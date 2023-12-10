@@ -8,6 +8,6 @@ import lombok.Setter;
 public class AccessoriesDTO {
     private String d_code;
     private String a_code;
-    private String a_name;
+    //private String a_name;
 
 }
