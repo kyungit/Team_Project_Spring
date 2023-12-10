@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원 수</title>
+<link rel="stylesheet" href="/">
+<table>
+    <tbody th:each="count : ${memberCount}">
+		<!-- 남자 -->
+		<tr>
+		    <td>남자</td>
+		    <td th:text="|${count.c_m}명|"></td>
+		    <td th:text="|${count.s_m}명|"></td>
+		    <td th:text="|${count.g_m}명|"></td>
+		    <td th:text="|${count.c_m + count.s_m + count.g_m}명|"></td>
+		</tr>
+		<!-- 여자 -->
+		<tr>
+		    <td>여자</td>
+		    <td th:text="|${count.c_fm}명|"></td>
+		    <td th:text="|${count.s_fm}명|"></td>
+		    <td th:text="|${count.g_fm}명|"></td>
+		    <td th:text="|${count.c_fm + count.s_fm + count.g_fm}명|"></td>
+		</tr>
+		<!-- 총합 -->
+		<tr>
+		    <td>총합</td>
+		    <td th:text="|${count.c_m + count.c_fm}명|"></td>
+		    <td th:text="|${count.s_m + count.s_fm}명|"></td>
+		    <td th:text="|${count.g_m + count.g_fm}명|"></td>
+		    <td th:text="|${count.c_m + count.c_fm + count.s_m + count.s_fm + count.g_m + count.g_fm}명|"></td>
+		</tr>
+    </tbody>
+</table>
+</table>
+    </table>
+</body>
+</html>

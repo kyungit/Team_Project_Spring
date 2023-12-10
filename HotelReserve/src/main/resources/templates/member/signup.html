@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원 등록</title>
+<link rel="stylesheet" href="/css/hotel.css">
+
+<script>
+window.onload = () => {
+	
+	btnRegister.addEventListener('click',async ()=> {
+		
+		//유효성 검사	
+		if(userid.value == '') {
+			alert("아이디를 입력하세요.");
+			userid.focus();
+			return false;
+		}
+		
+		const Pass = password.value;
+		const Pass1 = password1.value;
+		if(Pass == '') {
+			alert("암호를 입력하세요");
+			password.focus();
+			return false;
+		}
+		if(Pass1 == '') {
+			alert("암호를 입력하세요");
+			password1.focus();
+			return false;
+		}
+		if(Pass != Pass1) {
+			alert("입력된 암호를 확인하세요.");
+			password1.focus();
+			return false;
+		}
+		
+		//자바스크립트의 정규식(Regular Expression)을 이용해서 암호 규칙 확인
+		//암호 작성 규칙 --> 8-20자리 내의 영문,숫자,특수문자를 조합		
+		let num = Pass.search(/[0-9]/g); //0-9까지의 숫자가 들어 있는지 검색.검색해서 값이 없으면 -1을 리턴 
+		let eng = Pass.search(/[a-z]/ig); // i : 알파벳 대소문자 구분 없이 검색
+		let spe = Pass.search(/[`~!@#$%^&*|\\\'\";:\/?]/ig); //특수문자가 포함되어 있는지 검색
+		if(Pass.length < 8 || Pass.length > 20) {
+			alert("암호는 8자리 ~ 20자 이내로 입력해 주세요");
+			return false;
+		} else if(Pass.search(/\s/) != -1) {
+			alert("암호는 공백 없이 입력해 주세요.");
+			return false;
+		} else if(num <0 || eng < 0 || spe < 0) {
+			alert("암호는 영문,숫자,특수문자를 혼합하여 입력해 주세요.");
+			return false;
+		}
+		
+		if(username.value == '') {
+			alert("이름을 입력하세요.");
+			username.focus();
+			return false;
+		}
+		
+		if(birthdate.value == '') {
+			alert("생년월일을 입력하세요.");
+			birthdate.focus();
+			return false;
+		}
+		/*
+		const birthdateV = birthdate.value;
+		let num1 = birthdate.search(/[0-9]/g);
+		if(birthdate.length != 8) {
+			alert("생년월일은 8자리로 입력해 주세요.");
+			return false;
+		}
+		*/
+		const gender = document.querySelectorAll('input[name=gender]:checked');
+		if(gender.length == 0) {
+			alert("성별을 선택하세요");
+			return false;
+		}
+		
+		if(telno.value == '') {
+			alert("전화번호를 입력하세요");
+			telno.focus();
+			return false;
+		}
+		
+		const beforeTelno = telno.value;
+		const afterTelno = beforeTelno.replace(/\-/ig,"").replace(/\ /ig,"").trim();
+		telno.value = afterTelno;
+		
+		if(email.value == '') {
+			alert("이메일 주소를 입력하세요");
+			email.focus();
+			return false;
+		}
+		
+		//이메일 유효성 검사 로직 만들기
+		const emailV = email.value;
+		let reg = emailV.search(/^[0-9 a-z A-Z]([-_\.]?[0-9 a-z A-Z])*@[0-9 a-z A-Z]([-_\.]?[0-9 a-z A-Z])*\.[a-z A-Z]{2,3}$/g);
+		if(reg < 0) {
+			alert("이메일 형식에 맞게 입력하세요");
+			return false;
+		}
+		
+		if(hotelcode.value == '') {
+			
+		}
+		
+		const formData = new FormData(RegistryForm);
+		
+		await fetch('/member/signup', {
+			method: 'POST',
+			body: formData
+		}).then((response)=> response.json())
+			.then((data)=> {
+				if(data.message === 'GOOD'){
+					alert(decodeURIComponent(data.username) + '님, 회원 가입을 축하 드립니다.');
+					document.location.href='/board/list?page=1';
+				} else {
+					alert("서버 장애로 회원 가입에 실패했습니다.");
+				}
+		}).catch((error)=> {
+			console.lor("error = " + error);
+		});
+		
+		//document.RegistryForm.action = '/member/signup';
+		//document.RegistryForm.submit();
+	});	
+}
+		
+	/*
+	if(document.getElementById('all').checked == true)
+		for(var i = 0; i<document.getElementsByName('hobby').length; i++)
+			document.getElementsByName('hobby')[i].checked = true;
+	if(document.getElementById('all').checked == false)
+		for(var i = 0; i<document.getElementsByName('hobby').length; i++)
+			document.getElementsByName('hobby')[i].checked = false;	
+	*/
+
+</script>
+
+</head>
+<body>
+<div class="main">
+
+	<h1>회원 등록</h1><br>
+	
+	<div class="WriteForm">
+		<form id="RegistryForm" name="RegistryForm" method="POST" enctype="multipart/form-data">
+		<br><br>
+			<input type="text" class="input_field" id="userid" name="userid" placeholder="여기에 아이디를 입력해 주세요" onchange="idCheck()"><br>
+			<br><span id="idCheckNotice"></span>
+			<input type="password" class="input_field" id="password" name="password" placeholder="여기에 패스워드를 입력해 주세요"><br>
+			<input type="password" class="input_field" id="password1" name="userid1" placeholder="여기에 패스워드를 한번 더 입력해 주세요"><br>
+			<input type="text" class="input_field" id="username" name="username" placeholder="여기에 이름을 입력해 주세요"><br>
+			<input type="text" class="input_filed" id="birthdate" name="birthdate" placeholder="생년월일을 8자리로 입력해 주세요"><br>
+			<div style="width:90%; text-align:left; position:relative; left: 35px; border-bottom:2px solid #adadad; margin:10px; padding: 10px;">
+			성별 : 
+				<label><input type="radio" name="gender" value="남성">남성</label>	
+				<label><input type="radio" name="gender" value="여성">여성</label><br>
+			<input type="text" id="telno" class="input_field" name="telno" placeholder="전화번호를 입력하세요"><br>
+			<input type="text" id="email" class="input_field" name="email" placeholder="여기에 이메일주소를 입력하세요"><br><br>
+			<label><input type="button" id="hotelcode" name="hotelcode" value="호텔 코드">호텔 관계자라면 버튼을 누르고 해당 호텔의 코드를 적어주세요.</label><br><br>
+			
+			<input type="button" id="btnRegister" class="btn_write" value="여기를 클릭하세요.">			
+		</form>
+		<br><br>
+	
+	</div>
+
+</div>
+<br><br>
+</body>
+</html>

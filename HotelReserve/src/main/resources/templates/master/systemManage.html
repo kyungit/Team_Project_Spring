@@ -1,0 +1,24 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>관리자 페이지</title>
+<link rel="stylesheet" href="/css/board.css">
+</head>
+<body>
+
+<div class="menubar">
+		<ul class="main_menu">
+			<li><a href="/board/list?page=1">홈으로</a></li>
+			<li><a href="">사용자 통계</a>
+				<ul class="sub_menu">
+					<li><a href="/master/cntMember">회원 수</a></li>
+					<li><a href="/master/cntReply">댓글 수</a></li>
+				</ul>
+			</li>
+			<li><a href="/master/systemInfo">시스템 정보</a></li>
+		</ul>
+	</div>
+
+</body>
+</html>
