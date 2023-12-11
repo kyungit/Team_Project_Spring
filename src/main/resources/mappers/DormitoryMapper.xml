@@ -7,8 +7,9 @@
 
 <mapper namespace = "com.dormitory.mapper.DormitoryMapper">
 
-<select id="getRoom" resultType="com.dormitory.dto.RoomDTO">
-    select * from tbl_room limit 10;
+<!-- 메인화면 숙소 정보 조회 -->
+<select id="getDormitoryList" parameterType="int" resultType="com.dormitory.dto.DormitoryDTO">
+    select * from tbl_dormitory limit #{pageNum};
 </select>
 
 
