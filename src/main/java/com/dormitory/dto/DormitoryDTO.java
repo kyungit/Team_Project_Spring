@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Setter
-public class DomitoryDTO {
+public class DormitoryDTO {
     private String d_code;
     private String d_name;
     private String d_telno;

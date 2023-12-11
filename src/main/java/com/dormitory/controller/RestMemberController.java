@@ -13,6 +13,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 public class RestMemberController {
+
     private final MemberService service;
     @Autowired
     private BCryptPasswordEncoder pwdEncoder;
