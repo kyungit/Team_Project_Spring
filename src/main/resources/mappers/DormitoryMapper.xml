@@ -7,13 +7,9 @@
 
 <mapper namespace = "com.dormitory.mapper.DormitoryMapper">
 
-<!-- 메인화면 숙소 정보 조회 -->
-<select id="getDormitoryList" parameterType="HashMap" resultType="com.dormitory.dto.DormitoryDTO">
-    select * from tbl_dormitory where d_name like concat('%',#{keyword},'%') or d_road like concat('%',#{keyword},'%') limit #{pageNum}
-</select>
 
 <select id="getDormitoryStar" resultType="com.dormitory.dto.DormitoryDTO">
-    select * from tbl_dormitory order by star desc limit 10;
+    select * from tbl_dormitory order by d_star desc limit 10;
 </select>
 
 
@@ -21,4 +17,11 @@
     <select id="getRoomDetail" parameterType="String" resultType="com.dormitory.dto.RoomDTO">
         select * from tbl_room where d_code=#{d_code}
     </select>
+
+
+    <!-- 5.숙소 정보 조회 -->
+    <select id="getDormitoryList" parameterType="HashMap" resultType="com.dormitory.dto.DormitoryDTO">
+        select * from tbl_dormitory where d_name like concat('%',#{keyword},'%') or d_road like concat('%',#{keyword},'%') limit #{pageNum}
+    </select>
+
 </mapper>
