@@ -1,4 +1,4 @@
 package com.dormitory.dto;
 
-public class DomitoryDTO {
+public class PaymentDTO {
 }

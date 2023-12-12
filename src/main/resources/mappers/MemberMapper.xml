@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.dormitory.mapper.MemberMapper">
+    <select id="getMemberInfo" parameterType="String"  resultType="com.dormitory.dto.MemberDTO">
+        select * from tbl_member where userid = #{userid}
+    </select>
+
+
+    <!-- ==============Reservation=================-->
+    <!-- Reservation 3번 예약 정보(단순 출력만 하는데 아직 디비 넣기 전이라 x) -->
+
+</mapper>
