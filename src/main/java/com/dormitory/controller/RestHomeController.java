@@ -16,17 +16,34 @@ import java.util.List;
 public class RestHomeController {
     private final DormitoryService service;
 
+    //=========================MAIN==================================
     //search
-    // 메인화면 숙소 정보 조회 / list
+    // 메인화면 숙소 정보 조회 / list ????
     @GetMapping("/list")
-    public List<DormitoryDTO> getDormitoryList(@RequestParam("pageNum") int pageNum) throws Exception{
-        return service.getDormitoryList(pageNum*10);
+    public List<DormitoryDTO> getDormitoryList(@RequestParam(name="pageNum",defaultValue="1",required=false) int pageNum) throws Exception{
+        return null;
     }
 
-    //추천 숙소 (-> 무슨 정보로 추천 할건지는 아직 고민)
-    @GetMapping("/recommend")
-    public List<DormitoryDTO> getRecommend(@RequestParam("pageNum") int pageNum) throws Exception{
-        return service.getDormitoryList(pageNum*10);
+    //지역별 숙소(keyword를 파라미터로 제공받기)
+    @GetMapping("/location")
+    public void getLocation(){
+
+    }
+
+
+    //추천 숙소 (별점 높은 순)
+    //10개 가져오기
+    @GetMapping("/star")
+    public List<DormitoryDTO> getStar(@RequestParam(name="keyword",defaultValue="",required=false) String keyword){
+        return service.getDormitoryStar(keyword);
+    }
+
+
+    //추천 숙소 (특가???????)
+    //10개 가져오기
+    @GetMapping("/discount")
+    public List<DormitoryDTO> getDiscount(@RequestParam(name="pageNum",defaultValue="1",required=false) int pageNum) throws Exception{
+        return null;
     }
 
 

@@ -8,4 +8,8 @@
         select * from tbl_member where userid = #{userid}
     </select>
 
+
+    <!-- ==============Reservation=================-->
+    <!-- Reservation 3번 예약 정보(단순 출력만 하는데 아직 디비 넣기 전이라 x) -->
+
 </mapper>
