@@ -15,4 +15,10 @@
 <select id="getDormitoryStar" resultType="com.dormitory.dto.DormitoryDTO">
     select * from tbl_dormitory order by star desc limit 10;
 </select>
+
+
+    <!-- =====================4 RoomInfo ================== -->
+    <select id="getRoomDetail" parameterType="String" resultType="com.dormitory.dto.RoomDTO">
+        select * from tbl_room where d_code=#{d_code}
+    </select>
 </mapper>

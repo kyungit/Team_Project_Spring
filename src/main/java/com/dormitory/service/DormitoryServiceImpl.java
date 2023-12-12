@@ -2,6 +2,7 @@ package com.dormitory.service;
 
 
 import com.dormitory.dto.DormitoryDTO;
+import com.dormitory.dto.RoomDTO;
 import com.dormitory.mapper.DormitoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,18 @@ public class DormitoryServiceImpl implements DormitoryService {
     @Override
     public List<DormitoryDTO> getDormitoryStar(String keyword) {
         return mapper.getDormitoryStar(keyword);
+    }
+
+
+
+    //===========================
+
+
+
+
+    //=====================4. RoomInfo
+    public List<RoomDTO> getRoomDetail(String d_code){
+        return mapper.getRoomDetail(d_code);
+
     }
 }

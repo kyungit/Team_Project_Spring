@@ -24,5 +24,15 @@ public interface DormitoryMapper {
 
 
 
+    //=======================2
+
+
+    //=====================3
+
+    //========================4
+    public List<RoomDTO> getRoomDetail(String d_code);
+
+
+
 
 }

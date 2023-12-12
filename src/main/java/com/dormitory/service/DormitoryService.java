@@ -1,6 +1,7 @@
 package com.dormitory.service;
 
 import com.dormitory.dto.DormitoryDTO;
+import com.dormitory.dto.RoomDTO;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,4 +13,6 @@ public interface DormitoryService {
 
     //
     public List<DormitoryDTO> getDormitoryStar(String keyword);
+
+    public List<RoomDTO> getRoomDetail(String d_code);
 }
