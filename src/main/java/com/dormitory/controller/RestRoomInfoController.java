@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/room")
@@ -35,12 +37,18 @@ public class RestRoomInfoController {
 
     //4. 객실 정보
     @GetMapping("/roomDetail")
-    public RoomDTO getRoomDetail(){
-        return null;
+    public List<RoomDTO> getRoomDetail(DormitoryDTO dormitory){
+        //  1000002288  서귀포 유러하우스펜션
+        String d_code = "1000002288";
+        //String d_code = dormitory.getD_code()
+
+
+        return service.getRoomDetail(d_code);
     }
     //5. 숙소 정보
     @GetMapping("/dormitory")
     public DormitoryDTO getDormitory(DormitoryDTO dormitory){
+
         return null;
     }
     //6. 비품 정보
