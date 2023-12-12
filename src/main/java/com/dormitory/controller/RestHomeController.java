@@ -17,12 +17,6 @@ public class RestHomeController {
     private final DormitoryService service;
 
     //=========================MAIN==================================
-    //search
-    // 메인화면 숙소 정보 조회 / list ????
-    @GetMapping("/list")
-    public List<DormitoryDTO> getDormitoryList(@RequestParam(name="pageNum",defaultValue="1",required=false) int pageNum) throws Exception{
-        return null;
-    }
 
     //지역별 숙소(keyword를 파라미터로 제공받기)
     @GetMapping("/location")
@@ -31,7 +25,7 @@ public class RestHomeController {
     }
 
 
-    //추천 숙소 (별점 높은 순)
+    //1. 추천 숙소 (별점 높은 순)
     //10개 가져오기
     @GetMapping("/star")
     public List<DormitoryDTO> getStar(@RequestParam(name="keyword",defaultValue="",required=false) String keyword){
@@ -39,7 +33,7 @@ public class RestHomeController {
     }
 
 
-    //추천 숙소 (특가???????)
+    //2. 추천 숙소 (특가???????)
     //10개 가져오기
     @GetMapping("/discount")
     public List<DormitoryDTO> getDiscount(@RequestParam(name="pageNum",defaultValue="1",required=false) int pageNum) throws Exception{

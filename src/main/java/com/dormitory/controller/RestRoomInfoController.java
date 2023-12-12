@@ -39,9 +39,8 @@ public class RestRoomInfoController {
     @GetMapping("/roomDetail")
     public List<RoomDTO> getRoomDetail(DormitoryDTO dormitory){
         //  1000002288  서귀포 유러하우스펜션
-        String d_code = "1000002288";
-        //String d_code = dormitory.getD_code()
-
+        //String d_code = "1000002288";
+        String d_code = dormitory.getD_code();
 
         return service.getRoomDetail(d_code);
     }
