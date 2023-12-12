@@ -15,7 +15,7 @@ import java.util.List;
 public class RestRoomInfoController {
     private final DormitoryService service;
 
-    //1. 숙소 제일 위, 방 전체 정보 출력(사진, 리뷰 등)
+    //1. 숙소 제일 위, 방 전체 정보 출력(사진, 등)
     @GetMapping("/roomReview")
     public RoomReviewDTO getRoomReviewInfo(){
         //조인

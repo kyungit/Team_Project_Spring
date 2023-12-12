@@ -9,29 +9,41 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/menu")
 public class RestMenuController {
     private final MemberService service;
 
-    //1. 회원 정보 조회
+    //1. 회원 정보 조회 -> OK
     @GetMapping("/memberInfo")
     public MemberDTO getMemberInfo(HttpSession session){
         String userid = (String)session.getAttribute("userid");
+        //테스트용
+        //return service.getMemberInfo("ehrud");
+
         return service.getMemberInfo(userid);
     }
 
-    //2. 예약 정보 조회
+    //2. 예약 정보 조회 -> OK
     @GetMapping("/reservationInfo")
-    public ReservationDTO getReservationInfo(HttpSession session){
+    public List<ReservationDTO> getReservationInfo(HttpSession session){
+        String userid = (String)session.getAttribute("userid");
 
-        return null;
+        //테스트용
+        //return service.getReservationInfoById("ehrud");
+
+        return service.getReservationInfoById(userid);
     }
-    //3. 방문 내역
+    //3. 방문 내역 -> OK
     @GetMapping("/visited")
-    public ReservationDTO getVisited(HttpSession session){
-        return null;
+    public List<ReservationDTO> getVisited(HttpSession session){
+        String userid = (String)session.getAttribute("userid");
+        //테스트용
+        //return service.getVisited("ehrud");
+        return service.getVisited(userid);
     }
 
 

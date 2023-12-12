@@ -18,22 +18,18 @@ public class RestHomeController {
 
     //=========================MAIN==================================
 
-    //지역별 숙소(keyword를 파라미터로 제공받기)
-    @GetMapping("/location")
-    public void getLocation(){
-
-    }
+    //1. 지역별 숙소 -> 숙소 클릭시 바로 SearchList페이지로 이동이라 get/post 필요 x
 
 
-    //1. 추천 숙소 (별점 높은 순)
-    //10개 가져오기
+    // 2. 추천 숙소 (별점 높은 순) + 가능하면 내 주변위주로 -> OK
+    //10개 가져오기 // -> 나중에 위치기반 넣으면 그때 keyword 이용
     @GetMapping("/star")
     public List<DormitoryDTO> getStar(@RequestParam(name="keyword",defaultValue="",required=false) String keyword){
-        return service.getDormitoryStar(keyword);
+        return service.getDormitoryStar("화곡");
     }
 
 
-    //2. 추천 숙소 (특가???????)
+    //3. 추천 숙소 (특가???????) -> 할인적용 어떻게 할건지 고민
     //10개 가져오기
     @GetMapping("/discount")
     public List<DormitoryDTO> getDiscount(@RequestParam(name="pageNum",defaultValue="1",required=false) int pageNum) throws Exception{
