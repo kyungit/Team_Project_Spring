@@ -52,7 +52,7 @@ public class RestHomeController {
 
     //7. test용. 유형별
     @GetMapping("/type")
-    public List<DormitoryDTO> getDormitoryByType(@RequestParam(name="type", defaultValue="",required = false)String type )  {
+    public List<DormitoryDTO> getDormitoryByType()  {
 
         //return service.getDormitoryByType(type);
         return service.getDormitoryByType("Hotel");
