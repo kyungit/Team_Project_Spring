@@ -1,6 +1,8 @@
 package com.dormitory.mapper;
 
+import com.dormitory.dto.AmenityDTO;
 import com.dormitory.dto.DormitoryDTO;
+import com.dormitory.dto.ReviewDTO;
 import com.dormitory.dto.RoomDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -33,10 +35,19 @@ public interface DormitoryMapper {
 
     //=====================3
 
-    //========================4
+    //========================4 RoomInfo
+
+    //2. 숙소별 리뷰 조회
+    public List<ReviewDTO> getReview(String d_code);
+    //3. 지도 위도/경도
+    public DormitoryDTO getMap(String d_code);
+    //4. 숙소별 객실 정보
     public List<RoomDTO> getRoomDetail(String d_code);
 
+    //5. 숙소 정보
 
+    //6. 숙소별 어메니티 정보
+    public List<AmenityDTO> getAmenity(String d_code);
     //SearchList
     //전체 리스트
     public List<DormitoryDTO> getDormitoryList(Map<String, Object> data) throws Exception;

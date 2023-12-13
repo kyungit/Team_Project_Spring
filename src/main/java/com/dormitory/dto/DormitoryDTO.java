@@ -15,8 +15,8 @@ public class DormitoryDTO {
     private String d_type;
     private int d_zipcode;
     private String d_road;
-    private long d_lat;
-    private long d_log;
+    private String d_lat;
+    private String d_lon;
     private String d_description;
     private String d_grade;
     private String d_star;
