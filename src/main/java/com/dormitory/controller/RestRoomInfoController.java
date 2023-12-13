@@ -3,12 +3,13 @@ package com.dormitory.controller;
 import com.dormitory.dto.*;
 import com.dormitory.service.DormitoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@CrossOrigin(origins = {"http://localhost:3000/" })
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/room")
@@ -60,7 +61,6 @@ public class RestRoomInfoController {
     @GetMapping("/amenity")
     public List<AmenityDTO> getAmenity(DormitoryDTO dormitory){
         String d_code = dormitory.getD_code();
-
         return service.getAmenity("1000002288");
     }
 }

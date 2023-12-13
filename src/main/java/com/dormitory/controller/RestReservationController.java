@@ -3,13 +3,10 @@ package com.dormitory.controller;
 import com.dormitory.dto.*;
 import com.dormitory.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = {"http://localhost:3000/" })
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/reservation")
