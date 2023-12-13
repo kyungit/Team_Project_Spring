@@ -1,6 +1,8 @@
 package com.dormitory.service;
 
+import com.dormitory.dto.AmenityDTO;
 import com.dormitory.dto.DormitoryDTO;
+import com.dormitory.dto.ReviewDTO;
 import com.dormitory.dto.RoomDTO;
 
 import java.time.LocalDate;
@@ -25,8 +27,20 @@ public interface DormitoryService {
     public List<DormitoryDTO> getDormitoryByType(String type);
 
 
-    //
+    //========================4. RoomInfo=========================
+
+    //2. 리뷰 정보(숙소 전체)
+    public List<ReviewDTO> getReview(String d_code);
+    //3. 지도 위도/경도
+    public DormitoryDTO getMap(String d_code);
+
+    //4. 숙소별 객실 조회
     public List<RoomDTO> getRoomDetail(String d_code);
+
+    //5. 숙소 정보
+
+    //6. 어메니티 정보
+    public List<AmenityDTO> getAmenity(String d_code);
 
 
 

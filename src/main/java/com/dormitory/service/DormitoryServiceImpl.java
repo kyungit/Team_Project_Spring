@@ -1,7 +1,9 @@
 package com.dormitory.service;
 
 
+import com.dormitory.dto.AmenityDTO;
 import com.dormitory.dto.DormitoryDTO;
+import com.dormitory.dto.ReviewDTO;
 import com.dormitory.dto.RoomDTO;
 import com.dormitory.mapper.DormitoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,8 +78,29 @@ public class DormitoryServiceImpl implements DormitoryService {
 
 
     //=====================4. RoomInfo
+
+    //2. 리뷰 정보(숙소 전체)
+
+    @Override
+    public List<ReviewDTO> getReview(String d_code) {
+        return mapper.getReview(d_code);
+    }
+
+    //3. 지도 위도/경도
+    public DormitoryDTO getMap(String d_code){
+        return mapper.getMap(d_code);
+
+    }
+    //4. 숙소별 객실 정보
     public List<RoomDTO> getRoomDetail(String d_code){
         return mapper.getRoomDetail(d_code);
 
+    }
+
+    //5.
+
+    //6. 숙소별 어메니티 정보
+    public List<AmenityDTO> getAmenity(String d_code){
+        return mapper.getAmenity(d_code);
     }
 }

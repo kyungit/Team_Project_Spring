@@ -24,14 +24,20 @@ public class RestRoomInfoController {
 
     //2. 리뷰 테이블
     @GetMapping("/review")
-    public ReviewDTO getReview(){
-        return null;
+    public List<ReviewDTO> getReview(DormitoryDTO dormitory){
+        String d_code= dormitory.getD_code();
+
+
+        return  service.getReview("1010974");
     }
 
-    //3. 지도
+    //3. 지도 위도/경도
     @GetMapping("/map")
-    public DormitoryDTO getMap(){
-        return null;
+    public DormitoryDTO getMap(DormitoryDTO dormitory){
+
+        String d_code = dormitory.getD_code();
+        return service.getMap("1000088522");
+//        return service.getMap(d_code);
 
     }
 
@@ -41,8 +47,8 @@ public class RestRoomInfoController {
         //  1000002288  서귀포 유러하우스펜션
         //String d_code = "1000002288";
         String d_code = dormitory.getD_code();
-
-        return service.getRoomDetail(d_code);
+       // return service.getRoomDetail(d_code);
+        return service.getRoomDetail("1000088522");
     }
     //5. 숙소 정보
     @GetMapping("/dormitory")
@@ -51,8 +57,10 @@ public class RestRoomInfoController {
         return null;
     }
     //6. 비품 정보
-    @GetMapping("/amentiy")
-    public AmenityDTO getAmenity(DormitoryDTO dormitory){
-        return null;
+    @GetMapping("/amenity")
+    public List<AmenityDTO> getAmenity(DormitoryDTO dormitory){
+        String d_code = dormitory.getD_code();
+
+        return service.getAmenity("1000002288");
     }
 }
