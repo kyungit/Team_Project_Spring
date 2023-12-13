@@ -4,12 +4,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace = "com.dormitory.mapper.MemberMapper">
+
+
+    <!-- ====================2. Menu ==============================-->
+    <!-- 1. 회원 정보 조회 -->
     <select id="getMemberInfo" parameterType="String"  resultType="com.dormitory.dto.MemberDTO">
         select * from tbl_member where userid = #{userid}
     </select>
-
-
-    <!-- ==============Reservation=================-->
-    <!-- Reservation 3번 예약 정보(단순 출력만 하는데 아직 디비 넣기 전이라 x) -->
+    <!-- 2. 예약 정보 조회-->
+    <select id="getReservationInfoById" parameterType="String"  resultType="com.dormitory.dto.ReservationDTO">
+        select * from tbl_reservation where m_userid = #{userid}
+    </select>
+    <!-- 3.방문 내역 (s_status가 4인 것만)-->
+    <select id="getVisited" parameterType="String"  resultType="com.dormitory.dto.ReservationDTO">
+        select * from tbl_reservation where m_userid = #{userid} and s_status=4
+    </select>
+    <!-- ====================3. Reservation =======================-->
+    <!-- 1. 숙소+객실 조회 -->
+    <!-- 2. 예약 회원 정보 -->
+    <!-- 3. 예약 정보 -->
+    <!-- 4. 결제 정보-->
+    <!-- 5. 취소별 환불 규정-->
+    <select id="getCancelPolicy" parameterType="String" resultType="com.dormitory.dto.CancelDTO">
+        select * from tbl_cancel where d_code=#{d_code}
+    </select>
 
 </mapper>

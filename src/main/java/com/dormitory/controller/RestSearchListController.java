@@ -19,10 +19,10 @@ public class RestSearchListController {
 
     private final DormitoryService service;
 
-    //1. 검색 화면에서 왠쪽 체크박스(?)
+    //1. 검색 화면에서 왠쪽 체크박스(?) 프론트에서 체크박스 onChange 마다 -> 검색 다시 조회 ( /searchList/dormitory ) -> 할거없음
 
 
-    //2. 검색 화면에서 숙소 정보
+    //2. 검색 화면에서 숙소 정보 -> like 조건 어떻게 할건지 회의
     @GetMapping("/dormitory")
     public List<DormitoryDTO> getDormitory(
             @RequestParam(name="pageNum",defaultValue="1",required=false) int pageNum
@@ -32,11 +32,8 @@ public class RestSearchListController {
             ,@RequestParam(name="startDate", required = false) LocalDate startDate
             ,@RequestParam(name="endDate", required = false) LocalDate endDate) throws Exception{
 
-        if(null==startDate) startDate = LocalDate.now();
-        if(null==endDate) endDate = LocalDate.now();
-
-        System.out.println("keyword : " + keyword);
-
+        if(startDate==null) startDate = LocalDate.now();
+        if(endDate==null) endDate = LocalDate.now().plusDays(1);
 
         return service.getDormitoryList(pageNum*10,keyword,type,star,startDate,endDate);
     }

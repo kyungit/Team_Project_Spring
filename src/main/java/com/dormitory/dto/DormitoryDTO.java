@@ -19,4 +19,5 @@ public class DormitoryDTO {
     private long d_log;
     private String d_description;
     private String d_grade;
+    private String d_star;
 }

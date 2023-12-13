@@ -48,10 +48,26 @@ public class DormitoryServiceImpl implements DormitoryService {
 
     //리뷰 높은 순  추천
     @Override
-    public List<DormitoryDTO> getDormitoryStar(String keyword) {
-        return mapper.getDormitoryStar(keyword);
+    public List<DormitoryDTO> getDormitoryByStar(String keyword) {
+        return mapper.getDormitoryByStar(keyword);
     }
 
+    //5.(test)얼리체크인 순
+    @Override
+    public List<DormitoryDTO> getEarlyCheckin() {
+        return mapper.getEarlyCheckin();
+    }
+    //6.(test)
+    @Override
+    public List<DormitoryDTO> getDormitoryByGrade() {
+        return mapper.getDormitoryByGrade();
+    }
+
+    //7.
+    @Override
+    public List<DormitoryDTO> getDormitoryByType(String type) {
+        return mapper.getDormitoryByType(type);
+    }
 
 
     //===========================
