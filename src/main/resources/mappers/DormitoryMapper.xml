@@ -24,11 +24,10 @@
         select * from tbl_dormitory order by d_grade desc limit 10
     </select>
 
-    <!-- 6.(test) 추천(타압별) -->
+    <!-- 7.(test) 추천(타압별) -->
     <select id="getDormitoryByType" parameterType="String" resultType="com.dormitory.dto.DormitoryDTO">
         select * from tbl_dormitory where d_type=#{type} limit 10
     </select>
-    getDormitoryByType
     <!-- =====================4 RoomInfo ========================== -->
     <select id="getRoomDetail" parameterType="String" resultType="com.dormitory.dto.RoomDTO">
         select * from tbl_room where d_code=#{d_code}
