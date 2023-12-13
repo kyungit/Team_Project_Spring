@@ -11,8 +11,18 @@ public interface DormitoryService {
 
     //==============1. MAIN==================
 
-    //1. 숙소 추천(별점)
-    public List<DormitoryDTO> getDormitoryStar(String keyword);
+    //2. 숙소 추천(별점)
+    public List<DormitoryDTO> getDormitoryByStar(String keyword);
+
+
+    //5.
+    public List<DormitoryDTO> getEarlyCheckin();
+
+    // 6.(test) 등급별
+    public List<DormitoryDTO> getDormitoryByGrade();
+
+    //7.
+    public List<DormitoryDTO> getDormitoryByType(String type);
 
 
     //
