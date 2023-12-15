@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class ReservationDTO {
+    private int reservation_code;
     private String d_code;
     private long r_code;
     private String d_name;

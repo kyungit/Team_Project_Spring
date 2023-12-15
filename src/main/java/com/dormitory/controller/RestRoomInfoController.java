@@ -18,9 +18,10 @@ public class RestRoomInfoController {
 
     //1. 숙소 제일 위, 방 전체 정보 출력(사진, 등)
     @GetMapping("/roomReview")
-    public RoomReviewDTO getRoomReviewInfo(){
+    public List<DormitoryRoomDTO> getRoomReviewInfo(DormitoryDTO dormitory){
+        String d_code= dormitory.getD_code();
         //조인
-        return null;
+        return service.getRoomReviewInfo("1000088522");
     }
 
     //2. 리뷰 테이블
@@ -53,9 +54,9 @@ public class RestRoomInfoController {
     }
     //5. 숙소 정보
     @GetMapping("/dormitory")
-    public DormitoryDTO getDormitory(DormitoryDTO dormitory){
-
-        return null;
+    public List<DormitoryDTO> getDormitory(DormitoryDTO dormitory){
+        String d_code = dormitory.getD_code();
+        return service.getDormitory("1000088522");
     }
     //6. 비품 정보
     @GetMapping("/amenity")
@@ -63,4 +64,6 @@ public class RestRoomInfoController {
         String d_code = dormitory.getD_code();
         return service.getAmenity("1000002288");
     }
+
+    
 }

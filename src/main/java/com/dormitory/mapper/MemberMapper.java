@@ -19,8 +19,14 @@ public interface MemberMapper {
     //2. 예약 정보 조회
     public List<ReservationDTO> getReservationInfoById(String userid);
 
-    //3. 방문 내역 조회
+    //3. 예약 상태변경
+    public void ReservationOut(int reservation_code) throws Exception;
+
+    //4. 방문 내역 조회
     public List<ReservationDTO> getVisited(String userid);
+
+    //5. 방문 내역 삭제
+    public void DeleteVisited(int reservation_code) throws Exception;
     //=================3. Reservation=================
 
     //1. 숙소+객실 정보
@@ -29,4 +35,6 @@ public interface MemberMapper {
     //4. 결제
     //5. 취소 정책
     public List<CancelDTO> getCancelPolicy(String d_code);
+
+
 }
