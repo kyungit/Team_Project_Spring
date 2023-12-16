@@ -3,13 +3,12 @@ package com.dormitory.controller;
 import com.dormitory.dto.*;
 import com.dormitory.service.DormitoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-@CrossOrigin(origins = {"http://localhost:3000/" })
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/room")
@@ -21,7 +20,7 @@ public class RestRoomInfoController {
     public List<DormitoryRoomDTO> getRoomReviewInfo(DormitoryDTO dormitory){
         String d_code= dormitory.getD_code();
         //조인
-        return service.getRoomReviewInfo("1000088522");
+        return service.getRoomReviewInfo(d_code);
     }
 
     //2. 리뷰 테이블
@@ -30,7 +29,7 @@ public class RestRoomInfoController {
         String d_code= dormitory.getD_code();
 
 
-        return  service.getReview("1010974");
+        return  service.getReview(d_code);
     }
 
     //3. 지도 위도/경도
@@ -38,31 +37,29 @@ public class RestRoomInfoController {
     public DormitoryDTO getMap(DormitoryDTO dormitory){
 
         String d_code = dormitory.getD_code();
-        return service.getMap("1000088522");
-//        return service.getMap(d_code);
+        return service.getMap(d_code);
 
     }
 
     //4. 객실 정보
     @GetMapping("/roomDetail")
     public List<RoomDTO> getRoomDetail(DormitoryDTO dormitory){
-        //  1000002288  서귀포 유러하우스펜션
-        //String d_code = "1000002288";
         String d_code = dormitory.getD_code();
-       // return service.getRoomDetail(d_code);
-        return service.getRoomDetail("1000088522");
+        return service.getRoomDetail(d_code);
+
     }
     //5. 숙소 정보
     @GetMapping("/dormitory")
     public List<DormitoryDTO> getDormitory(DormitoryDTO dormitory){
         String d_code = dormitory.getD_code();
-        return service.getDormitory("1000088522");
+        return service.getDormitory(d_code);
     }
     //6. 비품 정보
     @GetMapping("/amenity")
     public List<AmenityDTO> getAmenity(DormitoryDTO dormitory){
         String d_code = dormitory.getD_code();
-        return service.getAmenity("1000002288");
+
+        return service.getAmenity(d_code);
     }
 
     

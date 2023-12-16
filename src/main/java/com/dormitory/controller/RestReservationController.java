@@ -3,10 +3,13 @@ package com.dormitory.controller;
 import com.dormitory.dto.*;
 import com.dormitory.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-@CrossOrigin(origins = {"http://localhost:3000/" })
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/reservation")
@@ -32,15 +35,17 @@ public class RestReservationController {
         return null;
     }
 
-    //3-1. 예약 정보 조회
+    //3-1. 예약 정보 조회  -> OK
     @GetMapping("/reservationInfo")
     public ReservationDTO getReservationInfo(ReservationDTO reservation){
+
         return reservation;
     }
 
     //3-2. 예약 정보 받아서 POST 처리
     @PostMapping("/reservationInfo")
     public String posteservationInfo(ReservationDTO reservation){
+
         return null;
     }
 

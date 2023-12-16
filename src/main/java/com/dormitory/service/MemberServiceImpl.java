@@ -61,4 +61,19 @@ public class MemberServiceImpl implements MemberService {
         return mapper.getCancelPolicy(d_code);
     }
 
+
+
+
+
+
+    //====================밑에는 건들ㄴㄴ=================
+
+    public MemberDTO memberInfo(String m_userid) {
+        // return mapper.memberInfo(userid);
+        return mapper.memberInfo(m_userid);
+    }
+
+    public void memberSave(MemberDTO member){
+        mapper.memberSave(member);
+    }
 }

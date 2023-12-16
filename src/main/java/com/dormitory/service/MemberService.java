@@ -29,4 +29,16 @@ public interface MemberService {
     //4. 결제
     //5. 취소 정책
     public List<CancelDTO> getCancelPolicy(String d_code);
+
+
+
+
+
+    //===========밑에는 건들ㄴㄴ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//service.memberInfo(authentication.getName());
+    public MemberDTO memberInfo(String email);
+
+    public void memberSave(MemberDTO member);
+
+
 }

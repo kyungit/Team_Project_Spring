@@ -2,13 +2,17 @@ package com.dormitory.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 
 @Getter
 @Setter
-public class MemberDTO {
+public class MemberDTO implements OAuth2User {
     private String userid;
     private String password;
     private String username;
@@ -24,4 +28,32 @@ public class MemberDTO {
     private String role;
     private String domitory_code;
     private String authkey;
+    private String social;
+
+
+
+
+
+
+    // 소셜로그인용
+    private Map<String, Object> attribute;
+    private Collection<? extends GrantedAuthority> authorities;
+    private String name;
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return this.attribute;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities(){
+        return this.authorities;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+
 }

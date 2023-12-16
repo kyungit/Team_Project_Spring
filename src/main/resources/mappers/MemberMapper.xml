@@ -41,4 +41,18 @@
     </select>
 
 
+
+
+
+    <!-- 이 밑으로 건들ㄴㄴ -->
+    <select id="memberInfo" parameterType="String" resultType="com.dormitory.dto.MemberDTO">
+        select * from tbl_member where userid=#{userid}
+    </select>
+
+    <!-- -->
+    <insert id="memberSave" parameterType="com.dormitory.dto.MemberDTO">
+        insert into tbl_member(userid, password,username, role, social) values(#{userid},#{password},#{username},#{role},#{social})
+    </insert>
+
+
 </mapper>

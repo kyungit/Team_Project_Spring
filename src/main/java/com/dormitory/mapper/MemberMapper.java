@@ -37,4 +37,11 @@ public interface MemberMapper {
     public List<CancelDTO> getCancelPolicy(String d_code);
 
 
+
+
+    //============밑에 건들ㄴㄴ================
+
+    public MemberDTO memberInfo(String m_userid);
+
+    public void memberSave(MemberDTO member);
 }
