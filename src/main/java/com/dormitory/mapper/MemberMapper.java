@@ -1,6 +1,7 @@
 package com.dormitory.mapper;
 
 import com.dormitory.dto.CancelDTO;
+import com.dormitory.dto.DormitoryDTO;
 import com.dormitory.dto.MemberDTO;
 import com.dormitory.dto.ReservationDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -30,6 +31,8 @@ public interface MemberMapper {
     //=================3. Reservation=================
 
     //1. 숙소+객실 정보
+    public List<DormitoryDTO> getDormitoryRoom(String d_code);
+
     //2. 구매 회원 정보 등록
     //3-1. 예약 정보?????? 등록?? 인데/???? 위랑 어떻게합치지
     //4. 결제

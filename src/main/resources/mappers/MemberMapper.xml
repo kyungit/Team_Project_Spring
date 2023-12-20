@@ -32,6 +32,10 @@
     </delete>
     <!-- ====================3. Reservation =======================-->
     <!-- 1. 숙소+객실 조회 -->
+    <select id="getDormitoryRoom" parameterType="String" resultType="com.dormitory.dto.DormitoryDTO">
+        select * from tbl_dormitory where d_code = #{d_code}
+    </select>
+
     <!-- 2. 예약 회원 정보 -->
     <!-- 3. 예약 정보 -->
     <!-- 4. 결제 정보-->
