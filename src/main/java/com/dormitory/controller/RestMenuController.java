@@ -62,12 +62,8 @@ public class RestMenuController {
     @ResponseBody
     @PostMapping("/visited")
     public String postVisited(ReservationDTO reservation,@RequestParam("reservation_code") int reservation_code) throws Exception {
-
             //방문 내역 삭제
             service.DeleteVisited(reservation_code);
-
             return "{\"message\":\"GOOD\"}";
-
-
     }
 }

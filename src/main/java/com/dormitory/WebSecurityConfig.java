@@ -56,7 +56,7 @@ public class WebSecurityConfig {
 		// OAuth2 설정
 		http
 				.oauth2Login((login) -> login
-						.loginPage("/")
+						.loginPage("/login")
 						.successHandler(oAuth2SuccessHandler)
 						.failureHandler(oAuth2FaliureHandler));
 

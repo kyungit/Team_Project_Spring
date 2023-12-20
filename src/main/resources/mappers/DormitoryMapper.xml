@@ -60,7 +60,14 @@
 
     <!-- =====================5. SearchList ====================== -->
     <select id="getDormitoryList" parameterType="HashMap" resultType="com.dormitory.dto.DormitoryDTO">
-        select * from tbl_dormitory where d_name like concat('%',#{keyword},'%') or d_road like concat('%',#{keyword},'%') limit #{pageNum}
+        SELECT
+            *,
+            (SELECT MAX(r_price) FROM tbl_room WHERE tbl_room.d_code = tbl_dormitory.d_code) AS max_r_price,
+            (SELECT MIN(r_price) FROM tbl_room WHERE tbl_room.d_code = tbl_dormitory.d_code) AS min_r_price
+        FROM tbl_dormitory
+        WHERE d_name LIKE CONCAT('%', #{keyword}, '%') OR d_road LIKE CONCAT('%', #{keyword}, '%')
+            LIMIT #{pageNum}
+
     </select>
 
 

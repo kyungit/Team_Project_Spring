@@ -20,7 +20,8 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         log.info("************************ 소셜 인증 완료 ************************");
 
-        setDefaultTargetUrl("http://localhost:3000/searchList");
+
+        setDefaultTargetUrl("http://localhost:3000/");
 
         super.onAuthenticationSuccess(request, response, authentication);
 
