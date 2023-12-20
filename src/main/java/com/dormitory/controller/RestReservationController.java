@@ -20,12 +20,11 @@ public class RestReservationController {
 
     //1. 숙소 + 객실 (JOIN + DTO)
     @GetMapping("/dormitoryRoom")
-    public DormitoryRoomDTO getDormitoryRoom(DormitoryDTO dormitory){
+    public List<DormitoryDTO> getDormitoryRoom(DormitoryDTO dormitory) throws Exception{
 
         dormitory.getD_code();
 
-
-        return null;
+        return service.getDormitoryRoom("");
     }
 
 
@@ -35,15 +34,17 @@ public class RestReservationController {
         return null;
     }
 
-    //3-1. 예약 정보 조회
+    //3-1. 예약 정보 조회  -> OK
     @GetMapping("/reservationInfo")
     public ReservationDTO getReservationInfo(ReservationDTO reservation){
+
         return reservation;
     }
 
     //3-2. 예약 정보 받아서 POST 처리
     @PostMapping("/reservationInfo")
     public String posteservationInfo(ReservationDTO reservation){
+
         return null;
     }
 

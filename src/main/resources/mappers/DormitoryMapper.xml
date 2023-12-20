@@ -29,6 +29,13 @@
         select * from tbl_dormitory where d_type=#{type} limit 10
     </select>
     <!-- =====================4 RoomInfo ========================== -->
+    <!-- 1. 숙소-->
+    <select id="getRoomReviewInfo" parameterType="String" resultType="com.dormitory.dto.DormitoryRoomDTO">
+        SELECT d.*, r.*
+        FROM tbl_dormitory d
+                 JOIN tbl_room r ON d.d_code = r.d_code
+        WHERE d.d_code = #{d_code}
+    </select>
     <!-- 2. 숙소별 리뷰 정보-->
     <select id="getReview" parameterType="String" resultType="com.dormitory.dto.ReviewDTO">
         select * from tbl_review where d_code=#{d_code}
@@ -43,7 +50,9 @@
     </select>
 
     <!-- 5. 숙소 정보 -->
-
+    <select id="getDormitory" parameterType="String" resultType="com.dormitory.dto.DormitoryDTO">
+        select * from tbl_dormitory where d_code=#{d_code}
+    </select>
     <!-- 6. 숙소별 어메니티 정보 -->
     <select id="getAmenity" parameterType="String" resultType="com.dormitory.dto.AmenityDTO">
         select * from tbl_amenity where d_code=#{d_code}
@@ -53,5 +62,7 @@
     <select id="getDormitoryList" parameterType="HashMap" resultType="com.dormitory.dto.DormitoryDTO">
         select * from tbl_dormitory where d_name like concat('%',#{keyword},'%') or d_road like concat('%',#{keyword},'%') limit #{pageNum}
     </select>
+
+
 
 </mapper>
