@@ -47,10 +47,18 @@ public class RestRoomInfoController {
 
     //4. 객실 정보
     @GetMapping("/roomDetail")
-    public Map getRoomDetail(DormitoryDTO dormitory){
+    public Map<String, Object> getRoomDetail(DormitoryDTO dormitory){
         String d_code = dormitory.getD_code();
-        Map data = new HashMap();
-        data.put("roomDetail",service.getRoomDetail(d_code));
+        List<RoomDTO> list = service.getR_Code(d_code);
+        Map<String,Object> data = new HashMap<>();
+
+        for(int i=0;i<list.size();i++){
+            RoomDTO room = list.get(i);
+            System.out.println("=======R_code=========="+room.getR_code());
+            data.put(Integer.toString(room.getR_code()),service.getUrl(room));
+        }
+
+//        data.put("roomDetail",);
         return data;
 
     }
