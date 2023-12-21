@@ -37,7 +37,10 @@
     </select>
 
     <!-- 2. 예약 회원 정보 -->
-    <!-- 3. 예약 정보 -->
+    <!-- 3. 예약 정보 저장 (POST)-->
+    <select id="posteservationInfo" parameterType="String" resultType="com.dormitory.dto.ReservationDTO">
+        select * from tbl_reservation where r_code=#{r_code}
+    </select>
     <!-- 4. 결제 정보-->
     <!-- 5. 취소별 환불 규정-->
     <select id="getCancelPolicy" parameterType="String" resultType="com.dormitory.dto.CancelDTO">
