@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @CrossOrigin(origins = {"http://localhost:3000/" })
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +23,7 @@ public class RestRoomInfoController {
     @GetMapping("/roomReview")
     public List<DormitoryRoomDTO> getRoomReviewInfo(DormitoryDTO dormitory){
         String d_code= dormitory.getD_code();
-        //조인
+
         return service.getRoomReviewInfo(d_code);
     }
 
@@ -44,9 +47,11 @@ public class RestRoomInfoController {
 
     //4. 객실 정보
     @GetMapping("/roomDetail")
-    public List<RoomDTO> getRoomDetail(DormitoryDTO dormitory){
+    public Map getRoomDetail(DormitoryDTO dormitory){
         String d_code = dormitory.getD_code();
-        return service.getRoomDetail(d_code);
+        Map data = new HashMap();
+        data.put("roomDetail",service.getRoomDetail(d_code));
+        return data;
 
     }
     //5. 숙소 정보

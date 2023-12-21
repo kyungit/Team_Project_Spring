@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class ReservationDTO {
     private int reservation_code;
     private String d_code;
-    private long r_code;
+    private String r_code;
     private String d_name;
     private String d_type;
     private String r_img;

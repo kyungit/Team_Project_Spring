@@ -58,7 +58,10 @@ public class MemberServiceImpl implements MemberService {
     }
 
     //2. 구매 회원 정보 등록
-    //3-1. 예약 정보?????? 등록?? 인데/???? 위랑 어떻게합치지
+    //3-2. 예약 정보 저장(POST)
+    public List<ReservationDTO> posteservationInfo(String r_code){
+        return mapper.posteservationInfo(r_code);
+    }
     //4. 결제
     //5. 취소 정책
     @Override
