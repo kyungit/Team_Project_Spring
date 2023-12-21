@@ -12,6 +12,6 @@ public class RoomDTO {
     private String r_description;
     private int r_num;
     private int r_max_num;
-    private String r_img;
+    private String r_url;
     private int r_price;
 }
