@@ -40,8 +40,8 @@ public interface DormitoryMapper {
     //3. 지도 위도/경도
     public DormitoryDTO getMap(String d_code);
     //4. 숙소별 객실 정보
-    public List<RoomDTO> getRoomDetail(String d_code);
-
+    public List<RoomDTO> getR_Code(String d_code);
+    public List<RoomDTO> getUrl(RoomDTO room);
     //5. 숙소 정보
     public List<DormitoryDTO> getDormitory(String d_code);
     //6. 숙소별 어메니티 정보
