@@ -41,7 +41,16 @@
     <select id="posteservationInfo" parameterType="String" resultType="com.dormitory.dto.ReservationDTO">
         select * from tbl_reservation where r_code=#{r_code}
     </select>
-    <!-- 4. 결제 정보-->
+    <!-- 4. 결제-->
+    <insert id="getPayment" parameterType="com.dormitory.dto.PaymentDTO">
+        insert into tbl_payment(merchant_uid,buyer_tel,buyer_name,paid_amount,paid_status,success)
+                        values(#{merchant_uid},#{buyer_tel},#{buyer_name},#{paid_amount},#{paid_status},#{success})
+    </insert>
+    <!-- 4-1. 결제 환불 -->
+    <update id="getPaymentCancel" parameterType="String">
+        update tbl_payment set paid_amount=0,paid_status='cancel' where merchant_uid=#{merchant_uid}
+    </update>
+
     <!-- 5. 취소별 환불 규정-->
     <select id="getCancelPolicy" parameterType="String" resultType="com.dormitory.dto.CancelDTO">
         select * from tbl_cancel where d_code=#{d_code}

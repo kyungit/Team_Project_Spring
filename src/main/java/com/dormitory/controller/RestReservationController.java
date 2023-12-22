@@ -73,8 +73,24 @@ public class RestReservationController {
 
     //4. 결제 정보 저장
     @PostMapping("/payment")
-    public String getPayment(PaymentDTO payment){
-        return null;
+    public String postPayment(@RequestBody PaymentDTO payment)throws Exception{
+        System.out.println(payment.toString());
+
+        System.out.println(payment);
+        try {
+            service.getPayment(payment);
+            return "{\" message \" : \" GOOD \"}";
+        }catch (Exception e){
+            e.printStackTrace();
+            return  "{\" message \" : \" FAIL \"}";
+        }
+    }
+    //4-1. 결제 환불
+    @PostMapping("/paymentCancel")
+    public void postPaymentCancel()throws Exception{
+        
+        //임시
+        service.getPaymentCancel("IMP151");
     }
 
 
