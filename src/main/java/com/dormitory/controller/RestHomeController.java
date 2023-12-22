@@ -2,6 +2,7 @@ package com.dormitory.controller;
 
 import com.dormitory.dto.DormitoryDTO;
 import com.dormitory.service.DormitoryService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,8 +37,9 @@ public class RestHomeController {
     //TEST
     //5. test용. 얼리체크인
     @GetMapping("/earlyCheckin")
-    public List<DormitoryDTO> getEarlyCheckin()  {
-
+    public List<DormitoryDTO> getEarlyCheckin(HttpSession session)  {
+        String userid = (String)session.getAttribute("userid");
+        System.out.println(userid);;
         return service.getEarlyCheckin();
     }
 
@@ -47,12 +49,6 @@ public class RestHomeController {
         return service.getDormitoryByGrade();
     }
 
-    //7. test용. 유형별
-//    @GetMapping("/type")
-//    public List<DormitoryDTO> getDormitoryByType()  {
-//
-////        return service.getDormitoryByType(type);
-//    }
 
 
 }
