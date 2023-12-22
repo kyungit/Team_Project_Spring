@@ -1,9 +1,6 @@
 package com.dormitory.mapper;
 
-import com.dormitory.dto.CancelDTO;
-import com.dormitory.dto.DormitoryDTO;
-import com.dormitory.dto.MemberDTO;
-import com.dormitory.dto.ReservationDTO;
+import com.dormitory.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -37,6 +34,9 @@ public interface MemberMapper {
     //3-2. 예약 정보 저장(POST)
     public List<ReservationDTO> posteservationInfo(String r_code);
     //4. 결제
+    public void getPayment(PaymentDTO paymentDTO)throws Exception;
+    //4-1. 결제 환불
+    public void getPaymentCancel(String merchant_uid)throws Exception;
     //5. 취소 정책
     public List<CancelDTO> getCancelPolicy(String d_code);
 

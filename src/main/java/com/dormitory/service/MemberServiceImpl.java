@@ -1,9 +1,6 @@
 package com.dormitory.service;
 
-import com.dormitory.dto.CancelDTO;
-import com.dormitory.dto.DormitoryDTO;
-import com.dormitory.dto.MemberDTO;
-import com.dormitory.dto.ReservationDTO;
+import com.dormitory.dto.*;
 import com.dormitory.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,6 +59,17 @@ public class MemberServiceImpl implements MemberService {
     public List<ReservationDTO> posteservationInfo(String r_code){
         return mapper.posteservationInfo(r_code);
     }
+    //4. 결제
+    @Override
+    public void getPayment(PaymentDTO paymentDTO) throws Exception {
+        mapper.getPayment(paymentDTO);
+    }
+    //4-1. 결제 환불
+    @Override
+    public void getPaymentCancel(String merchant_uid) throws Exception {
+        mapper.getPaymentCancel(merchant_uid);
+    }
+
     //4. 결제
     //5. 취소 정책
     @Override

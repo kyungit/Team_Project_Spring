@@ -23,7 +23,6 @@ public class RestRoomInfoController {
     @GetMapping("/roomReview")
     public List<DormitoryRoomDTO> getRoomReviewInfo(DormitoryDTO dormitory){
         String d_code= dormitory.getD_code();
-
         return service.getRoomReviewInfo(d_code);
     }
 
@@ -54,13 +53,12 @@ public class RestRoomInfoController {
 
         for(int i=0;i<list.size();i++){
             RoomDTO room = list.get(i);
-            System.out.println("=======R_code=========="+room.getR_code());
+
             data.put(Integer.toString(room.getR_code()),service.getUrl(room));
         }
 
-//        data.put("roomDetail",);
-        return data;
 
+        return data;
     }
     //5. 숙소 정보
     @GetMapping("/dormitory")
