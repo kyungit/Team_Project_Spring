@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class PaymentDTO {
     private String merchant_uid;
+    private int reservation_code;
     private String buyer_tel;
     private String buyer_name;
     private int paid_amount;

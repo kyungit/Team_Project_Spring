@@ -6,6 +6,7 @@ import com.dormitory.dto.PaymentDTO;
 import com.dormitory.dto.ReservationDTO;
 import com.dormitory.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -48,6 +49,7 @@ public class RestReservationController {
     @PostMapping("/reservationInfo")
     public String posteservationInfo(@RequestBody ReservationDTO reservation){
 
+        //해당 날짜에 예약된 날짜가 있는지 계산하기
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         //db에서 가져온 모든 checkin날짜/checkout날짜
         List<ReservationDTO> DB_reservation =service.posteservationInfo(reservation.getR_code());
@@ -71,7 +73,8 @@ public class RestReservationController {
 
 
 
-    //4. 결제 정보 저장
+    //4. 결제 정보 저장 + 예약 상태 변경
+    @Transactional
     @PostMapping("/payment")
     public String postPayment(@RequestBody PaymentDTO payment)throws Exception{
         System.out.println(payment.toString());

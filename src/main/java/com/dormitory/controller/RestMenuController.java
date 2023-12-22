@@ -20,9 +20,8 @@ public class RestMenuController {
     @GetMapping("/memberInfo")
     public MemberDTO getMemberInfo(HttpSession session) {
         String userid = (String) session.getAttribute("userid");
-        //테스트용
-        //return service.getMemberInfo("ehrud");
-
+        System.out.println("userid : " + userid);
+        System.out.println(service.getMemberInfo(userid));
         return service.getMemberInfo(userid);
     }
 
@@ -50,8 +49,7 @@ public class RestMenuController {
     @GetMapping("/visited")
     public List<ReservationDTO> getVisited(HttpSession session) {
         String userid = (String) session.getAttribute("userid");
-        //테스트용
-        //return service.getVisited("ehrud");
+
         return service.getVisited(userid);
     }
 
@@ -65,5 +63,13 @@ public class RestMenuController {
             //방문 내역 삭제
             service.DeleteVisited(reservation_code);
             return "{\"message\":\"GOOD\"}";
+    }
+
+
+
+    //test
+    @GetMapping("/test")
+    public String getTest( ){
+        return "{\"message\" : \" OK \"}";
     }
 }

@@ -81,6 +81,7 @@ public class OAuth2UserDetailsServiceImpl extends DefaultOAuth2UserService {
         savedMember.setUsername(savedMember.getUsername());
 
         session.setAttribute("userid", userid);
+        System.out.println("oauth , userid : "+userid);
         session.setAttribute("username", savedMember.getUsername());
         session.setAttribute("role", savedMember.getRole());
 
