@@ -45,6 +45,7 @@ public interface DormitoryService {
 
     //====================5. SearchList=================
     // 숙소 정보 조회 (페이지 기주)
-    public List<DormitoryDTO> getDormitoryList(int pageNum, String keyword, String type, String star, LocalDate startDate, LocalDate endDate) throws Exception;
+    public List<DormitoryDTO> getDormitoryList(int pageNum, String keyword, List<String> typeList, int minStar, int maxStar,
+            LocalDate startDate, LocalDate endDate) throws Exception ;
 
 }
