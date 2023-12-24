@@ -28,7 +28,7 @@ public interface MemberMapper {
     //=================3. Reservation=================
 
     //1. 숙소+객실 정보
-    public List<DormitoryDTO> getDormitoryRoom(String d_code);
+    public DormitoryRoomDTO getDormitoryRoom(String d_code);
 
     //2. 구매 회원 정보 등록
     //3-2. 예약 정보 저장(POST)

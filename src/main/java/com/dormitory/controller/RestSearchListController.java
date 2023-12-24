@@ -27,7 +27,8 @@ public class RestSearchListController {
             ,@RequestParam(name="type", defaultValue="",required=false) String type
             ,@RequestParam(name="star", defaultValue="", required = false) String star
             ,@RequestParam(name="startDate", required = false) LocalDate startDate
-            ,@RequestParam(name="endDate", required = false) LocalDate endDate) throws Exception{
+            ,@RequestParam(name="endDate", required = false) LocalDate endDate
+            ,@RequestParam(name="guest", required=false, defaultValue = "2") int guest) throws Exception{
 
         if(startDate==null) startDate = LocalDate.now();
         if(endDate==null) endDate = LocalDate.now().plusDays(1);

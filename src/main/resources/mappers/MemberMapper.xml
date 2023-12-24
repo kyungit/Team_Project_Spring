@@ -32,8 +32,9 @@
     </delete>
     <!-- ====================3. Reservation =======================-->
     <!-- 1. 숙소+객실 조회 -->
-    <select id="getDormitoryRoom" parameterType="String" resultType="com.dormitory.dto.DormitoryDTO">
-        select * from tbl_dormitory where d_code = #{d_code}
+    <select id="getDormitoryRoom" parameterType="String" resultType="com.dormitory.dto.DormitoryRoomDTO">
+        select * from tbl_dormitory inner join tbl_room on tbl_dormitory.d_code=tbl_room.d_code
+        where r_code = #{r_code}
     </select>
 
     <!-- 2. 예약 회원 정보 -->
