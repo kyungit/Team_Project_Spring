@@ -1,9 +1,6 @@
 package com.dormitory.controller;
 
-import com.dormitory.dto.CancelDTO;
-import com.dormitory.dto.DormitoryDTO;
-import com.dormitory.dto.PaymentDTO;
-import com.dormitory.dto.ReservationDTO;
+import com.dormitory.dto.*;
 import com.dormitory.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,11 +20,8 @@ public class RestReservationController {
 
     //1. 숙소 + 객실 (JOIN + DTO)
     @GetMapping("/dormitoryRoom")
-    public List<DormitoryDTO> getDormitoryRoom(DormitoryDTO dormitory) throws Exception{
-
-        ;
-
-        return service.getDormitoryRoom(dormitory.getD_code());
+    public DormitoryRoomDTO getDormitoryRoom(RoomDTO room) throws Exception{
+        return service.getDormitoryRoom(room.getR_code());
     }
 
 

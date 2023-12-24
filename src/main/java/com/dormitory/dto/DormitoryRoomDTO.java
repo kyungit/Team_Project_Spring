@@ -20,6 +20,7 @@ public class DormitoryRoomDTO {
     private long d_log;
     private String d_description;
     private String d_grade;
+    private String d_discount;
     
     //룸
     private int r_code;
@@ -27,4 +28,5 @@ public class DormitoryRoomDTO {
     private int r_num;
     private int r_max_num;
     private String r_img;
+    private String r_price;
 }

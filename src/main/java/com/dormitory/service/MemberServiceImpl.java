@@ -50,7 +50,7 @@ public class MemberServiceImpl implements MemberService {
     //=================3. Reservation=================
 
     //1. 숙소+객실 정보
-    public List<DormitoryDTO> getDormitoryRoom(String d_code) {
+    public DormitoryRoomDTO getDormitoryRoom(String d_code) {
         return mapper.getDormitoryRoom(d_code);
     }
 

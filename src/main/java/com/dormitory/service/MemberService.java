@@ -1,10 +1,6 @@
 package com.dormitory.service;
 
-import com.dormitory.dto.CancelDTO;
-import com.dormitory.dto.DormitoryDTO;
-import com.dormitory.dto.MemberDTO;
-import com.dormitory.dto.PaymentDTO;
-import com.dormitory.dto.ReservationDTO;
+import com.dormitory.dto.*;
 
 import java.util.List;
 
@@ -26,7 +22,7 @@ public interface MemberService {
     //=================3. Reservation=================
 
     //1. 숙소+객실 정보
-    public List<DormitoryDTO> getDormitoryRoom(String d_code);
+    public DormitoryRoomDTO getDormitoryRoom(String d_code);
 
     //2. 구매 회원 정보 등록
     //3-2. 예약 정보 저장(POST)

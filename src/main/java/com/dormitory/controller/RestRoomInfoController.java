@@ -30,8 +30,6 @@ public class RestRoomInfoController {
     @GetMapping("/review")
     public List<ReviewDTO> getReview(DormitoryDTO dormitory){
         String d_code= dormitory.getD_code();
-
-
         return  service.getReview(d_code);
     }
 
@@ -54,7 +52,7 @@ public class RestRoomInfoController {
         for(int i=0;i<list.size();i++){
             RoomDTO room = list.get(i);
 
-            data.put(Integer.toString(room.getR_code()),service.getUrl(room));
+            data.put(room.getR_code(),service.getUrl(room));
         }
 
 
