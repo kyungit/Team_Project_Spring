@@ -32,7 +32,7 @@ public interface MemberMapper {
 
     //2. 구매 회원 정보 등록
     //3-2. 예약 정보 저장(POST)
-    public List<ReservationDTO> getReservationInfoByR_Code(String r_code);
+
     public void postReservation(ReservationDTO reservation);
     //4. 결제
     public void getPayment(PaymentDTO paymentDTO)throws Exception;

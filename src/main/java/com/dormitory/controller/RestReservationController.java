@@ -21,7 +21,7 @@ public class RestReservationController {
 
     //1. 숙소 + 객실 (JOIN + DTO)
     @GetMapping("/dormitoryRoom")
-    public DormitoryRoomDTO getDormitoryRoom(RoomDTO room) throws Exception{
+    public DormitoryRoomDTO getDormitoryRoom(RoomTypeDTO room) throws Exception{
         return service.getDormitoryRoom(room.getR_code());
     }
 
@@ -49,25 +49,7 @@ public class RestReservationController {
 
 //
 //
-//        //해당 날짜에 예약된 날짜가 있는지 계산하기
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//        //db에서 가져온 모든 checkin날짜/checkout날짜
-//        List<ReservationDTO> DB_reservation =service.getReservationInfoByR_Code(reservation.getR_code());
-//        //원하는 날짜의 범위
-//        LocalDate reservation_checkin = reservation.getReservation_checkin();
-//        LocalDate reservation_checkout = reservation.getReservation_checkout();
 //
-//        for(int i=0;i<DB_reservation.size();i++){
-//            LocalDate checkinDate = DB_reservation.get(i).getReservation_checkin();
-//            LocalDate checkoutDate = DB_reservation.get(i).getReservation_checkout();
-//
-//            for(LocalDate date = reservation_checkin; !date.isAfter(reservation_checkout);date = date.plusDays(1)){
-//                if((date.isEqual(checkinDate) || date.isAfter(checkinDate)) && date.isBefore(checkoutDate)){
-//                    return "{\" message \" : \" FAIL \"}";
-//                }
-//            }
-//        }
-//        return "{\" message \" : \" GOOD \"}";
     }
 
 

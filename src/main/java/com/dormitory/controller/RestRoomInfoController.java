@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,14 +46,38 @@ public class RestRoomInfoController {
 
     //4. 객실 정보
     @GetMapping("/roomDetail")
-    public Map<String, Object> getRoomDetail(DormitoryDTO dormitory){
+    public Map<String, Object> getRoomDetail(DormitoryDTO dormitory, ReservationDTO reservation){
+        System.out.println(reservation.getReservation_checkin());
+        System.out.println(reservation.getReservation_checkout());
         String d_code = dormitory.getD_code();
-        List<RoomDTO> list = service.getR_Code(d_code);
+        List<RoomTypeDTO> list = service.getR_Code(d_code);
         Map<String,Object> data = new HashMap<>();
 
         for(int i=0;i<list.size();i++){
-            RoomDTO room = list.get(i);
+            RoomTypeDTO room = list.get(i);
 
+            //해당 날짜에 예약된 날짜가 있는지 계산하기
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        //db에서 가져온 모든 checkin날짜/checkout날짜
+        List<ReservationDTO> DB_reservation =service.getReservationInfoByR_Code(room.getR_code());
+        //원하는 날짜의 범위
+        LocalDate reservation_checkin = reservation.getReservation_checkin();
+        LocalDate reservation_checkout = reservation.getReservation_checkout();
+
+        for(int j=0;j<DB_reservation.size();j++){
+            LocalDate checkinDate = DB_reservation.get(j).getReservation_checkin();
+            LocalDate checkoutDate = DB_reservation.get(j).getReservation_checkout();
+
+            for(LocalDate date = reservation_checkin; !date.isAfter(reservation_checkout);date = date.plusDays(1)){
+                if((date.isEqual(checkinDate) || date.isAfter(checkinDate)) && date.isBefore(checkoutDate)){
+                    room.setR_status("X");
+                } else{
+                    room.setR_status("O");
+                }
+            }
+        }
+
+//            data.put(room.getR_code(),service.getUrl(room));
             data.put(room.getR_code(),service.getUrl(room));
         }
 
