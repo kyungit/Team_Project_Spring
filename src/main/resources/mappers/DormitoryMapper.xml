@@ -47,7 +47,7 @@
     <!-- 4. 숙소별 객실 정보 -->
 
     <select id="getR_Code" parameterType="String" resultType="com.dormitory.dto.RoomTypeDTO">
-        select distinct r_code from tbl_room_type where d_code=#{d_code}
+        select r_code from tbl_room_type where d_code=#{d_code}
     </select>
     <select id="getUrl" parameterType="com.dormitory.dto.RoomTypeDTO" resultType="com.dormitory.dto.RoomTypeDTO">
         select * from tbl_url left outer join tbl_room_type on tbl_url.r_code=tbl_room_type.r_code where tbl_url.r_code=#{r_code}
