@@ -56,9 +56,15 @@ public class MemberServiceImpl implements MemberService {
 
     //2. 구매 회원 정보 등록
     //3-2. 예약 정보 저장(POST)
-    public List<ReservationDTO> posteservationInfo(String r_code){
-        return mapper.posteservationInfo(r_code);
+    public List<ReservationDTO> getReservationInfoByR_Code(String r_code){
+        return mapper.getReservationInfoByR_Code(r_code);
     }
+
+    @Override
+    public void postReservation(ReservationDTO reservation) {
+        mapper.postReservation(reservation);
+    }
+
     //4. 결제
     @Override
     public void getPayment(PaymentDTO paymentDTO) throws Exception {
@@ -73,8 +79,8 @@ public class MemberServiceImpl implements MemberService {
     //4. 결제
     //5. 취소 정책
     @Override
-    public List<CancelDTO> getCancelPolicy(String d_code) {
-        return mapper.getCancelPolicy(d_code);
+    public List<CancelDTO> getCancelPolicy(DormitoryDTO dormitory) {
+        return mapper.getCancelPolicy(dormitory);
     }
 
 

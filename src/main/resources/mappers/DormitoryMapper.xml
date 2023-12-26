@@ -62,6 +62,11 @@
         select * from tbl_amenity where d_code=#{d_code}
     </select>
 
+    <!-- 7.환불 규정-->
+    <select id="getCancelPolicy" parameterType="com.dormitory.dto.CancelDTO" resultType="com.dormitory.dto.CancelDTO">
+        select * from tbl_cancel where d_code=#{d_code}
+    </select>
+
     <!-- =====================5. SearchList ====================== -->
     <select id="getDormitoryList" parameterType="HashMap" resultType="com.dormitory.dto.DormitoryDTO">
         SELECT
@@ -70,7 +75,7 @@
             (SELECT MIN(r_price) FROM tbl_room WHERE tbl_room.d_code = tbl_dormitory.d_code) AS min_r_price
         FROM tbl_dormitory
         WHERE d_name LIKE CONCAT('%', #{keyword}, '%') OR d_road LIKE CONCAT('%', #{keyword}, '%')
-            LIMIT #{pageNum}
+            LIMIT #{pageNum}, 10
     </select>
 
 

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-@CrossOrigin(origins = {"http://localhost:3000/" })
+@CrossOrigin(origins = {"http://localhost:3000/"})
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/searchList")
@@ -33,7 +33,7 @@ public class RestSearchListController {
         if(startDate==null) startDate = LocalDate.now();
         if(endDate==null) endDate = LocalDate.now().plusDays(1);
 
-        return service.getDormitoryList(pageNum*10,keyword,type,star,startDate,endDate);
+        return service.getDormitoryList(pageNum*10-10,keyword,type,star,startDate,endDate);
     }
 
 

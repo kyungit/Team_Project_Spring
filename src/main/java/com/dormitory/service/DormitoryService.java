@@ -40,7 +40,8 @@ public interface DormitoryService {
     public List<DormitoryDTO> getDormitory(String d_code);
     //6. 어메니티 정보
     public List<AmenityDTO> getAmenity(String d_code);
-
+    //7. 취소 정책
+    public List<CancelDTO> getCancelPolicy(DormitoryDTO dormitory);
 
 
     //====================5. SearchList=================

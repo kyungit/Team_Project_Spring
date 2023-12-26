@@ -26,13 +26,14 @@ public interface MemberService {
 
     //2. 구매 회원 정보 등록
     //3-2. 예약 정보 저장(POST)
-    public List<ReservationDTO> posteservationInfo (String r_code);
+    public List<ReservationDTO> getReservationInfoByR_Code (String r_code);
+    public void postReservation(ReservationDTO reservation);
     //4. 결제
     public void getPayment(PaymentDTO paymentDTO)throws Exception;
     //4-1. 결제 환불
     public void getPaymentCancel(String merchant_uid)throws Exception;
     //5. 취소 정책
-    public List<CancelDTO> getCancelPolicy(String d_code);
+    public List<CancelDTO> getCancelPolicy(DormitoryDTO dormitory);
 
 
 
