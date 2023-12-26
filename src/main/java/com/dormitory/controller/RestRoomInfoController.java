@@ -54,31 +54,36 @@ public class RestRoomInfoController {
         Map<String,Object> data = new HashMap<>();
 
         for(int i=0;i<list.size();i++){
-            RoomTypeDTO room = list.get(i);
+            RoomTypeDTO roomCode = list.get(i);
+            List<RoomTypeDTO> roomTypeList = service.getUrl(roomCode);
 
-            //해당 날짜에 예약된 날짜가 있는지 계산하기
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        //db에서 가져온 모든 checkin날짜/checkout날짜
-        List<ReservationDTO> DB_reservation =service.getReservationInfoByR_Code(room.getR_code());
-        //원하는 날짜의 범위
-        LocalDate reservation_checkin = reservation.getReservation_checkin();
-        LocalDate reservation_checkout = reservation.getReservation_checkout();
+            for(int k=0;k<roomTypeList.size();k++){
+                RoomTypeDTO room = roomTypeList.get(k);
+                //해당 날짜에 예약된 날짜가 있는지 계산하기
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                //db에서 가져온 모든 checkin날짜/checkout날짜
+                List<ReservationDTO> DB_reservation =service.getReservationInfoByR_Code(room.getR_code());
+                //원하는 날짜의 범위
+                LocalDate reservation_checkin = reservation.getReservation_checkin();
+                LocalDate reservation_checkout = reservation.getReservation_checkout();
 
-        for(int j=0;j<DB_reservation.size();j++){
-            LocalDate checkinDate = DB_reservation.get(j).getReservation_checkin();
-            LocalDate checkoutDate = DB_reservation.get(j).getReservation_checkout();
+                for(int j=0;j<DB_reservation.size();j++){
+                    LocalDate checkinDate = DB_reservation.get(j).getReservation_checkin();
+                    LocalDate checkoutDate = DB_reservation.get(j).getReservation_checkout();
 
-            for(LocalDate date = reservation_checkin; !date.isAfter(reservation_checkout);date = date.plusDays(1)){
-                if((date.isEqual(checkinDate) || date.isAfter(checkinDate)) && date.isBefore(checkoutDate)){
-                    room.setR_status("X");
-                } else{
-                    room.setR_status("O");
+                    for(LocalDate date = reservation_checkin; !date.isAfter(reservation_checkout);date = date.plusDays(1)){
+                        if((date.isEqual(checkinDate) || date.isAfter(checkinDate)) && date.isBefore(checkoutDate)){
+                            room.setR_status("X");
+                        } else{
+                            room.setR_status("O");
+                        }
+                    }
                 }
-            }
-        }
 
 //            data.put(room.getR_code(),service.getUrl(room));
-            data.put(room.getR_code(),service.getUrl(room));
+                data.put(room.getR_code(),room);
+            }
+
         }
 
 
