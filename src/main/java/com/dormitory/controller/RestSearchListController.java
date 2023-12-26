@@ -1,13 +1,16 @@
 package com.dormitory.controller;
 
 import com.dormitory.dto.DormitoryDTO;
+import com.dormitory.dto.SearchDTO;
 import com.dormitory.service.DormitoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
-@CrossOrigin(origins = {"http://localhost:3000/"})
+import java.util.stream.Collectors;
+@CrossOrigin(origins = {"http://localhost:3000/" })
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/searchList")
@@ -20,21 +23,65 @@ public class RestSearchListController {
 
 
     //2. 검색 화면에서 숙소 정보 -> like 조건 어떻게 할건지 회의
-    @GetMapping("/dormitory")
-    public List<DormitoryDTO> getDormitory(
-            @RequestParam(name="pageNum",defaultValue="1",required=false) int pageNum
-            ,@RequestParam(name="keyword",defaultValue="",required=false) String keyword
-            ,@RequestParam(name="type", defaultValue="",required=false) String type
-            ,@RequestParam(name="star", defaultValue="", required = false) String star
-            ,@RequestParam(name="startDate", required = false) LocalDate startDate
-            ,@RequestParam(name="endDate", required = false) LocalDate endDate
-            ,@RequestParam(name="guest", required=false, defaultValue = "2") int guest) throws Exception{
+    @PostMapping("/dormitory")
+    public List<DormitoryDTO> getDormitory(@RequestBody SearchDTO search, @RequestParam(name="pageNum",defaultValue="1",required=false) int pageNum) throws Exception {
 
-        if(startDate==null) startDate = LocalDate.now();
-        if(endDate==null) endDate = LocalDate.now().plusDays(1);
+        System.out.println("keyword : " + search.getKeyword());
+            for (int i = 0; i < search.getType().length; i++) {
+                System.out.println("type : " + i + search.getType()[i]);
+            }
+            for (int i = 0; i < search.getStar().length; i++) {
+                System.out.println("star : " + i + search.getStar()[i]);
+            }
+        System.out.println("startdate : " +search.getStartDate());
+        System.out.println("enddate : " +search.getEndDate());
+        System.out.println("guest : " + search.getGuest());
 
-        return service.getDormitoryList(pageNum*10-10,keyword,type,star,startDate,endDate);
+    // 별점 리스트를 처리하여 최소 별점과 최대 별점을 계산합니다.
+    List<String> starList = search.getStarList();
+    int minStar = 0;
+    int maxStar = 5;
+
+    if (!starList.contains("All") && !starList.isEmpty()) {
+        List<Integer> intStarList = starList.stream().map(Integer::parseInt).collect(Collectors.toList());
+
+        if (intStarList.size() == 1) { // 별점이 단일 값으로 선택되었을 때
+            int star = intStarList.get(0);
+            minStar = star == 2 ? 1 : star - 1;
+            maxStar = star;
+        } else { // 별점이 여러 값으로 선택되었을 때
+            minStar = intStarList.contains(2) && intStarList.contains(3) && intStarList.contains(4) && intStarList.contains(5) ? 1 : Collections.min(intStarList) - 1;
+            maxStar = intStarList.contains(4) ? 5 : Collections.max(intStarList);
+        }
     }
+
+        return service.getDormitoryList(pageNum * 10 - 10, search.getKeyword(), search.getTypeList(), minStar, maxStar, search.getStartDate(), search.getEndDate());
+    }
+
+    // @GetMapping("/dormitory")
+    // public List<DormitoryDTO> getDormitory(
+    //         @RequestParam(name="pageNum",defaultValue="1",required=false) int pageNum
+    //         ,@RequestParam(name="keyword",defaultValue="",required=false) String keyword
+    //         ,@RequestParam(name="type", defaultValue="",required=false) String[] type
+    //         ,@RequestParam(name="star", defaultValue="", required = false) String[] star
+    //         ,@RequestParam(name="startDate", required = false) LocalDate startDate
+    //         ,@RequestParam(name="endDate", required = false) LocalDate endDate
+    //         ,@RequestParam(name="guest", required=false, defaultValue = "2") int guest) throws Exception{
+
+    //         System.out.println("pageNum : " + pageNum);
+    //         System.out.println("keyword : " + keyword);
+    //         for (int i = 0; i < type.length; i++) {
+    //             System.out.println("type : " + i + type[i]);
+    //         }
+    //         for (int i = 0; i < star.length; i++) {
+    //             System.out.println("star : " + i + star[i]);
+    //         }
+    //         System.out.println("startDate : " + startDate);
+    //         System.out.println("endDate : " + endDate);
+    //         System.out.println("guest : " + guest);
+
+    //         return service.getDormitoryList(pageNum * 10 - 10, keyword, type, star, startDate, endDate);
+    // }
 
 
 }

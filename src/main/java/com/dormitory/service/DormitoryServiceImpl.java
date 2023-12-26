@@ -20,21 +20,24 @@ public class DormitoryServiceImpl implements DormitoryService {
     //=====================MAIN======================
 
     @Override
-    public List<DormitoryDTO> getDormitoryList(int pageNum, String keyword, String type, String star, LocalDate startDate,LocalDate endDate) throws Exception {
+    public List<DormitoryDTO> getDormitoryList(int pageNum, String keyword, List<String> typeList, int minStar, int maxStar,
+    LocalDate startDate, LocalDate endDate) throws Exception {
         Map<String, Object> data = new HashMap<>();
         data.put("pageNum",pageNum);
         data.put("keyword",keyword);
-        data.put("type",type);
-        data.put("star",star);
+        data.put("typeList",typeList);
+        data.put("minStar",minStar);
+        data.put("maxStar",maxStar);
         data.put("startDate",startDate);
         data.put("endDate",endDate);
 
-        System.out.println(pageNum);
-        System.out.println(keyword);
-        System.out.println(type);
-        System.out.println(star);
-        System.out.println(startDate);
-        System.out.println(endDate);
+        // System.out.println(pageNum);
+        // System.out.println(keyword);
+        // System.out.println(typeList);
+        // System.out.println(minStar);
+        // System.out.println(maxStar);
+        // System.out.println(startDate);
+        // System.out.println(endDate);
 
         List<DormitoryDTO> list = mapper.getDormitoryList(data);
         if(list == null) System.out.println("null");

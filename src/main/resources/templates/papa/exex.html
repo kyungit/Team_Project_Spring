@@ -1,68 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+    ></script>
     <!-- iamport.payment.js -->
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
+    ></script>
     <script>
-        //function requestPay() {
-            //try {
+      //function requestPay() {
+      //try {
 
-                var IMP = window.IMP;
-                IMP.init("imp30387750");
+      var IMP = window.IMP;
+      IMP.init("imp30387750");
 
-                var today = new Date();
-                var hours = today.getHours(); // 시
-                var minutes = today.getMinutes();  // 분
-                var seconds = today.getSeconds();  // 초
-                var milliseconds = today.getMilliseconds();
-                var makeMerchantUid = hours + minutes + seconds + milliseconds;
+      var today = new Date();
+      var hours = today.getHours(); // 시
+      var minutes = today.getMinutes(); // 분
+      var seconds = today.getSeconds(); // 초
+      var milliseconds = today.getMilliseconds();
+      var makeMerchantUid = hours + minutes + seconds + milliseconds;
 
-                function requestPay() {
-                    IMP.request_pay({
-                        pg: 'kakaopay',
-                        pay_method: 'kakaopay',
-                        merchant_uid: "IMP" + makeMerchantUid,
-                        name: '숙소예약Test', //입력란 만들기
-                        amount: 20000, //나중에 숙소 가격 DB에서 가져오기
-                        buyer_name: '이도경', //입력란 만들기
-                        buyer_tel: '01012345678', //입력란 만들기
-
-                    },  rsp => {
-                        if (rsp.success) {
-                            // axios로 HTTP 요청
-                            console.log("가격"+rsp.paid_amount);
-                            axios({
-                                url: "/reservation/payment",
-                                method: "post",
-                                headers: { "Content-Type": "application/json" },
-                                data: {
-                                    imp_uid: rsp.imp_uid,
-                                    merchant_uid: rsp.merchant_uid,
-                                    paid_amount: rsp.paid_amount,
-                                    buyer_name: rsp.buyer_name,
-                                    buyer_tel: rsp.buyer_tel,
-                                    paid_status: rsp.status,
-                                    success: rsp.success
-                                }
-                            }).then((data) => {
-                                // 서버 결제 API 성공시 로직
-                                console.log(data);
-                            })
-                        } else {
-                            alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
-                        }
-                    });
+      function requestPay() {
+        IMP.request_pay(
+          {
+            pg: "kakaopay",
+            pay_method: "kakaopay",
+            merchant_uid: "IMP" + makeMerchantUid,
+            name: "숙소예약Test", //입력란 만들기
+            amount: 20000, //나중에 숙소 가격 DB에서 가져오기
+            buyer_name: "이도경", //입력란 만들기
+            buyer_tel: "01012345678", //입력란 만들기
+          },
+          (rsp) => {
+            if (rsp.success) {
+              // axios로 HTTP 요청
+              console.log("가격" + rsp.paid_amount);
+              axios({
+                url: "/reservation/payment",
+                method: "post",
+                headers: { "Content-Type": "application/json" },
+                data: {
+                  imp_uid: rsp.imp_uid,
+                  merchant_uid: rsp.merchant_uid,
+                  paid_amount: rsp.paid_amount,
+                  buyer_name: rsp.buyer_name,
+                  buyer_tel: rsp.buyer_tel,
+                  paid_status: rsp.status,
+                  success: rsp.success,
+                  reservation_code: 2,
+                },
+              }).then((data) => {
+                // 서버 결제 API 성공시 로직
+                console.log(data);
+              });
+            } else {
+              alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
             }
-
-
+          }
+        );
+      }
     </script>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Sample Payment</title>
-</head>
-<body>
-<button onclick="requestPay()">결제하기</button> <!-- 결제하기 버튼 생성 -->
-</body>
+  </head>
+  <body>
+    <button onclick="requestPay()">결제하기</button>
+    <!-- 결제하기 버튼 생성 -->
+  </body>
 </html>
