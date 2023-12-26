@@ -33,15 +33,13 @@
     <!-- ====================3. Reservation =======================-->
     <!-- 1. 숙소+객실 조회 -->
     <select id="getDormitoryRoom" parameterType="String" resultType="com.dormitory.dto.DormitoryRoomDTO">
-        select * from tbl_dormitory inner join tbl_room on tbl_dormitory.d_code=tbl_room.d_code
+        select * from tbl_dormitory inner join tbl_room_type on tbl_dormitory.d_code=tbl_room_type.d_code
         where r_code = #{r_code}
     </select>
 
     <!-- 2. 예약 회원 정보 -->
     <!-- 3. 예약 정보 저장 (POST)-->
-    <select id="getReservationInfoByR_Code" parameterType="String" resultType="com.dormitory.dto.ReservationDTO">
-        select * from tbl_reservation where r_code=#{r_code}
-    </select>
+
     <insert id="postReservation" parameterType="com.dormitory.dto.ReservationDTO">
         insert into tbl_reservation(d_code,r_code,d_name,d_type,r_img,r_name,m_userid,m_telno,m_username,reservation_checkin,reservation_checkout,reservation_guest,reservation_price,reservation_description,d_discount,s_status)
         values(#{d_code},#{r_code},#{d_name},#{d_type},#{r_img},#{r_name},#{m_userid},#{m_telno},#{m_username},#{reservation_checkin},#{reservation_checkout},#{reservation_guest},#{reservation_price},#{reservation_description},#{d_discount},1)

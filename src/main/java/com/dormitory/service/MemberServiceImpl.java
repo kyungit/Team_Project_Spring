@@ -56,9 +56,6 @@ public class MemberServiceImpl implements MemberService {
 
     //2. 구매 회원 정보 등록
     //3-2. 예약 정보 저장(POST)
-    public List<ReservationDTO> getReservationInfoByR_Code(String r_code){
-        return mapper.getReservationInfoByR_Code(r_code);
-    }
 
     @Override
     public void postReservation(ReservationDTO reservation) {

@@ -98,13 +98,16 @@ public class DormitoryServiceImpl implements DormitoryService {
 
     }
     //4. 숙소별 객실 정보
-    public List<RoomDTO> getR_Code(String d_code){
+    public List<RoomTypeDTO> getR_Code(String d_code){
         return mapper.getR_Code(d_code);
     }
 
     @Override
-    public List<RoomDTO> getUrl(RoomDTO room) {
+    public List<RoomTypeDTO> getUrl(RoomTypeDTO room) {
         return mapper.getUrl(room);
+    }
+    public List<ReservationDTO> getReservationInfoByR_Code(String r_code){
+        return mapper.getReservationInfoByR_Code(r_code);
     }
 
     //5.숙소 정보
