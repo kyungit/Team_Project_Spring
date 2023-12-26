@@ -61,4 +61,11 @@ public class RestMenuController {
             service.DeleteVisited(reservation_code);
             return "{\"message\":\"GOOD\"}";
     }
+
+    //6. d_code 입력
+    @PostMapping("/code/{code}")
+    public String postDCode(@PathVariable String d_code) throws Exception {
+        service.getDormitoryRoom(d_code);
+        return d_code;
+    }
 }
