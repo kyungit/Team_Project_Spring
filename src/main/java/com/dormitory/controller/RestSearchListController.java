@@ -36,7 +36,7 @@ public class RestSearchListController {
         System.out.println("startdate : " +search.getStartDate());
         System.out.println("enddate : " +search.getEndDate());
         System.out.println("guest : " + search.getGuest());
-        
+
     // 별점 리스트를 처리하여 최소 별점과 최대 별점을 계산합니다.
     List<String> starList = search.getStarList();
     int minStar = 0;
@@ -44,7 +44,7 @@ public class RestSearchListController {
 
     if (!starList.contains("All") && !starList.isEmpty()) {
         List<Integer> intStarList = starList.stream().map(Integer::parseInt).collect(Collectors.toList());
-    
+
         if (intStarList.size() == 1) { // 별점이 단일 값으로 선택되었을 때
             int star = intStarList.get(0);
             minStar = star == 2 ? 1 : star - 1;

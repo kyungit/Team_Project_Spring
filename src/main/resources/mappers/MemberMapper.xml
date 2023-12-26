@@ -39,9 +39,13 @@
 
     <!-- 2. 예약 회원 정보 -->
     <!-- 3. 예약 정보 저장 (POST)-->
-    <select id="posteservationInfo" parameterType="String" resultType="com.dormitory.dto.ReservationDTO">
+    <select id="getReservationInfoByR_Code" parameterType="String" resultType="com.dormitory.dto.ReservationDTO">
         select * from tbl_reservation where r_code=#{r_code}
     </select>
+    <insert id="postReservation" parameterType="com.dormitory.dto.ReservationDTO">
+        insert into tbl_reservation(d_code,r_code,d_name,d_type,r_img,r_name,m_userid,m_telno,m_username,reservation_checkin,reservation_checkout,reservation_guest,reservation_price,reservation_description,d_discount,s_status)
+        values(#{d_code},#{r_code},#{d_name},#{d_type},#{r_img},#{r_name},#{m_userid},#{m_telno},#{m_username},#{reservation_checkin},#{reservation_checkout},#{reservation_guest},#{reservation_price},#{reservation_description},#{d_discount},1)
+    </insert>
     <!-- 4. 결제-->
     <insert id="getPayment" parameterType="com.dormitory.dto.PaymentDTO">
         insert into tbl_payment(merchant_uid,reservation_code,buyer_tel,buyer_name,paid_amount,paid_status,success)

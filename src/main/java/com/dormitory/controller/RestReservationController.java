@@ -6,9 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @CrossOrigin(origins = {"http://localhost:3000/" })
 @RestController
 @RequiredArgsConstructor
@@ -40,29 +41,33 @@ public class RestReservationController {
     }
 
     //3-2. 예약 정보 받아서 POST 처리
+    @ResponseBody
     @PostMapping("/reservationInfo")
-    public String posteservationInfo(@RequestBody ReservationDTO reservation){
+    public void posteservationInfo(@RequestBody ReservationDTO reservation){
 
-        //해당 날짜에 예약된 날짜가 있는지 계산하기
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        //db에서 가져온 모든 checkin날짜/checkout날짜
-        List<ReservationDTO> DB_reservation =service.posteservationInfo(reservation.getR_code());
-        //원하는 날짜의 범위
-        LocalDate reservation_checkin = reservation.getReservation_checkin();
-        LocalDate reservation_checkout = reservation.getReservation_checkout();
+        service.postReservation(reservation);
 
-        for(int i=0;i<DB_reservation.size();i++){
-            LocalDate checkinDate = DB_reservation.get(i).getReservation_checkin();
-            LocalDate checkoutDate = DB_reservation.get(i).getReservation_checkout();
-
-            for(LocalDate date = reservation_checkin; !date.isAfter(reservation_checkout);date = date.plusDays(1)){
-                if((date.isEqual(checkinDate) || date.isAfter(checkinDate)) && date.isBefore(checkoutDate)){
-
-                    return "{\" message \" : \" FAIL \"}";
-                }
-            }
-        }
-        return "{\" message \" : \" GOOD \"}";
+//
+//
+//        //해당 날짜에 예약된 날짜가 있는지 계산하기
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        //db에서 가져온 모든 checkin날짜/checkout날짜
+//        List<ReservationDTO> DB_reservation =service.getReservationInfoByR_Code(reservation.getR_code());
+//        //원하는 날짜의 범위
+//        LocalDate reservation_checkin = reservation.getReservation_checkin();
+//        LocalDate reservation_checkout = reservation.getReservation_checkout();
+//
+//        for(int i=0;i<DB_reservation.size();i++){
+//            LocalDate checkinDate = DB_reservation.get(i).getReservation_checkin();
+//            LocalDate checkoutDate = DB_reservation.get(i).getReservation_checkout();
+//
+//            for(LocalDate date = reservation_checkin; !date.isAfter(reservation_checkout);date = date.plusDays(1)){
+//                if((date.isEqual(checkinDate) || date.isAfter(checkinDate)) && date.isBefore(checkoutDate)){
+//                    return "{\" message \" : \" FAIL \"}";
+//                }
+//            }
+//        }
+//        return "{\" message \" : \" GOOD \"}";
     }
 
 
@@ -72,7 +77,6 @@ public class RestReservationController {
     @PostMapping("/payment")
     public String postPayment(@RequestBody PaymentDTO payment)throws Exception{
         System.out.println(payment.toString());
-
         System.out.println(payment);
         try {
             service.getPayment(payment);
@@ -93,12 +97,28 @@ public class RestReservationController {
 
     //5. 시즌별 환불규정 -> OK
     @GetMapping("/cancel")
-    public List<CancelDTO> getCancel(DormitoryDTO dormitory) throws Exception{
+    public Map<String, String> getCancel(DormitoryDTO dormitory) throws Exception{
         //테스트용
         //return service.getCancelPolicy("3002534");
-
-        return service.getCancelPolicy(dormitory.getD_code());
-
+        List<CancelDTO> cancel = service.getCancelPolicy(dormitory);
+        String cancelPolicy1="성수기 규정 enter";
+        String cancelPolicy0="비수기 규정 enter";
+        for(int i=0;i<cancel.size();i++){
+            if(cancel.get(i).getC_type() == 1){
+                cancelPolicy1 += "예약일 "+cancel.get(i).getC_policy_apply_date()+"일 전, "
+                        +cancel.get(i).getC_time()+"시 기준으로 "
+                        +(100-cancel.get(i).getC_rate()) + "%만 환불됩니다.enter";
+            }
+            else if(cancel.get(i).getC_type() == 0){
+                cancelPolicy0 += "예약일 "+cancel.get(i).getC_policy_apply_date()+"일 전, "
+                        +cancel.get(i).getC_time()+"시 기준으로 "
+                        +(100-cancel.get(i).getC_rate()) + "%만 환불됩니다.enter";
+            }
+        }
+        Map<String, String> data = new HashMap<>();
+        data.put("policy0",cancelPolicy0);
+        data.put("policy1",cancelPolicy1);
+        return data;
     }
 
 

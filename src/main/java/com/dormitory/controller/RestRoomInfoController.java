@@ -70,4 +70,29 @@ public class RestRoomInfoController {
         String d_code = dormitory.getD_code();
         return service.getAmenity(d_code);
     }
+
+    @GetMapping("/cancel")
+    public Map<String, String> getCancel(DormitoryDTO dormitory){
+        List<CancelDTO> cancel = service.getCancelPolicy(dormitory);
+        String cancelPolicy1="성수기 규정 enter";
+        String cancelPolicy0="비수기 규정 enter";
+        for(int i=0;i<cancel.size();i++){
+            if(cancel.get(i).getC_type() == 1){
+                cancelPolicy1 += "예약일 "+cancel.get(i).getC_policy_apply_date()+"일 전, "
+                        +cancel.get(i).getC_time()+"시 기준으로 "
+                        +(100-cancel.get(i).getC_rate()) + "%만 환불됩니다.enter";
+            }
+            else if(cancel.get(i).getC_type() == 0){
+                cancelPolicy0 += "예약일 "+cancel.get(i).getC_policy_apply_date()+"일 전, "
+                        +cancel.get(i).getC_time()+"시 기준으로 "
+                        +(100-cancel.get(i).getC_rate()) + "%만 환불됩니다.enter";
+            }
+        }
+        Map<String, String> data = new HashMap<>();
+        data.put("policy0",cancelPolicy0);
+        data.put("policy1",cancelPolicy1);
+        return data;
+    }
+
+
 }

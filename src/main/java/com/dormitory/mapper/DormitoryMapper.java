@@ -46,9 +46,13 @@ public interface DormitoryMapper {
     public List<DormitoryDTO> getDormitory(String d_code);
     //6. 숙소별 어메니티 정보
     public List<AmenityDTO> getAmenity(String d_code);
+    //7. 취소 정책
+    public List<CancelDTO> getCancelPolicy(DormitoryDTO dormitory);
+
     //SearchList
     //전체 리스트
     public List<DormitoryDTO> getDormitoryList(Map<String, Object> data) throws Exception;
+
 
 
 }

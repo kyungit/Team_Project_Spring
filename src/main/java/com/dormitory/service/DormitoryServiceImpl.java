@@ -116,4 +116,10 @@ public class DormitoryServiceImpl implements DormitoryService {
     public List<AmenityDTO> getAmenity(String d_code){
         return mapper.getAmenity(d_code);
     }
+    //7. 취소 정책
+
+    @Override
+    public List<CancelDTO> getCancelPolicy(DormitoryDTO dormitory) {
+        return mapper.getCancelPolicy(dormitory);
+    }
 }
