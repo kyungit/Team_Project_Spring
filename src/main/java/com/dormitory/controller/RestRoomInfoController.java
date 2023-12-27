@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -224,17 +223,17 @@ public class RestRoomInfoController {
         System.out.println(reservation.getReservation_checkout());
         String d_code = dormitory.getD_code();
         List<RoomTypeDTO> list = service.getR_Code(d_code); // d_code에 해당하는 모든 r_code 리스트를 뽑아냄.
-        List<List<RoomDTO>> listRoom = new ArrayList<>();    // 각 r_code에 해당하는 room정보를 저장하는 리스트
-        System.out.println("11111111" + list.size());
-            for(int i=0;i<list.size();i++){
-                RoomTypeDTO dto = list.get(i);
-                System.out.println(" r_code : "+dto.getR_code());
-//                listRoom.add(service.getRoom(dto.getR_code()));
-            }
+//        List<List<RoomDTO>> listRoom = new ArrayList<>();    // 각 r_code에 해당하는 room정보를 저장하는 리스트
+//        System.out.println("11111111" + list.size());
+//            for(int i=0;i<list.size();i++){
+//                RoomTypeDTO dto = list.get(i);
+//                System.out.println(" r_code : "+dto.getR_code());
+////                listRoom.add(service.getRoom(dto.getR_code()));
+//            }
         Map<String, Object> data = new HashMap<>();
 
         // 각 방의 예약 상태를 확인하는 로직을 별도의 메소드로 분리
-        Map<String, String> roomStatusMap = checkRoomAvailability(list, reservation, listRoom); // 모든 r_code에 해당하는 리스트와 예약 정보를 방 이용 가능
+        Map<String, String> roomStatusMap = checkRoomAvailability(list, reservation); // 모든 r_code에 해당하는 리스트와 예약 정보를 방 이용 가능
 
         // 각 방의 상세 정보와 예약 상태를 매핑
         for (RoomTypeDTO room : list) {
@@ -249,12 +248,12 @@ public class RestRoomInfoController {
         return data;
     }
 
-    private Map<String, String> checkRoomAvailability(List<RoomTypeDTO> list, ReservationDTO reservation, List<List<RoomDTO>> listRoom) {
+    private Map<String, String> checkRoomAvailability(List<RoomTypeDTO> list, ReservationDTO reservation) {
         Map<String, String> availability = new HashMap<>();
 
-        for(List<RoomDTO> li : listRoom){
-            for(int i=0;i<li.size();i++){
-                RoomDTO roomDTO = li.get(i);
+//        for(List<RoomDTO> li : listRoom){
+//            for(int i=0;i<li.size();i++){
+//                RoomDTO roomDTO = li.get(i);
                 for (RoomTypeDTO room : list) {
                     List<ReservationDTO> reservations = service.getReservationInfoByR_Code(room.getR_code()); // r_code에 해당하는 모든 예약 정보
                     int maxRoomCount = service.getRoomCount(room.getR_code());
@@ -265,9 +264,9 @@ public class RestRoomInfoController {
                     String status = (currentReservationCount < maxRoomCount) ? "O" : "X"; // 기존의 모든 예약 정보와 비교해서 TRUE일 경우 예약 가능, FALSE일 경우 예약 중첩
                     availability.put(room.getR_code(), status);
                 }
-            }
+//            }
 
-        }
+//        }
 
         return availability;
     }
