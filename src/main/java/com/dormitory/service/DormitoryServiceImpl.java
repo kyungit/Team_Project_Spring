@@ -125,4 +125,8 @@ public class DormitoryServiceImpl implements DormitoryService {
     public List<CancelDTO> getCancelPolicy(DormitoryDTO dormitory) {
         return mapper.getCancelPolicy(dormitory);
     }
+
+    public Integer getRoomCount(String r_code) {
+        return mapper.getRoomCount(r_code);
+    }
 }
