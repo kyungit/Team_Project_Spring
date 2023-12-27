@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Mapper
 public interface DormitoryMapper {
-    public List<RoomTypeDTO> getRoom() throws Exception;
+
 
     //숙소 정보 전체 조회
     //=============================MAIN==========================
@@ -42,7 +42,9 @@ public interface DormitoryMapper {
     //4. 숙소별 객실 정보
     public List<RoomTypeDTO> getR_Code(String d_code);
     public List<ReservationDTO> getReservationInfoByR_Code(String r_code);
-    public List<RoomTypeDTO> getUrl(RoomTypeDTO room);
+    public List<String> getUrl(RoomTypeDTO room);
+
+
     //5. 숙소 정보
     public List<DormitoryDTO> getDormitory(String d_code);
     //6. 숙소별 어메니티 정보

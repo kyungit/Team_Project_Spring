@@ -26,6 +26,8 @@ public class OAuth2UserDetailsServiceImpl extends DefaultOAuth2UserService {
     //	private final MemberRepository memberRepository;
     private final MemberService service;
     private final HttpSession session;
+    //JWT 관리 객체 의존성 주입
+//    private final JWTUtil jwtUtil;
 
     @SneakyThrows
     @Override
@@ -86,8 +88,22 @@ public class OAuth2UserDetailsServiceImpl extends DefaultOAuth2UserService {
         session.setAttribute("username", savedMember.getUsername());
         session.setAttribute("role", savedMember.getRole());
 
-        return oAuth2User;  // 변경된 부분
 
+        //jwt 토큰 발급
+//
+//        Map<String, Object> data = new HashMap<> ();
+//        data.put("userid", userid);
+//        data.put("password",12345);
+//        String accessToken = "";
+//        String refreshToken = "";   //토큰이 보안에 취약... 정상인지 아닌지 확인하려고 accessToke과 refreshToken 둘 다 사용
+        //access token & refresh token 생성
+//        accessToken = jwtUtil.generateToken(data, 1);
+//        refreshToken = jwtUtil.generateToken(data, 5);
+//
+//        String str = "{\"message\":\"good\",\"username\":\""
+//                + URLEncoder.encode(savedMember.getUsername(),"UTF-8") + "\",\"role\":\"" + savedMember.getRole() + "\"}";
+
+        return oAuth2User;  // 변경된 부분
     }
 
     private MemberDTO saveSocialMember(String userid, String provider) throws Exception {

@@ -34,8 +34,10 @@ public interface DormitoryService {
 
     //4. 숙소별 객실 조회
     public List<RoomTypeDTO> getR_Code(String d_code);
-    public List<RoomTypeDTO> getUrl(RoomTypeDTO room);
+    public List<String> getUrl(RoomTypeDTO room);
     public List<ReservationDTO> getReservationInfoByR_Code (String r_code);
+
+
 
     //5. 숙소 정보
     public List<DormitoryDTO> getDormitory(String d_code);

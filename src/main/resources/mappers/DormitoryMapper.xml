@@ -46,14 +46,23 @@
     </select>
     <!-- 4. 숙소별 객실 정보 -->
 
-    <select id="getR_Code" parameterType="String" resultType="com.dormitory.dto.RoomTypeDTO">
-        select r_code from tbl_room_type where d_code=#{d_code}
+    <select id="getR_Code" parameterType="com.dormitory.dto.RoomTypeDTO" resultType="com.dormitory.dto.RoomTypeDTO">
+        select * from tbl_room_type where d_code=#{d_code}
     </select>
-    <select id="getUrl" parameterType="com.dormitory.dto.RoomTypeDTO" resultType="com.dormitory.dto.RoomTypeDTO">
-        select * from tbl_url left outer join tbl_room_type on tbl_url.r_code=tbl_room_type.r_code where tbl_url.r_code=#{r_code}
+
+    <select id="getUrl" parameterType="com.dormitory.dto.RoomTypeDTO" resultType="String">
+        select r_url from tbl_url where r_code=#{r_code}
     </select>
     <select id="getReservationInfoByR_Code" parameterType="String" resultType="com.dormitory.dto.ReservationDTO">
         select * from tbl_reservation where r_code=#{r_code}
+    </select>
+    <select id="getVacancy" parameterType="com.dormitory.dto.RoomTypeDTO" resultType="int">
+        select count(*) from tbl_room where r_code=#{r_code}
+    </select>
+
+
+    <select id="getRoomCount" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM tbl_room WHERE r_code=#{r_code}
     </select>
 
     <!-- 5. 숙소 정보 -->
@@ -70,9 +79,7 @@
         select * from tbl_cancel where d_code=#{d_code}
     </select>
 
-    <select id="getRoomCount" parameterType="String" resultType="Integer">
-        SELECT COUNT(*) FROM tbl_room WHERE r_code=#{r_code}
-    </select>
+
 
     <!-- =====================5. SearchList ====================== -->
 
