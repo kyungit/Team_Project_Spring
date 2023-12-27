@@ -63,7 +63,7 @@ public class RestMenuController {
     }
 
     //6. d_code 입력
-    @PostMapping("/code/{code}")
+    @PostMapping("/codeInput/{code}")
     public String postDCode(@PathVariable String d_code) throws Exception {
         service.getDormitoryRoom(d_code);
         return d_code;

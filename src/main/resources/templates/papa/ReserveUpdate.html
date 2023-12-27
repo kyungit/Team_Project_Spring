@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Payment Management</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<!-- 각 결제 정보가 들어갈 곳입니다. -->
+<div id="paymentInfo"></div>
+
+<script>
+    $(document).ready(function() {
+        $.get("/api/payments", function(data) {
+            data.forEach(function(payment) {
+                $("#paymentInfo").append(
+                    `<h2>${payment.name}</h2>` +
+                    `<p>${payment.amount}</p>` +
+                    `<button onclick="updatePayment(${payment.id})">수정</button>` +
+                    `<button onclick="cancelPayment(${payment.id})">취소 확정</button>`
+                );
+            });
+        });
+    });
+
+    function updatePayment(paymentId) {
+        // 수정할 정보를 입력받습니다.
+        var updatedInfo = prompt("수정할 결제 정보를 입력하세요.");
+        $.ajax({
+            url: "/api/payments/" + paymentId,
+            type: 'PUT',
+            data: JSON.stringify(updatedInfo),
+            contentType: 'application/json',
+            success: function(result) {
+                alert('결제 정보가 수정되었습니다.');
+            }
+        });
+    }
+
+    function cancelPayment(paymentId) {
+        $.ajax({
+            url: "/api/payments/" + paymentId + "/cancel",
+            type: 'POST',
+            success: function(result) {
+                alert('결제 취소가 확정되었습니다.');
+            }
+        });
+    }
+</script>
+</body>
+</html>
