@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public interface AdminDormitoryService {
 
-    static void updatePayment(Long id, String name, BigDecimal amount);
+    void updatePayment(Long id, String name, BigDecimal amount);
 
-    static void cancelPayment(Long id);
+    void cancelPayment(Long id);
 }
