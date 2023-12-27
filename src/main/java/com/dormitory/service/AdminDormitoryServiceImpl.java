@@ -13,12 +13,12 @@ public class AdminDormitoryServiceImpl implements AdminDormitoryService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override
+
     public void updatePayment(Long id, String name, BigDecimal amount) {
         jdbcTemplate.update("UPDATE payment SET name=?, amount=? WHERE id=?", name, amount, id);
     }
 
-    @Override
+
     public void cancelPayment(Long id) {
         jdbcTemplate.update("UPDATE payment SET status='CANCELLED' WHERE id=?", id);
     }
