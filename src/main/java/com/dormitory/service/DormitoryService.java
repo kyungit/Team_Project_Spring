@@ -44,6 +44,7 @@ public interface DormitoryService {
     //7. 취소 정책
     public List<CancelDTO> getCancelPolicy(DormitoryDTO dormitory);
 
+    public Integer getRoomCount(String r_code); 
 
     //====================5. SearchList=================
     // 숙소 정보 조회 (페이지 기주)

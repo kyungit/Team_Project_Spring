@@ -49,6 +49,8 @@ public interface DormitoryMapper {
     public List<AmenityDTO> getAmenity(String d_code);
     //7. 취소 정책
     public List<CancelDTO> getCancelPolicy(DormitoryDTO dormitory);
+    
+    public Integer getRoomCount(String r_code); 
 
     //SearchList
     //전체 리스트
