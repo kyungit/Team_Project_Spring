@@ -34,7 +34,7 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-
+	implementation 'javax.xml.bind:jaxb-api:2.3.0'
 	implementation group: 'commons-io', name: 'commons-io', version: '2.15.0'
 
 	compileOnly 'org.projectlombok:lombok'
