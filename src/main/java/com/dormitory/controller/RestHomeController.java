@@ -2,6 +2,7 @@ package com.dormitory.controller;
 
 import com.dormitory.dto.DormitoryDTO;
 import com.dormitory.service.DormitoryService;
+//import com.dormitory.util.JWTUtil;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +50,12 @@ public class RestHomeController {
         return service.getDormitoryByGrade();
     }
 
+
+
+
+    //밑으로 건들ㄴㄴ
+    //JWT 관리 객체 의존성 주입
+//    private final JWTUtil jwtUtil;
 
 
 }
