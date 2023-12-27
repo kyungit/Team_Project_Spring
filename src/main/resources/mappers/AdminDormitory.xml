@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.dormitory.mapper.DormitoryMapper">
+
+    <update id="updatePayment" parameterType="map">
+        UPDATE payment
+        SET name=#{payment.name}, amount=#{payment.amount}
+        WHERE id=#{id}
+    </update>
+
+    <update id="cancelPayment" parameterType="long">
+        UPDATE payment
+        SET status='CANCELLED'
+        WHERE id=#{id}
+    </update>
+
+</mapper>
