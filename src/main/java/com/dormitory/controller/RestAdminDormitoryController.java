@@ -13,7 +13,7 @@ import java.util.Map;
 
 @CrossOrigin(origins = {"http://localhost:3000/" })
 @RestController
-@RequestMapping("/api") // 클래스 레벨에서 기본 경로 설정
+@RequestMapping("/components") // 클래스 레벨에서 기본 경로 설정
 @RequiredArgsConstructor
 public class RestAdminDormitoryController {
 
