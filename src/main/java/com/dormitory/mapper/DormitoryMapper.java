@@ -38,7 +38,7 @@ public interface DormitoryMapper {
     //2. 숙소별 리뷰 조회
     public List<ReviewDTO> getReview(String d_code);
     //3. 지도 위도/경도
-    public DormitoryDTO getMap(String d_code);
+    public List<DormitoryDTO> getMap(Map<String, Object> data);
     //4. 숙소별 객실 정보
     public List<RoomTypeDTO> getR_Code(String d_code);
     public List<ReservationDTO> getReservationInfoByR_Code(String r_code);
