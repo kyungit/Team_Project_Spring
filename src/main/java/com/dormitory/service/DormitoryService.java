@@ -30,7 +30,7 @@ public interface DormitoryService {
     //2. 리뷰 정보(숙소 전체)
     public List<ReviewDTO> getReview(String d_code);
     //3. 지도 위도/경도
-    public DormitoryDTO getMap(String d_code);
+    public List<DormitoryDTO> getMap(Double swLat, Double swLng, Double neLat, Double neLng);
 
     //4. 숙소별 객실 조회
     public List<RoomTypeDTO> getR_Code(String d_code);

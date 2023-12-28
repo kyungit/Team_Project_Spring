@@ -93,8 +93,13 @@ public class DormitoryServiceImpl implements DormitoryService {
     }
 
     //3. 지도 위도/경도
-    public DormitoryDTO getMap(String d_code){
-        return mapper.getMap(d_code);
+    public List<DormitoryDTO> getMap(Double swLat, Double swLng, Double neLat, Double neLng) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("swLat",swLat);
+        data.put("swLng",swLng);
+        data.put("neLat",neLat);
+        data.put("neLng",neLng);
+        return mapper.getMap(data);
 
     }
     //4. 숙소별 객실 정보
