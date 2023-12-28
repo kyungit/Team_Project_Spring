@@ -13,10 +13,10 @@
         $.get("/api/payment", function(data) {
             data.forEach(function(payment) {
                 $("#paymentInfo").append(
-                    `<h2>${payment.name}</h2>` +
-                    `<p>${payment.amount}</p>` +
-                    `<button onclick="updatePayment(${payment.id})">수정</button>` +
-                    `<button onclick="cancelPayment(${payment.id})">취소 확정</button>`
+                    `<h2>${payment.name}</h2>
+                    <p>${payment.amount}</p>
+                    <button onclick="updatePayment(${payment.id})">수정</button>
+                    <button onclick="cancelPayment(${payment.id})">취소 확정</button>`
                 );
             });
         });
@@ -24,14 +24,18 @@
 
     function updatePayment(paymentId) {
         // 수정할 정보를 입력받습니다.
-        var updatedInfo = prompt("수정할 결제 정보를 입력하세요.");
+        var updatedInfo = prompt("수정할 결제 정보를 입력하세요. (형식: name,amount)");
+        var [name, amount] = updatedInfo.split(",");
         $.ajax({
             url: "/api/payment/" + paymentId,
             type: 'PUT',
-            data: JSON.stringify(updatedInfo),
+            data: JSON.stringify({name, amount}),
             contentType: 'application/json',
             success: function(result) {
                 alert('결제 정보가 수정되었습니다.');
+            },
+            error: function(request, status, error) {
+                alert("요청이 실패하였습니다. 상태: " + request.status + ", 에러: " + error);
             }
         });
     }
@@ -42,6 +46,9 @@
             type: 'POST',
             success: function(result) {
                 alert('결제 취소가 확정되었습니다.');
+            },
+            error: function(request, status, error) {
+                alert("요청이 실패하였습니다. 상태: " + request.status + ", 에러: " + error);
             }
         });
     }

@@ -13,46 +13,48 @@ import java.util.Map;
 
 @CrossOrigin(origins = {"http://localhost:3000/" })
 @RestController
+@RequestMapping("/api") // 클래스 레벨에서 기본 경로 설정
 @RequiredArgsConstructor
 public class RestAdminDormitoryController {
 
+    private final AdminDormitoryService adminDormitoryService; // 서비스 인스턴스 주입
+
     @PutMapping("/{d_code}")
     public String updateDormitory(@PathVariable String d_code, @RequestBody String dormitory) {
-        // 여기서 데이터베이스에서 코드에 맞는 숙박시설을 찾아 정보를 수정하고 반환합니다.
-        // Facility는 숙박시설 정보를 담는 클래스입니다.
+        // TODO: 숙박시설 정보 수정 로직 구현
         return null;
     }
 
-    @GetMapping
-    @RequestMapping("/api/payment")
+    @GetMapping("/payment")
     public List<PaymentDTO> getPayment() {
-        // 결제 정보를 가져와서 반환합니다.
-        return null;
+        // 결제 정보 조회 서비스 메소드 호출
+        return adminDormitoryService.getPayment();
     }
 
-    @PostMapping("/{paymentId}/confirm")
+    @PostMapping("/payment/{paymentId}/confirm")
     public PaymentDTO confirmPayment(@PathVariable Long paymentId) {
-        // 결제를 확정하고 그 정보를 반환합니다.
-        return null;
+        // 결제 확정 서비스 메소드 호출
+        return adminDormitoryService.confirmPayment(paymentId);
     }
 
-    @PutMapping("/{paymentId}")
+    @PutMapping("/payment/{paymentId}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updatePayment(@PathVariable Long paymentId, @RequestBody Map<String, Object> payload) {
         String name = (String) payload.get("name");
         BigDecimal amount = new BigDecimal((String) payload.get("amount"));
-        AdminDormitoryService.updatePayment(paymentId, name, amount);
+        adminDormitoryService.updatePayment(paymentId, name, amount);
         return ResponseEntity.ok().body("Payment updated successfully");
     }
 
-    @PostMapping("/{paymentId}/cancel")
+    @PostMapping("/payment/{paymentId}/cancel")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> cancelPayment(@PathVariable Long paymentId) {
-        AdminDormitoryService.cancelPayment(paymentId);
+        adminDormitoryService.cancelPayment(paymentId);
         return ResponseEntity.ok().body("Payment cancelled successfully");
     }
 
 }
+
 
 /*
 import org.springframework.security.access.prepost.PreAuthorize;
