@@ -10,7 +10,7 @@
 
 <script>
     $(document).ready(function() {
-        $.get("/api/payment", function(data) {
+        $.get("/components/payment/payment", function(data) {
             data.forEach(function(payment) {
                 $("#paymentInfo").append(
                     `<h2>${payment.name}</h2>
@@ -27,7 +27,7 @@
         var updatedInfo = prompt("수정할 결제 정보를 입력하세요. (형식: name,amount)");
         var [name, amount] = updatedInfo.split(",");
         $.ajax({
-            url: "/api/payment/" + paymentId,
+            url: "/components/payment/payment/" + paymentId,
             type: 'PUT',
             data: JSON.stringify({name, amount}),
             contentType: 'application/json',

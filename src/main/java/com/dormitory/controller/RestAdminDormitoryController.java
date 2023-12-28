@@ -25,19 +25,19 @@ public class RestAdminDormitoryController {
         return null;
     }
 
-    @GetMapping("/payment")
+    @GetMapping("/components/payment/payment")
     public List<PaymentDTO> getPayment() {
         // 결제 정보 조회 서비스 메소드 호출
         return adminDormitoryService.getPayment();
     }
 
-    @PostMapping("/payment/{paymentId}/confirm")
+    @PostMapping("/components/payment/payment/{paymentId}/confirm")
     public PaymentDTO confirmPayment(@PathVariable Long paymentId) {
         // 결제 확정 서비스 메소드 호출
         return adminDormitoryService.confirmPayment(paymentId);
     }
 
-    @PutMapping("/payment/{paymentId}")
+    @PutMapping("/components/payment/payment/{paymentId}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updatePayment(@PathVariable Long paymentId, @RequestBody Map<String, Object> payload) {
         String name = (String) payload.get("name");
@@ -46,7 +46,7 @@ public class RestAdminDormitoryController {
         return ResponseEntity.ok().body("Payment updated successfully");
     }
 
-    @PostMapping("/payment/{paymentId}/cancel")
+    @PostMapping("/components/payment/payment/{paymentId}/cancel")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> cancelPayment(@PathVariable Long paymentId) {
         adminDormitoryService.cancelPayment(paymentId);
