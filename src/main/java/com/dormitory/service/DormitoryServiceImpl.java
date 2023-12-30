@@ -50,8 +50,14 @@ public class DormitoryServiceImpl implements DormitoryService {
 
     //리뷰 높은 순  추천
     @Override
-    public List<DormitoryDTO> getDormitoryByStar(String keyword) {
-        return mapper.getDormitoryByStar(keyword);
+    public List<DormitoryDTO> getDormitoryByStar() {
+        return mapper.getDormitoryByStar();
+    }
+
+    // 3. 특가 할인 숙소
+    @Override
+    public List<DormitoryDTO> getDormitoryByDiscount() {
+        return mapper.getDormitoryByDiscount();
     }
 
     //5.(test)얼리체크인 순
@@ -93,8 +99,13 @@ public class DormitoryServiceImpl implements DormitoryService {
     }
 
     //3. 지도 위도/경도
-    public DormitoryDTO getMap(String d_code){
-        return mapper.getMap(d_code);
+    public List<DormitoryDTO> getMap(Double swLat, Double swLng, Double neLat, Double neLng) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("swLat",swLat);
+        data.put("swLng",swLng);
+        data.put("neLat",neLat);
+        data.put("neLng",neLng);
+        return mapper.getMap(data);
 
     }
     //4. 숙소별 객실 정보

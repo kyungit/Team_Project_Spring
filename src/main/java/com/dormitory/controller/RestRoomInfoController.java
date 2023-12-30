@@ -6,12 +6,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = { "http://localhost:3000/" })
 @RestController
@@ -34,13 +37,78 @@ public class RestRoomInfoController {
         return service.getReview(d_code);
     }
 
+
     //3. 지도 위도/경도
     @GetMapping("/map")
-    public DormitoryDTO getMap(DormitoryDTO dormitory) {
+    public List<Map<String, Object>> getMap(@RequestParam(name="swLat",defaultValue="37.44687884419707",required=false) Double swLat,
+        @RequestParam(name="swLng",defaultValue="126.63192835841528",required=false) Double swLng,
+        @RequestParam(name="neLat",defaultValue="37.706582563426885",required=false) Double neLat,
+        @RequestParam(name = "neLng", defaultValue = "127.28965306363936", required = false) Double neLng,
+        @RequestParam(name = "centerLat", required = false) String centerLat,
+        @RequestParam(name = "centerLng", required = false) String centerLng) {
 
-        String d_code = dormitory.getD_code();
-        return service.getMap(d_code);
+        List<DormitoryDTO> dormitoryList = service.getMap(swLat, swLng, neLat, neLng);
 
+        // 2. 가져온 데이터를 일정한 간격으로 나누어 각 그룹에서 하나씩 선택합니다. 이를 통해 서로 거리가 멀게 데이터를 선택할 수 있습니다.
+        DormitoryDTO center = new DormitoryDTO();
+        center.setD_lat(centerLat);
+        center.setD_lon(centerLng);
+        List<DormitoryDTO> sortedDormitoryList = dormitoryList.stream()
+                .sorted((dorm1, dorm2) -> {
+                    Double distance1 = calculateDistance(dorm1, center);
+                    Double distance2 = calculateDistance(dorm2, center);
+                    return Double.compare(distance1, distance2);
+                })
+                .collect(Collectors.toList());
+
+        // 3. 선택된 데이터 중 최대 50개만 사용합니다.
+        List<DormitoryDTO> selectedDormitoryList = new ArrayList<>();
+        int interval = sortedDormitoryList.size() / 50;
+        if (interval < 1) interval = 1;  // sortedDormitoryList의 크기가 50 미만인 경우를 처리합니다.
+
+        for (int i = 0; i < sortedDormitoryList.size(); i += interval) {
+            selectedDormitoryList.add(sortedDormitoryList.get(i));
+            if (selectedDormitoryList.size() >= 50) {
+                break;
+            }
+        }
+
+        // selectedDormitoryList를 사용하여 결과를 생성합니다.
+        List<Map<String, Object>> result = selectedDormitoryList.stream().map(dorm -> {
+            Map<String, Object> map = new HashMap<>();
+            Map<String, Double> latLng = new HashMap<>();
+
+            latLng.put("lat", Double.valueOf(dorm.getD_lat()));
+            latLng.put("lng", Double.valueOf(dorm.getD_lon()));
+
+            map.put("d_name", dorm.getD_name());
+            map.put("d_star", dorm.getD_star());
+            map.put("position", latLng);
+
+            return map;
+        }).collect(Collectors.toList());
+
+        return result;
+
+    }
+    
+    private Double calculateDistance(DormitoryDTO dorm1, DormitoryDTO dorm2) {
+        final int EARTH_RADIUS = 6371; // Approx Earth radius in KM
+    
+        Double lat1 = Double.parseDouble(dorm1.getD_lat());
+        Double lon1 = Double.parseDouble(dorm1.getD_lon());
+        Double lat2 = Double.parseDouble(dorm2.getD_lat());
+        Double lon2 = Double.parseDouble(dorm2.getD_lon());
+    
+        Double dLat  = Math.toRadians((lat2 - lat1));
+        Double dLong = Math.toRadians((lon2 - lon1));
+    
+        Double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                Math.sin(dLong/2) * Math.sin(dLong/2);
+        Double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    
+        return EARTH_RADIUS * c * 1000; // convert to meters
     }
 
 //    //4. 객실 정보
@@ -105,13 +173,6 @@ public class RestRoomInfoController {
 
         String d_code = dormitory.getD_code();
         List<RoomTypeDTO> list = service.getR_Code(d_code); // d_code에 해당하는 모든 r_code 리스트를 뽑아냄.
-//        List<List<RoomDTO>> listRoom = new ArrayList<>();    // 각 r_code에 해당하는 room정보를 저장하는 리스트
-//        System.out.println("11111111" + list.size());
-//            for(int i=0;i<list.size();i++){
-//                RoomTypeDTO dto = list.get(i);
-//                System.out.println(" r_code : "+dto.getR_code());
-////                listRoom.add(service.getRoom(dto.getR_code()));
-//            }
         Map<String, Object> data = new HashMap<>();
 
         // 각 방의 예약 상태를 확인하는 로직을 별도의 메소드로 분리
@@ -133,23 +194,17 @@ public class RestRoomInfoController {
     private Map<String, String> checkRoomAvailability(List<RoomTypeDTO> list, ReservationDTO reservation) {
         Map<String, String> availability = new HashMap<>();
 
-//        for(List<RoomDTO> li : listRoom){
-//            for(int i=0;i<li.size();i++){
-//                RoomDTO roomDTO = li.get(i);
-                for (RoomTypeDTO room : list) {
-                    List<ReservationDTO> reservations = service.getReservationInfoByR_Code(room.getR_code()); // r_code에 해당하는 모든 예약 정보
-                    int maxRoomCount = service.getRoomCount(room.getR_code());
-                    int currentReservationCount = checkIfRoomAvailableCount(reservations, reservation);
-                    System.out.println("room.getR_code() : " + room.getR_code());
-                    System.out.println("maxRoomCount : " + maxRoomCount);
-                    System.out.println("currentReservationCount : " + currentReservationCount);
-                    String status = (currentReservationCount < maxRoomCount) ? "O" : "X"; // 기존의 모든 예약 정보와 비교해서 TRUE일 경우 예약 가능, FALSE일 경우 예약 중첩
-                    availability.put(room.getR_code(), status);
-                }
-//            }
-
-//        }
-
+        for (RoomTypeDTO room : list) {
+            List<ReservationDTO> reservations = service.getReservationInfoByR_Code(room.getR_code()); // r_code에 해당하는 모든 예약 정보
+            int maxRoomCount = service.getRoomCount(room.getR_code());
+            int currentReservationCount = checkIfRoomAvailableCount(reservations, reservation);
+            System.out.println("room.getR_code() : " + room.getR_code());
+            System.out.println("maxRoomCount : " + maxRoomCount);
+            System.out.println("currentReservationCount : " + currentReservationCount);
+            String status = (currentReservationCount < maxRoomCount) ? "O" : "X"; // 기존의 모든 예약 정보와 비교해서 TRUE일 경우 예약 가능, FALSE일 경우 예약 중첩
+            availability.put(room.getR_code(), status);
+        }
+                
         return availability;
     }
 

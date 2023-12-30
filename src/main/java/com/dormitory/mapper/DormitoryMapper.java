@@ -14,8 +14,11 @@ public interface DormitoryMapper {
     //=============================MAIN==========================
 
     //1. 숙소 추천 (별점 별)
-    public List<DormitoryDTO> getDormitoryByStar(String keyword);
+    public List<DormitoryDTO> getDormitoryByStar();
     //2. 숙소 추천
+
+    // 3. 특가 할인 숙소
+    public List<DormitoryDTO> getDormitoryByDiscount();
 
     //5.(test)  추천 얼리체크인
     public List<DormitoryDTO> getEarlyCheckin();
@@ -38,7 +41,7 @@ public interface DormitoryMapper {
     //2. 숙소별 리뷰 조회
     public List<ReviewDTO> getReview(String d_code);
     //3. 지도 위도/경도
-    public DormitoryDTO getMap(String d_code);
+    public List<DormitoryDTO> getMap(Map<String, Object> data);
     //4. 숙소별 객실 정보
     public List<RoomTypeDTO> getR_Code(String d_code);
     public List<ReservationDTO> getReservationInfoByR_Code(String r_code);

@@ -20,6 +20,7 @@ public class DormitoryDTO {
     private String d_description;
     private String d_grade;
     private String d_star;
+    private String d_discount;
 
     private String max_r_price;
     private String min_r_price;

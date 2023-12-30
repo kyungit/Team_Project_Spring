@@ -10,9 +10,21 @@
     <!-- ====================1. MAIN ============================-->
     <!-- 2. 추천(별점) -->
     <select id="getDormitoryByStar" resultType="com.dormitory.dto.DormitoryDTO">
-        select * from tbl_dormitory where d_road like concat('%',#{keyword},'%') order by d_star desc limit 10
+        select * from tbl_dormitory where d_star &gt;= 4.5 order by rand() limit 5;
     </select>
 
+    <!-- 3. 특가 할인 숙소 -->
+    <select id="getDormitoryByDiscount" resultType="com.dormitory.dto.DormitoryDTO">
+    select * from (
+        select
+            *,
+            (select max(r_price) from tbl_room_type where tbl_room_type.d_code = tbl_dormitory.d_code) * (d_discount / 100) as calculated_price
+        from tbl_dormitory
+    ) as tmp_tbl
+    where calculated_price &gt;= 30000
+    order by rand()
+    limit 8;
+    </select>
 
     <!-- 5.(test) 추천(얼리체크인) -->
     <select id="getEarlyCheckin" resultType="com.dormitory.dto.DormitoryDTO">
@@ -41,8 +53,8 @@
         select * from tbl_review where d_code=#{d_code}
     </select>
     <!-- 3. 지도 위도/경도-->
-    <select id="getMap" parameterType="String" resultType="com.dormitory.dto.DormitoryDTO">
-        select * from tbl_dormitory where d_code=#{d_code}
+    <select id="getMap" parameterType="HashMap" resultType="com.dormitory.dto.DormitoryDTO">
+        select d_lat, d_lon, d_name, d_star from tbl_dormitory WHERE d_lat BETWEEN #{swLat} AND #{neLat} AND d_lon BETWEEN #{swLng} AND #{neLng};
     </select>
     <!-- 4. 숙소별 객실 정보 -->
 
