@@ -1,6 +1,7 @@
 package com.dormitory.service;
 
 import com.dormitory.dto.MemberDTO;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
@@ -22,7 +23,9 @@ import java.util.Optional;
 @Log4j2
 public class OAuth2UserDetailsServiceImpl extends DefaultOAuth2UserService {
     private final PasswordEncoder pwdEncoder;
+    //	private final MemberRepository memberRepository;
     private final MemberService service;
+    private final HttpSession session;
 
     @SneakyThrows
     @Override
