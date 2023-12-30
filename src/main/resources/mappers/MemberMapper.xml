@@ -26,10 +26,42 @@
         select * from tbl_reservation where m_userid = #{userid} and s_status=4
     </select>
 
-    <!--5. 방문 내역 삭제 -->
-    <delete id="DeleteVisited" parameterType="int">
-        delete from tbl_reservation where reservation_code = #{reservation_code}
-    </delete>
+    <!--5. 방문/예약 내역 삭제 -->
+    <update id="DeleteVisited" parameterType="int">
+        update tbl_reservation set s_status=5 where reservation_code = #{reservation_code}
+    </update>
+
+    <!--6. 리뷰 등록-->
+    <insert id="setReview" parameterType="com.dormitory.dto.ReviewDTO" useGeneratedKeys="true" keyProperty="review_code">
+        insert into tbl_review (d_code,r_code,m_userid,review_score,review_comment,reservation_code)
+        values (#{d_code},#{r_code},#{m_userid},#{review_score},#{review_comment},${reservation_code})
+    </insert>
+
+    <!--7. 사용자가 작성한 리뷰 조회-->
+    <select id="getMemberReview" parameterType="String" resultType="com.dormitory.dto.ReviewDTO">
+        SELECT * FROM tbl_review where m_userid = #{m_userid}
+    </select>
+    <!-- 리뷰 수정하기-->
+    <update id="modifyReview" parameterType="com.dormitory.dto.ReviewDTO">
+        update tbl_review set review_score = #{review_score} , review_comment = #{review_comment} where review_code = #{review_code}
+    </update>
+    <!--8. 사진 등록하기 -->
+    <insert id="setImages" parameterType="HashMap">
+        insert into tbl_file (file_review_code,review_stored,review_file,review_filesize,userid,checkfile,file_img)
+                    values (#{review_code},#{review_stored},#{review_file},#{review_filesize},#{userid},#{checkfile},#{file_img})
+    </insert>
+    <!-- 사진 리스트 보기-->
+    <select id="imagesInfoview" parameterType="int" resultType="com.dormitory.dto.FileDTO">
+        select * from tbl_file where file_review_code = #{file_review_code} and checkfile = 'Y'
+    </select>
+    <!-- 첨부 파일 삭제를 위한 checkfile 정보 변경 -->
+    <update id="fileInfoUpdate" parameterType="int">
+        update tbl_file set checkfile = 'N' where file_seqno = #{file_seqno}
+    </update>
+    <!-- 리뷰 수정 시 파일 정보 수정(checkfile을 X로 변경) -->
+    <update id="deleteFileList" parameterType="int">
+        update tbl_file set checkfile = 'N' where review_code = #{file_review_code}
+    </update>
     <!-- ====================3. Reservation =======================-->
     <!-- 1. 숙소+객실 조회 -->
     <select id="getDormitoryRoom" parameterType="String" resultType="com.dormitory.dto.DormitoryRoomDTO">

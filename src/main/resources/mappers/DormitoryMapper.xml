@@ -40,6 +40,7 @@
     <select id="getReview" parameterType="String" resultType="com.dormitory.dto.ReviewDTO">
         select * from tbl_review where d_code=#{d_code}
     </select>
+
     <!-- 3. 지도 위도/경도-->
     <select id="getMap" parameterType="String" resultType="com.dormitory.dto.DormitoryDTO">
         select * from tbl_dormitory where d_code=#{d_code}

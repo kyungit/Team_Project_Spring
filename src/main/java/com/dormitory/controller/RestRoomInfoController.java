@@ -3,16 +3,16 @@ package com.dormitory.controller;
 import com.dormitory.dto.*;
 import com.dormitory.service.DormitoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @CrossOrigin(origins = {"http://localhost:3000/" })
 @RestController
@@ -32,6 +32,7 @@ public class RestRoomInfoController {
     @GetMapping("/review")
     public List<ReviewDTO> getReview(DormitoryDTO dormitory){
         String d_code= dormitory.getD_code();
+
         return  service.getReview(d_code);
     }
 

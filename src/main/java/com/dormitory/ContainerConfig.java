@@ -10,22 +10,22 @@ import org.springframework.context.annotation.Configuration;
 // 내장 톰캣 환경 설정
 @Configuration
 public class ContainerConfig {
-	
+
 	@Value("${tomcat.ajp.protocol}")
 	String ajpProtocol;
-	
+
 	@Value("${tomcat.ajp.port}")
 	int ajpPort;
-	
+
 	@Value("${tomcat.ajp.enabled}")
 	boolean ajpEnabled;
-	
+
 	@Bean
 	public TomcatServletWebServerFactory servlet() {
 		TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
-		
+
 		if(ajpEnabled) {
-			
+
 			Connector ajpConnector = new Connector(ajpProtocol);
 			ajpConnector.setPort(ajpPort);
 			ajpConnector.setSecure(false);
@@ -34,7 +34,7 @@ public class ContainerConfig {
 			tomcat.addAdditionalTomcatConnectors(ajpConnector);
 			((AbstractAjpProtocol<?>)ajpConnector.getProtocolHandler()).setSecretRequired(false);
 		}
-		
+
 		return tomcat;
 	}
 }
