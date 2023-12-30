@@ -10,7 +10,7 @@
     <!-- ====================1. MAIN ============================-->
     <!-- 2. 추천(별점) -->
     <select id="getDormitoryByStar" resultType="com.dormitory.dto.DormitoryDTO">
-        select * from tbl_dormitory where d_star &gt;= 4.5 order by rand(dayofyear(curdate())) limit 5;
+        select * from tbl_dormitory where d_star &gt;= 9 order by rand(dayofyear(curdate())) limit 5;
     </select>
 
     <!-- 3. 특가 할인 숙소 -->
