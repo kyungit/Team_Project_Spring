@@ -74,4 +74,15 @@
     </insert>
 
 
+    <!-- 토큰에 해당하는 회원 정보 가져오기 -->
+    <select id="getMemberInfoByToken" resultType="String">
+        select * from tbl_member where token=#{token}
+    </select>
+    <!--토큰 저장하기 -->
+    <update id="setToken" parameterType="com.dormitory.dto.MemberDTO">
+        update tbl_member set token=#{token} where userid=#{userid}
+    </update>
+
+
+
 </mapper>
