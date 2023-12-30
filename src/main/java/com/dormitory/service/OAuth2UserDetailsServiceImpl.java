@@ -1,7 +1,6 @@
 package com.dormitory.service;
 
 import com.dormitory.dto.MemberDTO;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
@@ -23,11 +22,7 @@ import java.util.Optional;
 @Log4j2
 public class OAuth2UserDetailsServiceImpl extends DefaultOAuth2UserService {
     private final PasswordEncoder pwdEncoder;
-    //	private final MemberRepository memberRepository;
     private final MemberService service;
-    private final HttpSession session;
-    //JWT 관리 객체 의존성 주입
-//    private final JWTUtil jwtUtil;
 
     @SneakyThrows
     @Override
@@ -82,26 +77,14 @@ public class OAuth2UserDetailsServiceImpl extends DefaultOAuth2UserService {
         savedMember.setAuthorities(grantedAuthorities);
         savedMember.setUsername(savedMember.getUsername());
 
-        session.setAttribute("userid", userid);
-        System.out.println("oauth , userid : "+userid);
-        System.out.println("session, userid" + (String)session.getAttribute("userid"));
-        session.setAttribute("username", savedMember.getUsername());
-        session.setAttribute("role", savedMember.getRole());
+
+        if(service.getMemberInfo(savedMember.getUserid())==null){
+            service.memberSave(savedMember);
+        }
 
 
-        //jwt 토큰 발급
-//
-//        Map<String, Object> data = new HashMap<> ();
-//        data.put("userid", userid);
-//        data.put("password",12345);
-//        String accessToken = "";
-//        String refreshToken = "";   //토큰이 보안에 취약... 정상인지 아닌지 확인하려고 accessToke과 refreshToken 둘 다 사용
-        //access token & refresh token 생성
-//        accessToken = jwtUtil.generateToken(data, 1);
-//        refreshToken = jwtUtil.generateToken(data, 5);
-//
-//        String str = "{\"message\":\"good\",\"username\":\""
-//                + URLEncoder.encode(savedMember.getUsername(),"UTF-8") + "\",\"role\":\"" + savedMember.getRole() + "\"}";
+
+
 
         return oAuth2User;  // 변경된 부분
     }
@@ -135,6 +118,7 @@ public class OAuth2UserDetailsServiceImpl extends DefaultOAuth2UserService {
         } else if (provider.equals("kakao")) {
             username = "카카오회원";
         }
+//        Cookie[] cookie = request.getCookies();
 
         System.out.println("소셜로그인 유저네임 = " + username);
 
@@ -144,10 +128,10 @@ public class OAuth2UserDetailsServiceImpl extends DefaultOAuth2UserService {
         member.setUsername(username);
         member.setRole("USER");
         member.setSocial("Y");
-
+//        member.setToken(cookie[0].toString());
         System.out.println("member의 유저네임 = " + member.getUsername());
 
-        service.memberSave(member);
+
 
         return member;
     }

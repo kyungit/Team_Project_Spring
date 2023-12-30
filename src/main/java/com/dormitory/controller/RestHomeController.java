@@ -24,6 +24,9 @@ public class RestHomeController {
     //10개 가져오기 // -> 나중에 위치기반 넣으면 그때 keyword 이용
     @GetMapping("/star")
     public List<DormitoryDTO> getStar(@RequestParam(name="keyword",defaultValue="",required=false) String keyword){
+
+
+
         return service.getDormitoryByStar("화곡");
     }
 
@@ -40,7 +43,7 @@ public class RestHomeController {
     @GetMapping("/earlyCheckin")
     public List<DormitoryDTO> getEarlyCheckin(HttpSession session)  {
         String userid = (String)session.getAttribute("userid");
-        System.out.println(userid);;
+        System.out.println("세션 : " + userid);
         return service.getEarlyCheckin();
     }
 
