@@ -86,7 +86,7 @@ public class WebSecurityConfig {
 						.logoutUrl("/logout")
 						.logoutSuccessUrl("http://localhost:3000/")
 						.invalidateHttpSession(true)
-						.deleteCookies("JSESSIONID","remember-me")
+						.deleteCookies("JSESSIONID","remember-me","accessToken","userid")
 						.permitAll());
 
 		http
