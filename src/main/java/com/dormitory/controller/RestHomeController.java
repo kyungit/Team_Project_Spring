@@ -40,7 +40,7 @@ public class RestHomeController {
     @GetMapping("/earlyCheckin")
     public List<DormitoryDTO> getEarlyCheckin(HttpSession session)  {
         String userid = (String)session.getAttribute("userid");
-        System.out.println(userid);;
+        System.out.println("세션 : " + userid);
         return service.getEarlyCheckin();
     }
 

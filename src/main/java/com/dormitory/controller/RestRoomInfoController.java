@@ -3,9 +3,14 @@ package com.dormitory.controller;
 import com.dormitory.dto.*;
 import com.dormitory.service.DormitoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,11 +41,11 @@ public class RestRoomInfoController {
     //3. 지도 위도/경도
     @GetMapping("/map")
     public List<Map<String, Object>> getMap(@RequestParam(name="swLat",defaultValue="37.44687884419707",required=false) Double swLat,
-        @RequestParam(name="swLng",defaultValue="126.63192835841528",required=false) Double swLng,
-        @RequestParam(name="neLat",defaultValue="37.706582563426885",required=false) Double neLat,
-        @RequestParam(name = "neLng", defaultValue = "127.28965306363936", required = false) Double neLng,
-        @RequestParam(name = "centerLat", required = false) String centerLat,
-        @RequestParam(name = "centerLng", required = false) String centerLng) {
+                                            @RequestParam(name="swLng",defaultValue="126.63192835841528",required=false) Double swLng,
+                                            @RequestParam(name="neLat",defaultValue="37.706582563426885",required=false) Double neLat,
+                                            @RequestParam(name = "neLng", defaultValue = "127.28965306363936", required = false) Double neLng,
+                                            @RequestParam(name = "centerLat", required = false) String centerLat,
+                                            @RequestParam(name = "centerLng", required = false) String centerLng) {
 
         List<DormitoryDTO> dormitoryList = service.getMap(swLat, swLng, neLat, neLng);
 
@@ -68,62 +73,6 @@ public class RestRoomInfoController {
             }
         }
 
-//    //4. 객실 정보
-//    @GetMapping("/roomDetail")
-//    public Map<String, Object> getRoomDetail(DormitoryDTO dormitory, ReservationDTO reservation){
-//        System.out.println(reservation.getReservation_checkin());
-//        System.out.println(reservation.getReservation_checkout());
-//        String d_code = dormitory.getD_code();
-//        List<RoomTypeDTO> list = service.getR_Code(d_code); //d_code에 해당하는 r_code조회
-//        Map<String,Object> data = new HashMap<>();
-//        System.out.println("1111111 : " + list.size());
-//
-//
-//
-//        for(int i=0;i<list.size();i++){
-//            RoomTypeDTO roomCode = list.get(i);
-//            List<RoomTypeDTO> roomTypeList = service.getUrl(roomCode);
-//
-//
-//
-//            for(int k=0;k<roomTypeList.size();k++){
-//                RoomTypeDTO room = roomTypeList.get(k);
-//                //해당 날짜에 예약된 날짜가 있는지 계산하기
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//                //db에서 가져온 모든 checkin날짜/checkout날짜
-//                List<ReservationDTO> DB_reservation =service.getReservationInfoByR_Code(room.getR_code());
-//                //원하는 날짜의 범위
-//                LocalDate reservation_checkin = reservation.getReservation_checkin();
-//                LocalDate reservation_checkout = reservation.getReservation_checkout();
-//                System.out.println("DB checkinDate : " + DB_reservation.size());
-//                if(DB_reservation.size() != 0){
-//                    for(int j=0;j<DB_reservation.size();j++){
-//                        LocalDate checkinDate = DB_reservation.get(j).getReservation_checkin();
-//                        LocalDate checkoutDate = DB_reservation.get(j).getReservation_checkout();
-//                                                                                                                                                                                                                                              for(LocalDate date = reservation_checkin; !date.isAfter(reservation_checkout);date = date.plusDays(1)){
-//
-//                            if(((date.isEqual(checkinDate) || date.isAfter(checkinDate)) && (date.isBefore(checkoutDate)))){
-//                                room.setR_status("X");
-//                                break;
-//                            }
-//                            else room.setR_status("O");
-//
-//                        }
-//                    }
-//                }
-//                else {
-//                    room.setR_status("O");
-//                }
-//
-////                  data.put(room.getR_code(),service.getUrl(room));    //-> status 안들어감
-//                data.put(room.getR_code(),room);                    //-> status 들어감
-//            }
-//        }
-//        return data;
-//    }
-
-
-    // //4. 객실 정보
         // selectedDormitoryList를 사용하여 결과를 생성합니다.
         List<Map<String, Object>> result = selectedDormitoryList.stream().map(dorm -> {
             Map<String, Object> map = new HashMap<>();
@@ -156,7 +105,7 @@ public class RestRoomInfoController {
 
         Double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
                 Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-                Math.sin(dLong/2) * Math.sin(dLong/2);
+                        Math.sin(dLong/2) * Math.sin(dLong/2);
         Double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
         return EARTH_RADIUS * c * 1000; // convert to meters
@@ -223,17 +172,19 @@ public class RestRoomInfoController {
         System.out.println(reservation.getReservation_checkout());
 
         String d_code = dormitory.getD_code();
-        List<RoomTypeDTO> list = service.getR_Code(d_code); // d_code에 해당하는 모든 r_code를 포함한 모든 정보들 (*) 리스트를 뽑아냄.
-
+        List<RoomTypeDTO> list = service.getR_Code(d_code); // d_code에 해당하는 모든 r_code 리스트를 뽑아냄.
         Map<String, Object> data = new HashMap<>();
+
         // 각 방의 예약 상태를 확인하는 로직을 별도의 메소드로 분리
         Map<String, String> roomStatusMap = checkRoomAvailability(list, reservation); // 모든 r_code에 해당하는 리스트와 예약 정보를 방 이용 가능
 
         // 각 방의 상세 정보와 예약 상태를 매핑
         for (RoomTypeDTO room : list) {
+
             room.setR_status(roomStatusMap.getOrDefault(room.getR_code(), "O"));
             List<String> li = service.getUrl(room);
             room.setR_url(li);
+
             data.put(room.getR_code(),room);
         }
 
@@ -245,8 +196,8 @@ public class RestRoomInfoController {
 
         for (RoomTypeDTO room : list) {
             List<ReservationDTO> reservations = service.getReservationInfoByR_Code(room.getR_code()); // r_code에 해당하는 모든 예약 정보
-            int maxRoomCount = service.getRoomCount(room.getR_code());      //r_code에 해당하는 방의 갯수
-            int currentReservationCount = checkIfRoomAvailableCount(reservations, reservation);     //해당 날짜에 예약이 된 방의 갯수
+            int maxRoomCount = service.getRoomCount(room.getR_code());
+            int currentReservationCount = checkIfRoomAvailableCount(reservations, reservation);
             System.out.println("room.getR_code() : " + room.getR_code());
             System.out.println("maxRoomCount : " + maxRoomCount);
             System.out.println("currentReservationCount : " + currentReservationCount);
@@ -266,7 +217,6 @@ public class RestRoomInfoController {
             if (!reserved.getReservation_checkout().isBefore(checkin)
                     && !reserved.getReservation_checkin().isAfter(checkout)) {
                 count++; // 예약이 중첩됨
-
             }
         }
         return count; // 예약 가능
