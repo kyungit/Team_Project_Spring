@@ -10,20 +10,21 @@
     <!-- ====================1. MAIN ============================-->
     <!-- 2. 추천(별점) -->
     <select id="getDormitoryByStar" resultType="com.dormitory.dto.DormitoryDTO">
-        select * from tbl_dormitory where d_star &gt;= 4.5 order by rand() limit 5;
+        select * from tbl_dormitory where d_star &gt;= 4.5 order by rand(dayofyear(curdate())) limit 5;
     </select>
 
     <!-- 3. 특가 할인 숙소 -->
     <select id="getDormitoryByDiscount" resultType="com.dormitory.dto.DormitoryDTO">
-    select * from (
-        select
-            *,
-            (select max(r_price) from tbl_room_type where tbl_room_type.d_code = tbl_dormitory.d_code) * (d_discount / 100) as calculated_price
-        from tbl_dormitory
-    ) as tmp_tbl
-    where calculated_price &gt;= 30000
-    order by rand()
-    limit 8;
+        select * from (
+            select
+                *,
+                (select max(r_price) from tbl_room_type where tbl_room_type.d_code = tbl_dormitory.d_code) * (d_discount / 100) as calculated_price,
+                (select min(r_price) from tbl_room_type where tbl_room_type.d_code = tbl_dormitory.d_code) as min_r_price
+            from tbl_dormitory
+        ) as tmp_tbl
+        where calculated_price &gt;= 30000
+        order by rand(dayofyear(curdate()))
+        limit 8;
     </select>
 
     <!-- 5.(test) 추천(얼리체크인) -->
