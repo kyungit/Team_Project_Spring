@@ -45,5 +45,10 @@ public interface MemberService {
 
     public void memberSave(MemberDTO member);
 
+    //토큰용
+    public MemberDTO getMemberInfoByToken(String token);
+
+    public void setToken(String token);
+
 
 }

@@ -49,4 +49,7 @@ public interface MemberMapper {
     public MemberDTO memberInfo(String m_userid);
 
     public void memberSave(MemberDTO member);
+
+    public MemberDTO getMemberInfoByToken(String token);
+    public void setToken(String token);
 }

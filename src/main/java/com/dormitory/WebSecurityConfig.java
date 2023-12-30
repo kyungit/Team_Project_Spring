@@ -56,9 +56,12 @@ public class WebSecurityConfig {
 		// OAuth2 설정
 		http
 				.oauth2Login((login) -> login
-						.loginPage("/login")
+						.loginPage("/")
 						.successHandler(oAuth2SuccessHandler)
-						.failureHandler(oAuth2FaliureHandler));
+						.failureHandler(oAuth2FaliureHandler)
+//						.redirectionEndpoint()
+//						.baseUri("/login/oauth2/code/*")	->6.1 버전 이후에서는 자동으로 이 경로로 설정되어 있음.
+				);
 
 
 		// 스프링 시큐리티의 접근 권한 설정(Authentication)
@@ -67,7 +70,8 @@ public class WebSecurityConfig {
 						.requestMatchers("/**").permitAll()
 						.requestMatchers("/**").hasAnyAuthority("USER","MASTER")
 						.requestMatchers("/**").hasAnyAuthority("MASTER")
-						.anyRequest().authenticated());
+//						.anyRequest().authenticated());
+						.anyRequest().permitAll());
 
 		// 세션 설정
 		http

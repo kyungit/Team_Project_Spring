@@ -30,6 +30,7 @@ public class MemberDTO implements OAuth2User {
     private String authkey;
     private String social;
 
+    private String token;
 
 
 

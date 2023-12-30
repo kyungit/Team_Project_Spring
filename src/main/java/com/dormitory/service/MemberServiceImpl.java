@@ -95,4 +95,16 @@ public class MemberServiceImpl implements MemberService {
     public void memberSave(MemberDTO member){
         mapper.memberSave(member);
     }
+
+    //토큰용
+
+    @Override
+    public MemberDTO getMemberInfoByToken(String token) {
+        return mapper.getMemberInfoByToken(token);
+    }
+
+    @Override
+    public void setToken(String token) {
+        mapper.setToken(token);
+    }
 }
