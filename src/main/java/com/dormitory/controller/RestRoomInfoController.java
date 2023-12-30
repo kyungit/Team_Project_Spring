@@ -170,6 +170,7 @@ public class RestRoomInfoController {
     public Map<String, Object> getRoomDetail(DormitoryDTO dormitory, ReservationDTO reservation) {
         System.out.println(reservation.getReservation_checkin());
         System.out.println(reservation.getReservation_checkout());
+
         String d_code = dormitory.getD_code();
         List<RoomTypeDTO> list = service.getR_Code(d_code); // d_code에 해당하는 모든 r_code 리스트를 뽑아냄.
         Map<String, Object> data = new HashMap<>();
