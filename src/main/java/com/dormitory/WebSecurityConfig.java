@@ -59,8 +59,8 @@ public class WebSecurityConfig {
                                 .loginPage("/")
                                 .successHandler(oAuth2SuccessHandler)
                                 .failureHandler(oAuth2FaliureHandler)
-//						.redirectionEndpoint()
-//						.baseUri("/login/oauth2/code/*")	->6.1 버전 이후에서는 자동으로 이 경로로 설정되어 있음.
+                                // .redirectionEndpoint()
+                                // .baseUri("/login/oauth2/code/*")	->6.1 버전 이후에서는 자동으로 이 경로로 설정되어 있음.
                 );
 
 
@@ -70,7 +70,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/**").permitAll()
                         .requestMatchers("/**").hasAnyAuthority("USER","MASTER")
                         .requestMatchers("/**").hasAnyAuthority("MASTER")
-//						.anyRequest().authenticated());
+//			.anyRequest().authenticated());
                         .anyRequest().permitAll());
 
         // 세션 설정

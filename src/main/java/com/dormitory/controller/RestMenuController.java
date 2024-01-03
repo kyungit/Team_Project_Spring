@@ -84,7 +84,7 @@ public class RestMenuController {
     //7. 사용자가 작성한 리뷰 조회
     @GetMapping("/memberReview")
     public List<ReviewDTO> getMemberReview() throws Exception {
-        String userid = "ehrud0226@gmail.com";
+        String userid = "jingom368@gmail.com";
         List<ReviewDTO> list = service.getMemberReview(userid);
 
 
