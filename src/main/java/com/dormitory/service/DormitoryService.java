@@ -48,11 +48,11 @@ public interface DormitoryService {
     //7. 취소 정책
     public List<CancelDTO> getCancelPolicy(DormitoryDTO dormitory);
 
-    public Integer getRoomCount(String r_code); 
+    public Integer getRoomCount(String r_code);
 
     //====================5. SearchList=================
     // 숙소 정보 조회 (페이지 기주)
     public List<DormitoryDTO> getDormitoryList(int pageNum, String keyword, List<String> typeList, int minStar, int maxStar,
-            LocalDate startDate, LocalDate endDate) throws Exception ;
+                                               LocalDate startDate, LocalDate endDate) throws Exception ;
 
 }

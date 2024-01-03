@@ -4,6 +4,12 @@ import com.dormitory.dto.*;
 import com.dormitory.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
+import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 import java.util.List;
 
@@ -41,11 +47,64 @@ public class MemberServiceImpl implements MemberService {
         return mapper.getVisited(userid);
     }
 
-    //5. 방문 내역 삭제
+    //5. 방문/예약 내역 삭제
     @Override
     public void DeleteVisited(int reservation_code) throws Exception {
         mapper.DeleteVisited(reservation_code);
     }
+    //6. 리뷰 등록
+    @Override
+    public void setReview(ReviewDTO review) throws Exception {
+        mapper.setReview(review);
+    }
+    //7. 사용자가 작성한 리뷰 조회
+    @Override
+    public List<ReviewDTO> getMemberReview(String userid) throws Exception {
+        return mapper.getMemberReview(userid);
+    }
+    //8. 리뷰 사진등록
+    @Override
+    public void setImages(Map<String, Object> data) throws Exception {
+        mapper.setImages(data);
+    }
+
+    @Override
+    public String getReviewCode() {
+        return mapper.getReviewCode();
+    }
+
+    // 리뷰 수정하기
+    @Override
+    public void modifyReview(ReviewDTO review) throws Exception {
+        mapper.modifyReview(review);
+    }
+    // 리뷰 수정 시 파일 정보 수정
+    @Override
+    public void deleteFileList(int fileseqno) throws Exception {
+        mapper.deleteFileList(fileseqno);
+    }
+
+    @Override
+    public List<FileDTO> imagesInfoview(int file_review_code) throws Exception {
+        return mapper.imagesInfoview(file_review_code);
+    }
+
+    @Override
+    public List<String> getFilename() throws Exception {
+        return mapper.getFilename();
+    }
+    /*@Transactional
+    public void insertReviewAndFile(ReviewDTO review, FileDTO file) {
+        try {
+            mapper.setReview(review);
+            file.setReview_Code(Integer.parseInt(review.getReview_code()));
+            mapper.setImages((Map<String, Object>) file);
+        } catch (Exception e) {
+            // 트랜잭션 롤백 처리
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            e.printStackTrace();
+        }
+    }*/
 
     //=================3. Reservation=================
 

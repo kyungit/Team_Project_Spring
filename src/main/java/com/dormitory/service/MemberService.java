@@ -1,8 +1,11 @@
 package com.dormitory.service;
 
 import com.dormitory.dto.*;
+import com.dormitory.mapper.MemberMapper;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MemberService {
 
@@ -17,8 +20,22 @@ public interface MemberService {
     public void ReservationOut(int reservation_code) throws Exception;
     //4. 방문 내역 조회
     public List<ReservationDTO> getVisited(String userid);
-    //5. 방문 내역 삭제
+    //5. 방문/예약 내역 삭제
     public void DeleteVisited(int reservation_code) throws Exception;
+    //6. 리뷰 등록
+    public void setReview(ReviewDTO review) throws  Exception;
+    //7. 사용자가 작성한 리뷰 조회
+    public List<ReviewDTO> getMemberReview(String userid) throws  Exception;
+    //8. 리뷰 사진등록
+    public void setImages(Map<String,Object> data) throws Exception;
+    public String getReviewCode();
+    // 리뷰 수정하기
+    public void modifyReview(ReviewDTO review) throws Exception;
+    // 리뷰 수정 시 파일 정보 수정
+    public void deleteFileList(int fileseqno) throws Exception;
+    // 사진 목록 가져오기
+    public List<FileDTO> imagesInfoview(int file_review_code) throws Exception;
+    public List<String> getFilename() throws  Exception;
     //=================3. Reservation=================
 
     //1. 숙소+객실 정보
