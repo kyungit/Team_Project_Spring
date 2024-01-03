@@ -23,10 +23,8 @@ public class RestHomeController {
     // 2. 추천 숙소 (별점 높은 순) + 3. 가능하면 내 주변위주로 -> OK
     //10개 가져오기 // -> 나중에 위치기반 넣으면 그때 keyword 이용
     @GetMapping("/star")
-
     public List<DormitoryDTO> getStar(){
         return service.getDormitoryByStar();
-
     }
 
 

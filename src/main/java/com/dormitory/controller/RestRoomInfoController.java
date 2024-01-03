@@ -41,11 +41,11 @@ public class RestRoomInfoController {
     //3. 지도 위도/경도
     @GetMapping("/map")
     public List<Map<String, Object>> getMap(@RequestParam(name="swLat",defaultValue="37.44687884419707",required=false) Double swLat,
-        @RequestParam(name="swLng",defaultValue="126.63192835841528",required=false) Double swLng,
-        @RequestParam(name="neLat",defaultValue="37.706582563426885",required=false) Double neLat,
-        @RequestParam(name = "neLng", defaultValue = "127.28965306363936", required = false) Double neLng,
-        @RequestParam(name = "centerLat", required = false) String centerLat,
-        @RequestParam(name = "centerLng", required = false) String centerLng) {
+                                            @RequestParam(name="swLng",defaultValue="126.63192835841528",required=false) Double swLng,
+                                            @RequestParam(name="neLat",defaultValue="37.706582563426885",required=false) Double neLat,
+                                            @RequestParam(name = "neLng", defaultValue = "127.28965306363936", required = false) Double neLng,
+                                            @RequestParam(name = "centerLat", required = false) String centerLat,
+                                            @RequestParam(name = "centerLng", required = false) String centerLng) {
 
         List<DormitoryDTO> dormitoryList = service.getMap(swLat, swLng, neLat, neLng);
 
@@ -91,23 +91,23 @@ public class RestRoomInfoController {
         return result;
 
     }
-    
+
     private Double calculateDistance(DormitoryDTO dorm1, DormitoryDTO dorm2) {
         final int EARTH_RADIUS = 6371; // Approx Earth radius in KM
-    
+
         Double lat1 = Double.parseDouble(dorm1.getD_lat());
         Double lon1 = Double.parseDouble(dorm1.getD_lon());
         Double lat2 = Double.parseDouble(dorm2.getD_lat());
         Double lon2 = Double.parseDouble(dorm2.getD_lon());
-    
+
         Double dLat  = Math.toRadians((lat2 - lat1));
         Double dLong = Math.toRadians((lon2 - lon1));
-    
+
         Double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
                 Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-                Math.sin(dLong/2) * Math.sin(dLong/2);
+                        Math.sin(dLong/2) * Math.sin(dLong/2);
         Double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    
+
         return EARTH_RADIUS * c * 1000; // convert to meters
     }
 
@@ -204,7 +204,7 @@ public class RestRoomInfoController {
             String status = (currentReservationCount < maxRoomCount) ? "O" : "X"; // 기존의 모든 예약 정보와 비교해서 TRUE일 경우 예약 가능, FALSE일 경우 예약 중첩
             availability.put(room.getR_code(), status);
         }
-                
+
         return availability;
     }
 
