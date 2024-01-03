@@ -30,7 +30,7 @@
 
     <!-- 5.(test) 추천(얼리체크인) -->
     <select id="getEarlyCheckin" resultType="com.dormitory.dto.DormitoryDTO">
-        select * from tbl_dormitory order by d_checkin asc limit 10
+        select * from tbl_dormitory where d_earlycheckin = 'Y' order by rand(dayofyear(curdate())) limit 8;
     </select>
 
     <!-- 6.(test) 추천(등급 높은 순) -->
