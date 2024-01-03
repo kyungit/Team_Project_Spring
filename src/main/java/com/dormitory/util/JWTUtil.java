@@ -18,7 +18,7 @@ import java.util.Map;
 @Component
 public class JWTUtil {
 
-//    @Value("${jwt.secret}")
+    //    @Value("${jwt.secret}")
     @Value("dormitoryiwannagohomeiwannagooutsideiwannagiveu")
     private String baseKey;
     private SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
@@ -94,21 +94,3 @@ public class JWTUtil {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

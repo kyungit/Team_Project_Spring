@@ -21,7 +21,7 @@ public class DormitoryServiceImpl implements DormitoryService {
 
     @Override
     public List<DormitoryDTO> getDormitoryList(int pageNum, String keyword, List<String> typeList, int minStar, int maxStar,
-    LocalDate startDate, LocalDate endDate) throws Exception {
+                                               LocalDate startDate, LocalDate endDate) throws Exception {
         Map<String, Object> data = new HashMap<>();
         data.put("pageNum",pageNum);
         data.put("keyword",keyword);

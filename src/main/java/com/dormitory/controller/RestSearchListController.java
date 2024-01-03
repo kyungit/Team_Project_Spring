@@ -27,33 +27,33 @@ public class RestSearchListController {
     public List<DormitoryDTO> getDormitory(@RequestBody SearchDTO search, @RequestParam(name="pageNum",defaultValue="1",required=false) int pageNum) throws Exception {
 
         System.out.println("keyword : " + search.getKeyword());
-            for (int i = 0; i < search.getType().length; i++) {
-                System.out.println("type : " + i + search.getType()[i]);
-            }
-            for (int i = 0; i < search.getStar().length; i++) {
-                System.out.println("star : " + i + search.getStar()[i]);
-            }
+        for (int i = 0; i < search.getType().length; i++) {
+            System.out.println("type : " + i + search.getType()[i]);
+        }
+        for (int i = 0; i < search.getStar().length; i++) {
+            System.out.println("star : " + i + search.getStar()[i]);
+        }
         System.out.println("startdate : " +search.getStartDate());
         System.out.println("enddate : " +search.getEndDate());
         System.out.println("guest : " + search.getGuest());
 
-    // 별점 리스트를 처리하여 최소 별점과 최대 별점을 계산합니다.
-    List<String> starList = search.getStarList();
-    int minStar = 5;
-    int maxStar = 10;
+        // 별점 리스트를 처리하여 최소 별점과 최대 별점을 계산합니다.
+        List<String> starList = search.getStarList();
+        int minStar = 5;
+        int maxStar = 10;
 
-    if (!starList.contains("All") && !starList.isEmpty()) {
-        List<Integer> intStarList = starList.stream().map(Integer::parseInt).collect(Collectors.toList());
+        if (!starList.contains("All") && !starList.isEmpty()) {
+            List<Integer> intStarList = starList.stream().map(Integer::parseInt).collect(Collectors.toList());
 
-        if (intStarList.size() == 1) { // 별점이 단일 값으로 선택되었을 때
-            int star = intStarList.get(0);
-            minStar = star == 6 ? 5 : star - 1;
-            maxStar = star;
-        } else { // 별점이 여러 값으로 선택되었을 때
-            minStar = intStarList.contains(6) && intStarList.contains(7) && intStarList.contains(8) && intStarList.contains(9) && intStarList.contains(10) ? 5 : Collections.min(intStarList) - 1;
-            maxStar = Collections.max(intStarList);
+            if (intStarList.size() == 1) { // 별점이 단일 값으로 선택되었을 때
+                int star = intStarList.get(0);
+                minStar = star == 6 ? 5 : star - 1;
+                maxStar = star;
+            } else { // 별점이 여러 값으로 선택되었을 때
+                minStar = intStarList.contains(6) && intStarList.contains(7) && intStarList.contains(8) && intStarList.contains(9) && intStarList.contains(10) ? 5 : Collections.min(intStarList) - 1;
+                maxStar = Collections.max(intStarList);
+            }
         }
-    }
 
         return service.getDormitoryList(pageNum * 10 - 10, search.getKeyword(), search.getTypeList(), minStar, maxStar, search.getStartDate(), search.getEndDate());
     }

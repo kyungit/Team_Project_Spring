@@ -22,7 +22,7 @@ public interface DormitoryMapper {
 
     //5.(test)  추천 얼리체크인
     public List<DormitoryDTO> getEarlyCheckin();
-    
+
     //6. (test) 추천 등급별
     public List<DormitoryDTO> getDormitoryByGrade();
 
@@ -54,8 +54,8 @@ public interface DormitoryMapper {
     public List<AmenityDTO> getAmenity(String d_code);
     //7. 취소 정책
     public List<CancelDTO> getCancelPolicy(DormitoryDTO dormitory);
-    
-    public Integer getRoomCount(String r_code); 
+
+    public Integer getRoomCount(String r_code);
 
     //SearchList
     //전체 리스트
