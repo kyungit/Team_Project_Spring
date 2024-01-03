@@ -39,19 +39,19 @@ public class RestSearchListController {
 
     // 별점 리스트를 처리하여 최소 별점과 최대 별점을 계산합니다.
     List<String> starList = search.getStarList();
-    int minStar = 0;
-    int maxStar = 5;
+    int minStar = 5;
+    int maxStar = 10;
 
     if (!starList.contains("All") && !starList.isEmpty()) {
         List<Integer> intStarList = starList.stream().map(Integer::parseInt).collect(Collectors.toList());
 
         if (intStarList.size() == 1) { // 별점이 단일 값으로 선택되었을 때
             int star = intStarList.get(0);
-            minStar = star == 2 ? 1 : star - 1;
+            minStar = star == 6 ? 5 : star - 1;
             maxStar = star;
         } else { // 별점이 여러 값으로 선택되었을 때
-            minStar = intStarList.contains(2) && intStarList.contains(3) && intStarList.contains(4) && intStarList.contains(5) ? 1 : Collections.min(intStarList) - 1;
-            maxStar = intStarList.contains(4) ? 5 : Collections.max(intStarList);
+            minStar = intStarList.contains(6) && intStarList.contains(7) && intStarList.contains(8) && intStarList.contains(9) && intStarList.contains(10) ? 5 : Collections.min(intStarList) - 1;
+            maxStar = Collections.max(intStarList);
         }
     }
 
