@@ -53,9 +53,9 @@ public class RestHomeController {
     //10개 가져오기 // -> 나중에 위치기반 넣으면 그때 keyword 이용
     @GetMapping("/star")
     public List<DormitoryDTO> getStar(
-            @RequestParam(name = "lat", required = false) String centerLat,
-            @RequestParam(name = "lng", required = false) String centerLng
-    ) {
+            @RequestParam(name = "lat", defaultValue ="37.49616859", required = false) String centerLat,
+            @RequestParam(name = "lng", defaultValue = "127.0204826", required = false) String centerLng
+    ) throws Exception {
         // 2. 가져온 데이터를 일정한 간격으로 나누어 각 그룹에서 하나씩 선택합니다. 이를 통해 서로 거리가 멀게 데이터를 선택할 수 있습니다.
 
         System.out.println("centerLat : " + centerLat);
@@ -75,12 +75,15 @@ public class RestHomeController {
     //4. 추천 숙소 (특가???????) -> 할인적용 어떻게 할건지 고민
     //10개 가져오기
     @GetMapping("/discount")
-    public List<DormitoryDTO> getDiscount() throws Exception{
+    public List<DormitoryDTO> getDiscount(
+            @RequestParam(name = "lat", defaultValue ="37.49616859", required = false) String centerLat,
+            @RequestParam(name = "lng", defaultValue = "127.0204826", required = false) String centerLng
+    ) throws Exception {
         List<DormitoryDTO> dormitoryList = service.getDormitoryByDiscount();
 
         DormitoryDTO center = new DormitoryDTO();
-        center.setD_lat("37.49616859");
-        center.setD_lon("127.0204826");
+        center.setD_lat(centerLat);
+        center.setD_lon(centerLng);
 
         List<DormitoryDTO> nearbyDormitories = getNearbyDormitories(center, dormitoryList);
 
@@ -90,12 +93,15 @@ public class RestHomeController {
     //TEST
     //5. test용. 얼리체크인
     @GetMapping("/earlyCheckin")
-    public List<DormitoryDTO> getEarlyCheckin()  {
+    public List<DormitoryDTO> getEarlyCheckin(
+            @RequestParam(name = "lat", defaultValue ="37.49616859", required = false) String centerLat,
+            @RequestParam(name = "lng", defaultValue = "127.0204826", required = false) String centerLng
+    ) throws Exception {
         List<DormitoryDTO> dormitoryList = service.getEarlyCheckin();
        
         DormitoryDTO center = new DormitoryDTO();
-        center.setD_lat("37.49616859");
-        center.setD_lon("127.0204826");
+        center.setD_lat(centerLat);
+        center.setD_lon(centerLng);
 
         List<DormitoryDTO> nearbyDormitories = getNearbyDormitories(center, dormitoryList);
 
