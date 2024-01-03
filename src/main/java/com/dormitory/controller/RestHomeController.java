@@ -38,9 +38,7 @@ public class RestHomeController {
     //TEST
     //5. test용. 얼리체크인
     @GetMapping("/earlyCheckin")
-    public List<DormitoryDTO> getEarlyCheckin(HttpSession session)  {
-        String userid = (String)session.getAttribute("userid");
-        System.out.println("세션 : " + userid);
+    public List<DormitoryDTO> getEarlyCheckin()  {
         return service.getEarlyCheckin();
     }
 
