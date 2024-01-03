@@ -95,10 +95,6 @@
 
 
 
-    <select id="getRoomCount" parameterType="String" resultType="Integer">
-        SELECT COUNT(*) FROM tbl_room WHERE r_code=#{r_code}
-    </select>
-
     <!-- =====================5. SearchList ====================== -->
 
 <select id="getDormitoryList" parameterType="HashMap" resultType="com.dormitory.dto.DormitoryDTO">
