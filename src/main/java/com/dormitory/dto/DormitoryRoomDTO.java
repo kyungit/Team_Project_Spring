@@ -12,12 +12,13 @@ public class DormitoryRoomDTO {
     private String d_telno;
     private String d_checkout;
     private String d_checkin;
+    private String d_star;
     private String d_img;
     private String d_type;
     private int d_zipcode;
     private String d_road;
-    private long d_lat;
-    private long d_log;
+    private double d_lat;
+    private double d_lon;
     private String d_description;
     private String d_grade;
     private String d_discount;
