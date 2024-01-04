@@ -77,12 +77,12 @@ public class RestRoomInfoController {
 
         // 3. 선택된 데이터 중 최대 50개만 사용합니다.
         List<DormitoryDTO> selectedDormitoryList = new ArrayList<>();
-        int interval = sortedDormitoryList.size() / 50;
+        int interval = sortedDormitoryList.size() / 20;
         if (interval < 1) interval = 1;  // sortedDormitoryList의 크기가 50 미만인 경우를 처리합니다.
 
         for (int i = 0; i < sortedDormitoryList.size(); i += interval) {
             selectedDormitoryList.add(sortedDormitoryList.get(i));
-            if (selectedDormitoryList.size() >= 50) {
+            if (selectedDormitoryList.size() >= 20) {
                 break;
             }
         }
