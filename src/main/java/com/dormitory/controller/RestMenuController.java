@@ -1,6 +1,7 @@
 package com.dormitory.controller;
 
 import com.dormitory.dto.*;
+import com.dormitory.service.ManagerService;
 import com.dormitory.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ import java.util.List;
 @RequestMapping("/menu")
 public class RestMenuController {
     private final MemberService service;
+    private final ManagerService managerService;
 
 
     //1. 회원 정보 조회 -> OK
@@ -116,6 +118,43 @@ public class RestMenuController {
                     }
                 }
             }*/
+    //관리자로 회원 변경
+    @PostMapping("/manager")
+    public void postManager(@RequestBody DormitoryDTO dormitory,@RequestParam("userid") String userid) throws Exception {
+//        System.out.println(dormitory.getD_code());
+//        //managerService.managerUpdate(dormitory.getD_code());
+//        System.out.println(managerService.getDcode());
+
+
+        String clientDCode = dormitory.getD_code();  // 클라이언트에서 입력받은 d_code
+        System.out.println(clientDCode);
+        // managerService에서 반환된 d_code 리스트와 비교
+        for (DormitoryDTO dbDormitory : managerService.getDcode()) {
+            if (dbDormitory.getD_code().equals(clientDCode)) {  // d_code 일치 확인
+                // d_code가 일치하는 경우, managerService의 로직을 수행
+                managerService.managerUpdate(userid,clientDCode);
+                break;  // 일치하는 d_code를 찾았으므로 더 이상 반복할 필요가 없음
+            }
+        }
+
+    }
+    //관리자 예약내역 가져오기
+    @GetMapping("/managerReservation")
+    public List<ReservationDTO> getManagerReservation(ReservationDTO reservation) throws Exception {
+
+
+        return managerService.getManagerR(reservation.getD_code());
+    }
+    @PostMapping("/checkin")
+    public void postCheckin(@RequestBody ReservationDTO reservation)throws Exception{
+        System.out.println("checkin"+reservation);
+        managerService.ReservationCheckin(reservation.getReservation_code());
+    }
+    @PostMapping("/checkout")
+    public void postCheckout(@RequestBody ReservationDTO reservation)throws Exception{
+        System.out.println("checkout"+reservation);
+        managerService.ReservationCheckout(reservation.getReservation_code());
+    }
     //8. 이미지 파일 등록
     @PostMapping("/imageUpload")
     public void postImageUpload(FileDTO file,ReviewDTO review,@RequestParam("kind") String kind,
