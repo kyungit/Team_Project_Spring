@@ -27,4 +27,9 @@ public class ReservationDTO {
     private String reservation_description;
     private String d_discount;
     private int s_status;
+
+
+    //tbl_member
+    private String dormitoryCode;
+    private String userid;
 }

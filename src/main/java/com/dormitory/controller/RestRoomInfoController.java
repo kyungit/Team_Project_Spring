@@ -2,6 +2,7 @@ package com.dormitory.controller;
 
 import com.dormitory.dto.*;
 import com.dormitory.service.DormitoryService;
+import com.dormitory.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/roomInfo")
 public class RestRoomInfoController {
     private final DormitoryService service;
+    private final MemberService memberService;
 
     //1. 숙소 제일 위, 방 전체 정보 출력(사진, 등)
     @GetMapping("/roomReview")
@@ -32,9 +34,21 @@ public class RestRoomInfoController {
 
     //2. 리뷰 테이블
     @GetMapping("/review")
-    public List<ReviewDTO> getReview(DormitoryDTO dormitory) {
-        String d_code = dormitory.getD_code();
-        return service.getReview(d_code);
+    public List<ReviewDTO> getReview(DormitoryDTO dormitory) throws Exception {
+
+        List<ReviewDTO> list = service.getReview(dormitory.getD_code());
+        //String d_code = dormitory.getD_code();
+        // 각 방의 상세 정보와 예약 상태를 매핑
+        for (ReviewDTO reviewList :  list) {
+            /* Map<String, List<FileDTO>> map = new HashMap<>();*/
+
+            List<FileDTO> li = memberService.imagesInfoview(reviewList.getReview_code());
+            /*map.put("File", li);*/
+
+            reviewList.setFileInfo(li);
+        }
+        //return service.getReview(d_code);
+        return list;
     }
 
 

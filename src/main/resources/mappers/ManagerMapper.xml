@@ -7,6 +7,30 @@
 
 
     <!-- ====================2. Menu ==============================-->
+    <!--관리자로 업데이트-->
+    <update id="managerUpdate" parameterType="map">
+        update tbl_member set username='관리자' , role ='MASTER',dormitory_code=#{dormitoryCode} where userid=#{userid}
+    </update>
+    <select id="getManagerR" parameterType="String" resultType="com.dormitory.dto.ReservationDTO">
+        SELECT *
+        FROM tbl_member AS m
+                 JOIN tbl_reservation AS r ON m.dormitory_code = r.d_code;
+    </select>
+    <!--3. 예약 상태 변경 -->
+    <update id="ReservationCheckin" parameterType="int">
+        update tbl_reservation set s_status=3 where reservation_code = #{reservation_code}
+
+    </update>
+    <!--3. 예약 상태 변경 -->
+    <update id="ReservationCheckout" parameterType="int">
+        update tbl_reservation set s_status=4 where reservation_code = #{reservation_code}
+
+    </update>
+    <!--d_code가져오기-->
+    <select id="getDcode" resultType="com.dormitory.dto.DormitoryDTO">
+        select d_code from tbl_dormitory
+    </select>
+
     <!-- ====================3. Reservation =======================-->
     <!-- =====================4 RoomInfo ========================== -->
     <!-- =====================5. SearchList ====================== -->
