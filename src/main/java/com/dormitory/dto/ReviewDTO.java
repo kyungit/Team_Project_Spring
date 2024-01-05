@@ -19,7 +19,6 @@ public class ReviewDTO {
     private String review_comment;
     private int reservation_code;
     private List<FileDTO> fileInfo;
-    private String r_name;
 
     /*// List<FileDTO> 필드 추가
     private List<FileDTO> fileInfo;
