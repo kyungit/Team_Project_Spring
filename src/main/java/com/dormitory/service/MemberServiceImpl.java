@@ -139,9 +139,11 @@ public class MemberServiceImpl implements MemberService {
         return mapper.getCancelPolicy(dormitory);
     }
 
-
-
-
+    // 6. 예약 가능한 방 찾기
+    @Override
+    public List<String> getAvailableRooms(ReservationDTO reservation) {
+        return mapper.getAvailableRooms(reservation);
+    }
 
 
     //====================밑에는 건들ㄴㄴ=================

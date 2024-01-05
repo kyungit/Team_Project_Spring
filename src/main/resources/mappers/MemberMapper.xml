@@ -80,8 +80,8 @@
     <!-- 3. 예약 정보 저장 (POST)-->
 
     <insert id="postReservation" parameterType="com.dormitory.dto.ReservationDTO">
-        insert into tbl_reservation(d_code,r_code,d_name,d_type,r_img,r_name,m_userid,m_telno,m_username,reservation_checkin,reservation_checkout,reservation_guest,reservation_price,reservation_description,d_discount,s_status)
-        values(#{d_code},#{r_code},#{d_name},#{d_type},#{r_img},#{r_name},#{m_userid},#{m_telno},#{m_username},#{reservation_checkin},#{reservation_checkout},#{reservation_guest},#{reservation_price},#{reservation_description},#{d_discount},1)
+        insert into tbl_reservation(d_code,r_code,d_name,d_type,r_img,r_name,m_userid,m_telno,m_username,reservation_checkin,reservation_checkout,reservation_guest,reservation_price,reservation_description,d_discount,s_status,room)
+        values(#{d_code},#{r_code},#{d_name},#{d_type},#{r_img},#{r_name},#{m_userid},#{m_telno},#{m_username},#{reservation_checkin},#{reservation_checkout},#{reservation_guest},#{reservation_price},#{reservation_description},#{d_discount},1,#{room})
     </insert>
     <!-- 4. 결제-->
     <insert id="getPayment" parameterType="com.dormitory.dto.PaymentDTO">
@@ -98,8 +98,22 @@
         select * from tbl_cancel where d_code=#{d_code}
     </select>
 
-
-
+    <!-- 6. 예약 가능한 방 찾기 -->
+    <select id="getAvailableRooms" parameterType="com.dormitory.dto.ReservationDTO" resultType="String">
+        SELECT r.room
+        FROM tbl_room AS r
+        LEFT JOIN tbl_reservation AS res
+        ON r.room = res.room AND r.r_code = res.r_code
+        WHERE r.r_code = #{r_code}
+        AND res.room IS NULL 
+        OR (
+            res.room IS NOT NULL
+            AND (
+                res.reservation_checkin &gt;= #{reservation_checkout}
+                OR res.reservation_checkout &lt;= #{reservation_checkin}
+            )
+        )
+    </select>
 
 
     <!-- 이 밑으로 건들ㄴㄴ -->

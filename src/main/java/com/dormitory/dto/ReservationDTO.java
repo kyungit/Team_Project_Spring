@@ -19,6 +19,7 @@ public class ReservationDTO {
     private String m_userid;
     private String m_telno;
     private String m_username;
+    private String room;
 
     private LocalDate reservation_checkin;
     private LocalDate reservation_checkout;

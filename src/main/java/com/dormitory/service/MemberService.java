@@ -52,7 +52,8 @@ public interface MemberService {
     //5. 취소 정책
     public List<CancelDTO> getCancelPolicy(DormitoryDTO dormitory);
 
-
+    // 6. 예약 가능한 방 찾기
+    public List<String> getAvailableRooms(ReservationDTO reservation);
 
 
 

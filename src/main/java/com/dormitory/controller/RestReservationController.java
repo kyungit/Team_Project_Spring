@@ -45,11 +45,14 @@ public class RestReservationController {
     @PostMapping("/reservationInfo")
     public void posteservationInfo(@RequestBody ReservationDTO reservation){
 
-        service.postReservation(reservation);
+        List<String> availableRooms = service.getAvailableRooms(reservation);
+        for (String room : availableRooms) {
+            System.out.println("방 뭐 들어가있게? " + room);
+        }
+            System.out.println("방 어디로 배정되게? : " + availableRooms.get(0));
+            reservation.setRoom(availableRooms.get(0));
+            service.postReservation(reservation);
 
-//
-//
-//
     }
 
 
