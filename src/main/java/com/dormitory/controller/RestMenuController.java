@@ -85,8 +85,7 @@ public class RestMenuController {
     }
     //7. 사용자가 작성한 리뷰 조회
     @GetMapping("/memberReview")
-    public List<ReviewDTO> getMemberReview() throws Exception {
-        String userid = "jingom368@gmail.com";
+    public List<ReviewDTO> getMemberReview(@RequestParam("userid") String userid) throws Exception {
         List<ReviewDTO> list = service.getMemberReview(userid);
 
 
@@ -157,7 +156,7 @@ public class RestMenuController {
     }
     //8. 이미지 파일 등록
     @PostMapping("/imageUpload")
-    public void postImageUpload(FileDTO file,ReviewDTO review,@RequestParam("kind") String kind,
+    public void postImageUpload(FileDTO file,DormitoryDTO dormitory,ReviewDTO review,@RequestParam("kind") String kind,
                                 @RequestParam(name="sendToFileList",required = false) List<MultipartFile> multipartFile,
                                 @RequestParam(name="deleteFileList",required=false) int[] deleteFileList) throws Exception{
 
@@ -175,6 +174,7 @@ public class RestMenuController {
 
      //  String review_code = service.getReviewCode();
         if(kind.equals("I")){ //리뷰 작성
+            review.getD_code(); // review_
             service.setReview(review);
         }
 
