@@ -14,6 +14,7 @@ public class ReviewDTO {
     private String d_code;
     private String r_code;
     private String m_userid;
+    private String r_name;
     private String review_score;
     private String review_comment;
     private int reservation_code;
