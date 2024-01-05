@@ -14,7 +14,8 @@
     <select id="getManagerR" parameterType="String" resultType="com.dormitory.dto.ReservationDTO">
         SELECT *
         FROM tbl_member AS m
-                 JOIN tbl_reservation AS r ON m.dormitory_code = r.d_code;
+                 JOIN tbl_reservation AS r ON m.dormitory_code = r.d_code
+        where m.dormitory_code = r.d_code;
     </select>
     <!--3. 예약 상태 변경 -->
     <update id="ReservationCheckin" parameterType="int">
