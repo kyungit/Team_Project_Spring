@@ -12,7 +12,9 @@
 ### 9. Design
 ### 10. Sequence Diagram
 
-# 0. Background - Business Value
+# 0. Background
+## Business Value
+
 
 # 1. Topic
 
