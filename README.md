@@ -4,7 +4,7 @@
 
 ## 목차 
 
-### 0. [Background](#0.)
+### 0. [Background](#0. Background)
 ### 1. [Topic](#Topic)
 ### 2. [Communication](#Communication)
 ### 3. [Function](#Function)
