@@ -1,5 +1,5 @@
 <div align=center>
-	<img src="https://capsule-render.vercel.app/api?type=waving&color=orange&height=200&section=header&text=Airbnb!&fontSize=80" />	
+	<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Airbnb!&fontSize=80" />	
 </div>
 
 ## 목차 
