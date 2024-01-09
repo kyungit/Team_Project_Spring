@@ -10,7 +10,7 @@
 ### 7. [Database](#Database)
 ### 8. [Architecture](#Architecture)
 ### 9. [Design](#Design)
-### 10. [Sequence Diagram](#Sequence Diagram)
+### 10. [Sequence_Diagram](#Sequence_Diagram)
 
 # 0. Background
 ## Business Value
@@ -51,6 +51,6 @@
 <img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/7ec9fa45-9b72-4ec3-a95f-707b2d603ca8" width="800" height="450">
 
 
-# 10. Sequence Diagram
+# 10. Sequence_Diagram
 
 <img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/896e1b9b-e5d9-458e-be51-b325e94ec710" width="800" height="450">
