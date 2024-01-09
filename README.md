@@ -15,6 +15,16 @@
 # 0. Background
 ## Business Value
 
+<img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/c881c8c5-a136-4354-a857-a55e09cafc20" width="800" height="450">
+<img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/a4034f19-8665-479f-ad17-6776fb28035e" width="800" height="450">
+<img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/49bc62d3-d6f6-48d0-8133-d5ca8c727df0" width="800" height="450">
+<img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/19edb61e-df54-42cb-b1db-e1b8579ecc1d" width="800" height="450">
+<img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/dd165d8f-87f4-483a-afd9-b20e0813c192" width="800" height="450">
+
+
+
+
+
 
 # 1. Topic
 
