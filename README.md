@@ -1,3 +1,7 @@
+<div align=center>
+	<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=jingom!&fontSize=90" />	
+</div>
+
 ## 목차 
 
 ### 0. [Background](#Background)
