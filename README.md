@@ -4,7 +4,7 @@
 
 ## 목차 
 
-### 0. [Background](# 0. Background)
+### 0. [Background](#Background)
 ### 1. [Topic](#Topic)
 ### 2. [Communication](#Communication)
 ### 3. [Function](#Function)
@@ -16,7 +16,7 @@
 ### 9. [Design](#Design)
 ### 10. [Sequence_Diagram](#Sequence_Diagram)
 
-# 0. Background
+# Background
 ## Business Value
 
 <div>감성 숙소의 6294억원에서 8577억원으로 Business 시장 규모 전년 대비 36.3% 상승</div>
