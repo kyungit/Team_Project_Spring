@@ -1,6 +1,6 @@
 ## 목차 
 
-### 0. Background(#Background (Business Value))
+### 0. Background(#Background - Business Value)
 ### 1. [Communication](#Communication)
 ### 2. [Function](#Function)
 ### 3. [Reference](#Reference)
@@ -11,7 +11,7 @@
 ### 8. Design
 ### 9. Sequence
 
-# 0. Background : Business Value
+# 0. Background - Business Value
 
 # 1. Topic
 
