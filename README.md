@@ -1,8 +1,8 @@
 ## 목차 
 
-1. [Communication](# Communication)
-2. [Reference](# Reference)
-3. [API](# API)
+1. [Communication](#Communication)
+2. [Reference](#Reference)
+3. [API](#API)
 
 ---
 
