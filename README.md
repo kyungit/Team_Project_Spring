@@ -25,12 +25,10 @@
 <img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/19edb61e-df54-42cb-b1db-e1b8579ecc1d" width="800" height="450">
 <img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/dd165d8f-87f4-483a-afd9-b20e0813c192" width="800" height="450">
 
-
-
-
-
-
 # 1. Topic
+
+<img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/9bf224f9-2738-4585-b997-41113967fda1" width="800" height="450">
+
 
 # 2. Communication
 
