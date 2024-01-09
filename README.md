@@ -33,6 +33,7 @@
 # 2. Communication
 
 <img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/ad2eafe6-dcdb-417d-92e7-d62bc9dd33e3" width="800" height="450">
+<img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/a35506b4-2be0-4fde-9c90-eb65a4af4a8f" width="800" height="450">
 
 
 # 3. Function
