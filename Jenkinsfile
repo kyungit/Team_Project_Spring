@@ -1,7 +1,7 @@
 pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('docker-hub')
-        DB_URL = 'your_database_url'
+        DB_URL = 'jdbc:mariadb://mariadb.cls8a6uamjkk.ap-northeast-2.rds.amazonaws.com:3306/mariadb'
         DB_CREDENTIALS = credentials('db-credentials')
         GOOGLE_CREDENTIALS = credentials('google-credentials')
         KAKAO_CREDENTIALS = credentials('kakao-credentials')
@@ -20,19 +20,22 @@ pipeline {
         }
         stage("Build") {
            steps {
-	       export DB_URL=$DB_URL
-	       export DB_USERNAME=$(echo $DB_CREDENTIALS | cut -d: -f1)
-	       export DB_PASSWORD=$(echo $DB_CREDENTIALS | cut -d: -f2)
-               export GOOGLE_CLIENT_ID=$(echo $GOOGLE_CREDENTIALS | cut -d: -f1)
-               export GOOGLE_CLIENT_SECRET=$(echo $GOOGLE_CREDENTIALS | cut -d: -f2)
-               export NAVER_CLIENT_ID=$(echo $NAVER_CREDENTIALS | cut -d: -f1)
-               export NAVER_CLIENT_SECRET=$(echo $NAVER_CREDENTIALS | cut -d: -f2)
-               export KAKAO_CLIENT_ID=$(echo $KAKAO_CREDENTIALS | cut -d: -f1)
-               export KAKAO_CLIENT_SECRET=$(echo $KAKAO_CREDENTIALS | cut -d: -f2)
-               export GITHUB_CLIENT_ID=$(echo $GITHUB_CREDENTIALS | cut -d: -f1)
-               export GITHUB_CLIENT_SECRET=$(echo $GITHUB_CREDENTIALS | cut -d: -f2)
-               sh "./gradlew build"
-               sh "cp ./build/libs/dormitory-0.0.1-SNAPSHOT.jar ./docker/dormitory/"
+                withEnv([
+                    "DB_URL=$DB_URL",
+                    "DB_USERNAME=$(echo $DB_CREDENTIALS | cut -d: -f1)",
+                    "DB_PASSWORD=$(echo $DB_CREDENTIALS | cut -d: -f2)",
+                    "GOOGLE_CLIENT_ID=$(echo $GOOGLE_CREDENTIALS | cut -d: -f1)",
+                    "GOOGLE_CLIENT_SECRET=$(echo $GOOGLE_CREDENTIALS | cut -d: -f2)",
+                    "NAVER_CLIENT_ID=$(echo $NAVER_CREDENTIALS | cut -d: -f1)",
+                    "NAVER_CLIENT_SECRET=$(echo $NAVER_CREDENTIALS | cut -d: -f2)",
+                    "KAKAO_CLIENT_ID=$(echo $KAKAO_CREDENTIALS | cut -d: -f1)",
+                    "KAKAO_CLIENT_SECRET=$(echo $KAKAO_CREDENTIALS | cut -d: -f2)",
+                    "GITHUB_CLIENT_ID=$(echo $GITHUB_CREDENTIALS | cut -d: -f1)",
+                    "GITHUB_CLIENT_SECRET=$(echo $GITHUB_CREDENTIALS | cut -d: -f2)"
+                ]) {
+                    sh "./gradlew build"
+                    sh "cp ./build/libs/dormitory-0.0.1-SNAPSHOT.jar ./docker/dormitory/"
+                }
            } 
         }
         stage("Docker Login") {
