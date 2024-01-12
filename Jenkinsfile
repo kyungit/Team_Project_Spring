@@ -15,11 +15,6 @@ pipeline {
     stages {
         stage("Compile") {
             steps {
-                sh "./gradlew clean compileJava"
-            }
-        }
-        stage("Build") {
-            steps {
                 withCredentials([
                     usernamePassword(credentialsId: 'db-credentials', usernameVariable: 'DB_USERNAME', passwordVariable: 'DB_PASSWORD'),
                     usernamePassword(credentialsId: 'google-credentials', usernameVariable: 'GOOGLE_CLIENT_ID', passwordVariable: 'GOOGLE_CLIENT_SECRET'),
@@ -40,14 +35,15 @@ pipeline {
                         "GITHUB_CLIENT_ID=${env.GITHUB_CLIENT_ID}",
                         "GITHUB_CLIENT_SECRET=${env.GITHUB_CLIENT_SECRET}"
                     ]) {
-                        sh "./gradlew build"
-                        sh "cp ./build/libs/dormitory-0.0.1-SNAPSHOT.jar ./docker/dormitory/"
-                        sh 'echo $DB_USERNAME'
-                        sh 'echo $DB_PASSWORD'
-                        sh "echo ${env.DB_USERNAME}"
-                        sh "echo ${env.DB_PASSWORD}"
+                        sh "./gradlew clean compileJava"
                     }
                 }
+            }
+        }
+        stage("Build") {
+            steps {
+                sh "./gradlew build"
+                sh "cp ./build/libs/dormitory-0.0.1-SNAPSHOT.jar ./docker/dormitory/"
             }
         }
         stage("Docker Login") {
