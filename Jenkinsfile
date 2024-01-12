@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage("Prepare") {
             steps {
-                sh "cp /src/main/resources/application-secret.properties src/main/resources/"
+                sh "cp ./src/main/resources/application-secret.properties src/main/resources/"
             }
         }
         stage("Compile") {
