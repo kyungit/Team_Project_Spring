@@ -26,7 +26,13 @@ pipeline {
                     usernamePassword(credentialsId: 'naver-credentials', usernameVariable: 'NAVER_CLIENT_ID', passwordVariable: 'NAVER_CLIENT_SECRET'),
                     usernamePassword(credentialsId: 'kakao-credentials', usernameVariable: 'KAKAO_CLIENT_ID', passwordVariable: 'KAKAO_CLIENT_SECRET'),
                     usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GITHUB_CLIENT_ID', passwordVariable: 'GITHUB_CLIENT_SECRET')
-                ]) {
+                ]) 
+                {
+                    sh 'echo $DB_USERNAME'
+                    sh 'echo $DB_PASSWORD'
+                    sh "echo ${env.DB_USERNAME}"
+                    sh "echo ${env.DB_PASSWORD}"
+                } {
                     withEnv([
                         "DB_URL=${env.DB_URL}",
                         "DB_USERNAME=${env.DB_USERNAME}",
