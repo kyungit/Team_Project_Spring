@@ -1,15 +1,36 @@
 pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('docker-hub')
+        DB_CREDENTIALS = credentials('db-credentials')
+        GOOGLE_CREDENTIALS = credentials('google-credentials')
+        KAKAO_CREDENTIALS = credentials('kakao-credentials')
+        NAVER_CREDENTIALS = credentials('naver-credentials')
+        GITHUB_CREDENTIALS = credentials('github-credentials')
     }
     agent any
     triggers {
         pollSCM('* * * * *')
     }
     stages {
+        stage('Set up application.properties') {
+            steps {
+                sh '''
+                    echo "spring.datasource.username=${DB_CREDENTIALS_USR}" >> ./src/main/resources/application.properties
+                    echo "spring.datasource.password=${DB_CREDENTIALS_PSW}" >> ./src/main/resources/application.properties
+                    echo "spring.security.oauth2.client.registration.google.client-id=${GOOGLE_CREDENTIALS_USR}" >> ./src/main/resources/application.properties
+                    echo "spring.security.oauth2.client.registration.google.client-secret=${GOOGLE_CREDENTIALS_PSW}" >> ./src/main/resources/application.properties
+                    echo "spring.security.oauth2.client.registration.kakao.client-id=${KAKAO_CREDENTIALS_USR}" >> ./src/main/resources/application.properties
+                    echo "spring.security.oauth2.client.registration.kakao.client-secret=${KAKAO_CREDENTIALS_PSW}" >> ./src/main/resources/application.properties
+                    echo "spring.security.oauth2.client.registration.naver.client-id=${NAVER_CREDENTIALS_USR}" >> ./src/main/resources/application.properties
+                    echo "spring.security.oauth2.client.registration.naver.client-secret=${NAVER_CREDENTIALS_PSW}" >> ./src/main/resources/application.properties
+                    echo "spring.security.oauth2.client.registration.github.client-id=${GITHUB_CREDENTIALS_USR}" >> ./src/main/resources/application.properties
+                    echo "spring.security.oauth2.client.registration.github.client-secret=${GITHUB_CREDENTIALS_PSW}" >> ./src/main/resources/application.properties
+                '''
+            }
+        }
         stage("Compile") {
             steps {
-                
+
                 sh "./gradlew clean compileJava"
             }
         }
