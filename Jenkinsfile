@@ -19,24 +19,32 @@ pipeline {
             }
         }
         stage("Build") {
-           steps {
-                withEnv([
-                    "DB_URL=$DB_URL",
-                    "DB_USERNAME=$(echo $DB_CREDENTIALS | cut -d: -f1)",
-                    "DB_PASSWORD=$(echo $DB_CREDENTIALS | cut -d: -f2)",
-                    "GOOGLE_CLIENT_ID=$(echo $GOOGLE_CREDENTIALS | cut -d: -f1)",
-                    "GOOGLE_CLIENT_SECRET=$(echo $GOOGLE_CREDENTIALS | cut -d: -f2)",
-                    "NAVER_CLIENT_ID=$(echo $NAVER_CREDENTIALS | cut -d: -f1)",
-                    "NAVER_CLIENT_SECRET=$(echo $NAVER_CREDENTIALS | cut -d: -f2)",
-                    "KAKAO_CLIENT_ID=$(echo $KAKAO_CREDENTIALS | cut -d: -f1)",
-                    "KAKAO_CLIENT_SECRET=$(echo $KAKAO_CREDENTIALS | cut -d: -f2)",
-                    "GITHUB_CLIENT_ID=$(echo $GITHUB_CREDENTIALS | cut -d: -f1)",
-                    "GITHUB_CLIENT_SECRET=$(echo $GITHUB_CREDENTIALS | cut -d: -f2)"
+            steps {
+                withCredentials([
+                    usernamePassword(credentialsId: 'db-credentials', passwordVariable: 'DB_PASSWORD', usernameVariable: 'DB_USERNAME'),
+                    usernamePassword(credentialsId: 'google-credentials', passwordVariable: 'GOOGLE_CLIENT_SECRET', usernameVariable: 'GOOGLE_CLIENT_ID'),
+                    usernamePassword(credentialsId: 'naver-credentials', passwordVariable: 'NAVER_CLIENT_SECRET', usernameVariable: 'NAVER_CLIENT_ID'),
+                    usernamePassword(credentialsId: 'kakao-credentials', passwordVariable: 'KAKAO_CLIENT_SECRET', usernameVariable: 'KAKAO_CLIENT_ID'),
+                    usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'GITHUB_CLIENT_SECRET', usernameVariable: 'GITHUB_CLIENT_ID')
                 ]) {
-                    sh "./gradlew build"
-                    sh "cp ./build/libs/dormitory-0.0.1-SNAPSHOT.jar ./docker/dormitory/"
+                    withEnv([
+                        "DB_URL=$DB_URL",
+                        "DB_USERNAME=$DB_USERNAME",
+                        "DB_PASSWORD=$DB_PASSWORD",
+                        "GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID",
+                        "GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET",
+                        "NAVER_CLIENT_ID=$NAVER_CLIENT_ID",
+                        "NAVER_CLIENT_SECRET=$NAVER_CLIENT_SECRET",
+                        "KAKAO_CLIENT_ID=$KAKAO_CLIENT_ID",
+                        "KAKAO_CLIENT_SECRET=$KAKAO_CLIENT_SECRET",
+                        "GITHUB_CLIENT_ID=$GITHUB_CLIENT_ID",
+                        "GITHUB_CLIENT_SECRET=$GITHUB_CLIENT_SECRET"
+                    ]) {
+                        sh "./gradlew build"
+                        sh "cp ./build/libs/dormitory-0.0.1-SNAPSHOT.jar ./docker/dormitory/"
+                    }
                 }
-           } 
+            }
         }
         stage("Docker Login") {
            steps {
