@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: smboard-deployment
+  name: dormitory-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: smboard
+      app: dormitory 
   template:
     metadata:
-      name: smboard
+      name: dormitory 
       labels:
-        app: smboard
+        app: dormitory 
     spec:
       containers:
-      - name: smboard
-        image: docker.io/jingom368/smboard_smboard:{{VERSION}}
+      - name: dormitory 
+        image: docker.io/jingom368/dormitory_dormitory:{{VERSION}}
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -26,12 +26,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: smboard-service
+  name: dormitory-service
 spec:
   ports:
   - port: 8080
     targetPort: 8080
     nodePort: 30002
   selector:
-    app: smboard
+    app: dormitory 
   type: NodePort

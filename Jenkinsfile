@@ -15,7 +15,7 @@ pipeline {
         stage("Build") {
            steps {
                sh "./gradlew build"
-               sh "cp ./build/libs/dormitory-0.0.1-SNAPSHOT.jar ./docker/smboard/"
+               sh "cp ./build/libs/dormitory-0.0.1-SNAPSHOT.jar ./docker/dormitory/"
            } 
         }
         stage("Docker Login") {
@@ -25,20 +25,17 @@ pipeline {
         }
         stage("Docker Image Build") {
            steps {
-               sh "docker build -t jingom368/apache2_smboard:${BUILD_NUMBER} ./docker/apache2/"
-               sh "docker build -t jingom368/smboard_smboard:${BUILD_NUMBER} ./docker/smboard/"
+               sh "docker build -t jingom368/dormitory_dormitory:${BUILD_NUMBER} ./docker/dormitory/"
            }
         }
         stage("Docker Image Push") {
            steps {
-               sh "docker push jingom368/apache2_smboard:${BUILD_NUMBER}"
-               sh "docker push jingom368/smboard_smboard:${BUILD_NUMBER}" 
+               sh "docker push jingom368/dormitory_dormitory:${BUILD_NUMBER}" 
            } 
         }
         stage("Docker Image Clean up") {
            steps {
-               sh "docker image rm jingom368/apache2_smboard:${BUILD_NUMBER}" 
-               sh "docker image rm jingom368/smboard_smboard:${BUILD_NUMBER}" 
+               sh "docker image rm jingom368/dormitory_dormitory:${BUILD_NUMBER}" 
            }
         }
         stage("Minikube start") {
@@ -48,11 +45,9 @@ pipeline {
         }
         stage("Deploy") {
            steps {
-               sh "sed -i 's/{{VERSION}}/${BUILD_NUMBER}/g' ./kubernetes/apache2.yml"
-               sh "sed -i 's/{{VERSION}}/${BUILD_NUMBER}/g' ./kubernetes/smboard.yml"
+               sh "sed -i 's/{{VERSION}}/${BUILD_NUMBER}/g' ./kubernetes/dormitory.yml"
                sh "kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission"
-               sh "kubectl apply -f ./kubernetes/smboard.yml"
-               sh "kubectl apply -f ./kubernetes/apache2.yml"
+               sh "kubectl apply -f ./kubernetes/dormitory.yml"
                sh "kubectl apply -f ./kubernetes/ingress.yml"
            } 
            post {

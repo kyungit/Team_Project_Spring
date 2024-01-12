@@ -1,13 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: smboard-ingress
+  name: dormitory-ingress
   annotations:
     #nginx.ingress.kubernetes.io/rewrite-target: /
     spec.ingressClassName: nginx
 spec:
   rules:
-    - host: www.smboard.com
+    - host: www.dormitory.com
       http:
         paths:
           - path: /
