@@ -1,12 +1,6 @@
 pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('docker-hub')
-        DB_URL = 'jdbc:mariadb://mariadb.cls8a6uamjkk.ap-northeast-2.rds.amazonaws.com:3306/mariadb'
-        DB_CREDENTIALS = credentials('db-credentials')
-        GOOGLE_CREDENTIALS = credentials('google-credentials')
-        KAKAO_CREDENTIALS = credentials('kakao-credentials')
-        NAVER_CREDENTIALS = credentials('naver-credentials')
-        GITHUB_CREDENTIALS = credentials('github-credentials')
     }
     agent any
     triggers {
@@ -15,29 +9,8 @@ pipeline {
     stages {
         stage("Compile") {
             steps {
-                withCredentials([
-                    usernamePassword(credentialsId: 'db-credentials', usernameVariable: 'DB_USERNAME', passwordVariable: 'DB_PASSWORD'),
-                    usernamePassword(credentialsId: 'google-credentials', usernameVariable: 'GOOGLE_CLIENT_ID', passwordVariable: 'GOOGLE_CLIENT_SECRET'),
-                    usernamePassword(credentialsId: 'naver-credentials', usernameVariable: 'NAVER_CLIENT_ID', passwordVariable: 'NAVER_CLIENT_SECRET'),
-                    usernamePassword(credentialsId: 'kakao-credentials', usernameVariable: 'KAKAO_CLIENT_ID', passwordVariable: 'KAKAO_CLIENT_SECRET'),
-                    usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GITHUB_CLIENT_ID', passwordVariable: 'GITHUB_CLIENT_SECRET')
-                ]) {
-                    withEnv([
-                        "DB_URL=${env.DB_URL}",
-                        "DB_USERNAME=${env.DB_USERNAME}",
-                        "DB_PASSWORD=${env.DB_PASSWORD}",
-                        "GOOGLE_CLIENT_ID=${env.GOOGLE_CLIENT_ID}",
-                        "GOOGLE_CLIENT_SECRET=${env.GOOGLE_CLIENT_SECRET}",
-                        "NAVER_CLIENT_ID=${env.NAVER_CLIENT_ID}",
-                        "NAVER_CLIENT_SECRET=${env.NAVER_CLIENT_SECRET}",
-                        "KAKAO_CLIENT_ID=${env.KAKAO_CLIENT_ID}",
-                        "KAKAO_CLIENT_SECRET=${env.KAKAO_CLIENT_SECRET}",
-                        "GITHUB_CLIENT_ID=${env.GITHUB_CLIENT_ID}",
-                        "GITHUB_CLIENT_SECRET=${env.GITHUB_CLIENT_SECRET}"
-                    ]) {
-                        sh "./gradlew clean compileJava"
-                    }
-                }
+                
+                sh "./gradlew clean compileJava"
             }
         }
         stage("Build") {
