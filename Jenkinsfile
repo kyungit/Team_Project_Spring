@@ -42,12 +42,11 @@ pipeline {
                     ]) {
                         sh "./gradlew build"
                         sh "cp ./build/libs/dormitory-0.0.1-SNAPSHOT.jar ./docker/dormitory/"
+                        sh 'echo $DB_USERNAME'
+                        sh 'echo $DB_PASSWORD'
+                        sh "echo ${env.DB_USERNAME}"
+                        sh "echo ${env.DB_PASSWORD}"
                     }
-                } {
-                    sh 'echo $DB_USERNAME'
-                    sh 'echo $DB_PASSWORD'
-                    sh "echo ${env.DB_USERNAME}"
-                    sh "echo ${env.DB_PASSWORD}"
                 }
             }
         }
