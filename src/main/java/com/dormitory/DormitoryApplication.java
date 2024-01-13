@@ -10,4 +10,4 @@ public class DormitoryApplication {
 		SpringApplication.run(DormitoryApplication.class, args);
 	}
 
-}
+}	
