@@ -68,7 +68,6 @@ pipeline {
         stage("Deploy") {
            steps {
                sh "sed -i 's/{{VERSION}}/${BUILD_NUMBER}/g' ./kubernetes/dormitory.yml"
-               sh "kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission"
                sh "kubectl apply -f ./kubernetes/dormitory.yml"
            } 
            post {
