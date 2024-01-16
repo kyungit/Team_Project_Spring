@@ -106,17 +106,17 @@
     <select id="getAvailableRooms" parameterType="com.dormitory.dto.ReservationDTO" resultType="String">
         SELECT r.room
         FROM tbl_room AS r
-        LEFT JOIN tbl_reservation AS res
-        ON r.room = res.room AND r.r_code = res.r_code
         WHERE r.r_code = #{r_code}
-        AND res.room IS NULL 
-        OR (
-            res.room IS NOT NULL
+        AND NOT EXISTS (
+            SELECT 1
+            FROM tbl_reservation AS res
+            WHERE r.room = res.room
+            AND r.r_code = res.r_code
             AND (
-                res.reservation_checkin &gt;= #{reservation_checkout}
-                OR res.reservation_checkout &lt;= #{reservation_checkin}
+                res.reservation_checkin &lt; #{reservation_checkout}
+                AND res.reservation_checkout &gt; #{reservation_checkin}
             )
-        )
+        );
     </select>
 
 

@@ -21,7 +21,7 @@ public class RestHomeController {
     //1. 지역별 숙소 -> 숙소 클릭시 바로 SearchList페이지로 이동이라 get/post 필요 x
     
     private List<DormitoryDTO> getNearbyDormitories(DormitoryDTO center, List<DormitoryDTO> dormitoryList) {
-        final double MAX_DISTANCE = 5000; // 5km를 미터 단위로 환산
+        final double MAX_DISTANCE = 4000; // 4km를 미터 단위로 환산
         final int MAX_RESULTS = 8; // 반환할 최대 숙소 수
 
         return dormitoryList.stream()
@@ -79,13 +79,20 @@ public class RestHomeController {
             @RequestParam(name = "lat", defaultValue ="37.49616859", required = false) String centerLat,
             @RequestParam(name = "lng", defaultValue = "127.0204826", required = false) String centerLng
     ) throws Exception {
+        System.out.println("centerLat : " + centerLat);
+        System.out.println("centerLng : " + centerLng);
+
         List<DormitoryDTO> dormitoryList = service.getDormitoryByDiscount();
+
+        System.out.println("dormitoryList : " + dormitoryList);
 
         DormitoryDTO center = new DormitoryDTO();
         center.setD_lat(centerLat);
         center.setD_lon(centerLng);
 
         List<DormitoryDTO> nearbyDormitories = getNearbyDormitories(center, dormitoryList);
+
+        System.out.println("nearbyDormitories : " + nearbyDormitories);
 
         return nearbyDormitories;
     }
@@ -97,13 +104,20 @@ public class RestHomeController {
             @RequestParam(name = "lat", defaultValue ="37.49616859", required = false) String centerLat,
             @RequestParam(name = "lng", defaultValue = "127.0204826", required = false) String centerLng
     ) throws Exception {
+        System.out.println("centerLat : " + centerLat);
+        System.out.println("centerLng : " + centerLng);
+
         List<DormitoryDTO> dormitoryList = service.getEarlyCheckin();
        
+        System.out.println("dormitoryList : " + dormitoryList);
+
         DormitoryDTO center = new DormitoryDTO();
         center.setD_lat(centerLat);
         center.setD_lon(centerLng);
 
         List<DormitoryDTO> nearbyDormitories = getNearbyDormitories(center, dormitoryList);
+
+        System.out.println("nearbyDormitories : " + nearbyDormitories);
 
         return nearbyDormitories;
     }
