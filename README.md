@@ -171,4 +171,4 @@
 
 # 10. Sequence_Diagram
 
-<img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/896e1b9b-e5d9-458e-be51-b325e94ec710" width="800" height="450">
+<img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/3c0676ae-57f1-4ec6-9ba1-65f8fb4809a1" width="800" height="450">
