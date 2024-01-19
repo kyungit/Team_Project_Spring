@@ -5,7 +5,7 @@
 
 <h2>기능 설계 및 구현</h2>
 
-  · 기능 설계 및 구현(기능 전체 설계, 기능 구현은 본인이 한 것만 o)
+
   - o 1. Oauth2 - 로그인 : Google, KaKao, Naver의 로그인 API와 Spring Security를 활용하여 Oauth2 로그인 시스템을 구현. JWT(Jason Web Token) 토큰을 이용하여 사용자의 인증 정보를 안전하게 처리, localStorage에 로그인 Token정보를 저장하고 refresh Token를 서버측과 통신하여 로그인 유지.
   - o 2. Calender - 달력 기능 구현 : React의 DatePicker를 커스터마이징하여 사용자들이 날짜를 입력할 수 있는 달력 기능을 구현.
   - o 3. Search - 숙소 검색 기능 구현 : 키워드, 날짜, 인원을 기반으로 숙소를 검색, 숙소 유형과 별점에 따른 필터 기능을 통해 사용자가 원하는 숙소 리스트를 제공. 사용자가 검색 결과를 끊임없이 확인할 수 있도록 무한 스크롤 기능을 구현
