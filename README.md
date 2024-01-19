@@ -86,9 +86,13 @@
 <h2>프로젝트 아키텍처 및 기술 스택</h2>
 
      · 프론트엔드 
+     
          · 프레임워크 : React
+	 
          · 상태 관리 : React-Redux
+	 
          · 스타일 : TailwindCSS, Styled-Component
+	 
      · 백엔드 :
          · 클라우드 : AWS
          · 운영체제 : Ubuntu 22.04
