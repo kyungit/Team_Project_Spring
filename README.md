@@ -1,3 +1,7 @@
+<div align=center>
+	<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Airbnb&fontSize=80" />	
+</div>
+
 <h1>숙박 예약 플랫폼</h1>
 <p> · 팀 구성 - 설계 및 리딩 1명, BE 1명, FE 1명, 개발 보조 1명</p>
 <p> · 상세 역할 - 개발 및 프로젝트 리딩 / 설계 및 디자인 / BE & FE</p>
@@ -55,12 +59,6 @@
      · 인증 : OAuth2, JWT
      · 배포 : Docker & Kubernetes 
      · CI/CD : Jenkins
-
-     
-
-<div align=center>
-	<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Airbnb&fontSize=80" />	
-</div>
 
 ## 목차 
 
