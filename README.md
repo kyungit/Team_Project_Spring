@@ -3,6 +3,7 @@
 <p> · 상세 역할 - 개발 및 프로젝트 리딩 / 설계 및 디자인 / BE & FE</p>
 <p> · 상세 내용</p>
 
+<h3>헬로</h3>
 
   · 기능 설계 및 구현(기능 전체 설계, 기능 구현은 본인이 한 것만 o)
   - o 1. Oauth2 - 로그인 : Google, KaKao, Naver의 로그인 API와 Spring Security를 활용하여 Oauth2 로그인 시스템을 구현. JWT(Jason Web Token) 토큰을 이용하여 사용자의 인증 정보를 안전하게 처리, localStorage에 로그인 Token정보를 저장하고 refresh Token를 서버측과 통신하여 로그인 유지.
