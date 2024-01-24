@@ -1,4 +1,4 @@
-<img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/5c0ef670-1b0d-4767-9f17-fd6f47bbb3e4" />
+<div><img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/5c0ef670-1b0d-4767-9f17-fd6f47bbb3e4"></div>
 
 <div align=center>
 	<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Airbnb&fontSize=80" />	
