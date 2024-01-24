@@ -1,8 +1,8 @@
-<div><img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/5c0ef670-1b0d-4767-9f17-fd6f47bbb3e4"></div>
-
 <div align=center>
 	<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Airbnb&fontSize=80" />	
 </div>
+
+<div><img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/5c0ef670-1b0d-4767-9f17-fd6f47bbb3e4"></div>
 
 <h1>숙박 예약 플랫폼</h1>
 <p> · 팀 구성 - 설계 및 리딩 1명, BE 1명, FE 1명, 개발 보조 1명</p>
