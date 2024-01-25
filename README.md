@@ -9,7 +9,7 @@
 <h2>SSL/TLS 설정</h2>
 <div><img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/c001c9db-a76f-4d4e-b814-32479a63abac"></div>
 
-
+<br />
 <h1>숙박 예약 플랫폼</h1>
 <p> · 팀 구성 - 설계 및 리딩 1명, BE 1명, FE 1명, 개발 보조 1명</p>
 <p> · 상세 역할 - 개발 및 프로젝트 리딩 / 설계 및 디자인 / BE & FE</p>
