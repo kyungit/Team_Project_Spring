@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dormitory-ingress
+spec:
+  tls:
+  - hosts:
+    - www.dormitory.com
+    secretName: my-tls-cert
+  rules:
+  - host: www.dormitory.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/api"
+        backend:
+          service:
+            name: dormitory-service
+            port:
+              number: 30002
+      - pathType: ImplementationSpecific
+        path: "/"
+        backend:
+          service:
+            name: apache-service
+            port:
+              number: 80
