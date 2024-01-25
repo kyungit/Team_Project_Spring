@@ -70,7 +70,7 @@ pipeline {
                sh "sed -i 's/{{VERSION}}/${BUILD_NUMBER}/g' ./kubernetes/dormitory.yml"
                sh "kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission"
                sh "kubectl apply -f ./kubernetes/dormitory.yml"
-               sh "kubectl apply -f ./kubernetes/ingress.yml"
+               sh "kubectl apply -f ./kubernetes/ingressApacheTomcat.yml"
            } 
            post {
                 success {
