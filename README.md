@@ -2,14 +2,16 @@
 	<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Airbnb&fontSize=80" />	
 </div>
 
-<h2></h2>
+<h2>Backend Development</h2>
 <div><img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/1f42a757-c8ec-464c-8714-1d9b14fde476" /></div>
 
 <h2>Cloud & Server Infrastructure</h2>
 <div><img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/deda01ef-d83e-47d8-8cf0-82d9c14ece0a" /></div>
 
-<h2>DevOps</h2>
+<h2>DevOps & Containerization</h2>
 <div><img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/984bd890-eaff-4ed6-96e5-e4a90f2e1549" /></div>
+
+<h2></h2>
 
 
 <h2>Dokcer/Kubernetes/Jenkins</h2>
