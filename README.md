@@ -2,6 +2,8 @@
 	<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Airbnb&fontSize=80" />	
 </div>
 
+<img src="https://firebasestorage.googleapis.com/v0/b/stackticon-81399.appspot.com/o/images%2F1706248262171?alt=media&token=0157badd-b2ea-40e2-b903-ce37bcb97b37" />
+
 <h2>Dokcer/Kubernetes/Jenkins</h2>
 <div><img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/5c0ef670-1b0d-4767-9f17-fd6f47bbb3e4"></div>
 
