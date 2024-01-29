@@ -3,7 +3,7 @@
 </div>
 
 <h2>- Architecture</h2>
-<div><img src="https://github.com/jingom368/Team_Project_React/assets/67932739/5263abbd-2f5e-49ab-b862-c2fdb9bf6fea" /></div>
+<div><img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/d0605ed2-42bf-4e49-aa7f-eb8cf751b60d" /></div>
 
 <h2>- Backend Development</h2>
 <div><img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/1f42a757-c8ec-464c-8714-1d9b14fde476" /></div>
