@@ -3,7 +3,7 @@
 </div>
 
 <h2>프론트엔드 바로 가기</h2>
-[프론트엔드 바로가기](https://github.com/jingom368/Team_Project_React)
+### [프론트엔드 바로가기](https://github.com/jingom368/Team_Project_React)
 
 <h2>- Architecture</h2>
 <div><img src="https://github.com/jingom368/Team_Project_Spring/assets/67932739/d0605ed2-42bf-4e49-aa7f-eb8cf751b60d" /></div>
